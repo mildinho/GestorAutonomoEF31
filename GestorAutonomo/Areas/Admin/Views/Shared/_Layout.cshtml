@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gestor Autonomo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="Admin" asp-controller="Painel" asp-action="Index">Gestor Autonomo</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li class="nav-item dropdown">
+
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produto</a>
+                            <div class="dropdown-menu p-2">
+                                <div class="row" style="width:900px">
+                                    <div class="col-4">
+                                        <div class="dropdown-header">Produto</div>
+                                        <a class="dropdown-item" href="#">Manutenção</a>
+                                        <a class="dropdown-item" href="#">Relatórios</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="dropdown-header">Categoria</div>
+                                        <a class="dropdown-item" href="#">Manutenção</a>
+                                        <a class="dropdown-item" href="#">Relatórios</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+
+
+
+                        <li class="nav-item dropdown">
+
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parceiro</a>
+                            <div class="dropdown-menu p-2">
+                                <div class="row" style="width:900px">
+                                    <div class="col-4">
+                                        <div class="dropdown-header">Cliente</div>
+                                        <a class="dropdown-item" href="#">Manutenção</a>
+                                        <a class="dropdown-item" href="#">Relatórios</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="dropdown-header">Fornecedor</div>
+                                        <a class="dropdown-item" href="#">Manutenção</a>
+                                        <a class="dropdown-item" href="#">Relatórios</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="dropdown-header">Vendedor</div>
+                                        <a class="dropdown-item" href="#">Manutenção</a>
+                                        <a class="dropdown-item" href="#">Relatórios</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+
+
+
+
+
+                        <li class="nav-item dropdown">
+
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administrativo</a>
+                            <div class="dropdown-menu p-2">
+                                <div class="row" style="width:900px">
+                                    <div class="col-4">
+                                        <div class="dropdown-header">Cobrança</div>
+                                        <a class="dropdown-item" href="#">Manutenção</a>
+                                        <a class="dropdown-item" href="#">Relatórios</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="dropdown-header">Financeiro</div>
+                                        <a class="dropdown-item" href="#">Manutenção</a>
+                                        <a class="dropdown-item" href="#">Relatórios</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Configuração</a>
+                            <div class="dropdown-menu p-2">
+                                <div class="row" style="width:900px">
+                                    <div class="col-4">
+                                        <div class="dropdown-header">Empresa</div>
+                                        <a class="dropdown-item" asp-action="Manutencao" asp-controller="Empresa" asp-area="Admin">Manutenção</a>
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+
+
+
+                    </ul>
+
+
+                </div>
+               
+               <a class="btn btn-dark btn-sm " asp-area="Admin" asp-controller="Painel" asp-action="Logout">Sair</a>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - Gestor Autonomo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Politica de Privacidade</a>
+            </div>
+        </footer>
+
+
+
+
+
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/font-awesome/js/all.min.js"></script>
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>

@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using GestorAutonomo.Data;
-using GestorAutonomo.Services;
 using GestorAutonomo.Session;
 using GestorAutonomo.Models;
 using System.Globalization;
@@ -37,7 +36,8 @@ namespace GestorAutonomo
             //Configuracao dos Repositories
             services.AddScoped<IBancoRepository, BancoRepository>();
             services.AddScoped<IUFRepository, UFRepository>();
-
+            services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
 
             services.AddMemoryCache();
             services.AddSession(options =>
@@ -47,9 +47,7 @@ namespace GestorAutonomo
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddScoped<Sessao>();
-
-
+       
 
             services.AddControllersWithViews();
 
@@ -58,9 +56,13 @@ namespace GestorAutonomo
 
 
             services.AddScoped<SeedingService>();
+            
+            services.AddScoped<Sessao>();
             services.AddScoped<SessaoUsuario>();
-            services.AddScoped<Login>();
-            services.AddScoped<LoginService>();
+
+
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 
         }

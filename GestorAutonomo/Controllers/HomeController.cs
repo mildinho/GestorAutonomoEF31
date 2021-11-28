@@ -1,13 +1,10 @@
-﻿using GestorAutonomo.Biblioteca.Filtro;
-using GestorAutonomo.Models;
-using GestorAutonomo.Services;
+﻿using GestorAutonomo.Models;
+using GestorAutonomo.Repositories;
+using GestorAutonomo.Repositories.Interface;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestorAutonomo.Controllers
@@ -15,16 +12,14 @@ namespace GestorAutonomo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly SessaoUsuario _loginusuario;
-        private readonly Login _login;
-        private readonly LoginService _loginService;
+        private readonly SessaoUsuario _sessaoUsuario;
+        private readonly ILoginRepository _loginRepository;
 
-        public HomeController(ILogger<HomeController> logger, SessaoUsuario loginUsuario, Login login, LoginService loginService)
+        public HomeController(ILogger<HomeController> logger, SessaoUsuario sessaoUsuario, ILoginRepository loginRepository)
         {
             _logger = logger;
-            _loginusuario = loginUsuario;
-            _login = login;
-            _loginService = loginService;
+            _sessaoUsuario = sessaoUsuario;
+            _loginRepository = loginRepository;
         }
 
         public IActionResult Index()
@@ -51,23 +46,23 @@ namespace GestorAutonomo.Controllers
 
 
         [HttpPost]
-        public IActionResult Login([FromForm] Login login)
+        public async Task<IActionResult> Login([FromForm] Login login)
         {
 
-            Login obj = _loginService.Pesquisar(login.EMail, login.Password);
+            Login obj = await _loginRepository.SelecionarPorEmailSenhaAsync(login.EMail, login.Password);
 
 
             if (obj != null)
             {
-                _loginusuario.Login(obj);
+                _sessaoUsuario.Login(obj);
 
-                
-                return View();
+
+                return RedirectToAction("Index", "Painel", new { area = "Admin" });
+
             }
             else
             {
                 ViewData["msg_e"] = "Usuário e Senha Inválidos! Por favor verifique.";
-                //return RedirectToAction(nameof(Autenticar));
                return View("Autenticar");
             }
         }

@@ -22,7 +22,8 @@ namespace GestorAutonomo.Biblioteca.Filtro
             Login obj = _loginUsuario.GetLoginUsuario();
             if (obj == null)
             {
-                context.Result = new ContentResult() { Content = "Fudeu nao Logado" };
+                //context.Result = new ContentResult() { Content = "Fudeu nao Logado" };
+                context.Result = new RedirectToActionResult("Autenticar", "Home", null);
             }
             
         }

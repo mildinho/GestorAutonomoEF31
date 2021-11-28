@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GestorAutonomo.Models;
 
 namespace GestorAutonomo.Session
@@ -27,7 +23,6 @@ namespace GestorAutonomo.Session
 
         public Login GetLoginUsuario()
         {
-
             if (_sessao.Existe(_key))
             {
                 string obj = _sessao.Consultar(_key);

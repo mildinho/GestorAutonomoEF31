@@ -17,7 +17,6 @@ namespace GestorAutonomo.Data
         public DbSet<CategoriaProduto> Categoria { get; set; }
         public DbSet<UF> UF { get; set; }
         public DbSet<Banco> Banco { get; set; }
-
         public DbSet<Login> Login { get; set; }
 
     }
