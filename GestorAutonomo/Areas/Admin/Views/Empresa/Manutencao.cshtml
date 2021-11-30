@@ -82,18 +82,21 @@
 
             <div class="form-group">
                 <label asp-for="CEP"></label>
-                <input asp-for="CEP" class="form-control" placeholder="Informe o CEP">
+                <input asp-for="CEP" class="form-control" placeholder="Informe o CEP" onkeypress="$(this).mask('00.000-000')">
                 <span asp-validation-for="CEP" class="text-danger"></span>
             </div>
         </div>
 
         <div class="col">
 
-            <div class="form-group">
-                <label asp-for="UF"></label>
-                <input asp-for="UF" class="form-control" placeholder="Informe o Estado">
-                <span asp-validation-for="UF" class="text-danger"></span>
+            <div class="form-group col-md-6">
+                <label asp-for="UFId"></label>
+                <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF">
+                    <option value="">Selecione</option>
+                </select>
+                <span asp-validation-for="UFId" class="text-danger"></span>
             </div>
+
         </div>
 
         <div class="col">
@@ -130,7 +133,7 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="EmailFinanceiro"></label>
-                <input asp-for="EmailFinanceiro" class="form-control" placeholder="Seu email Financeiro">
+                <input asp-for="EmailFinanceiro" class="form-control" placeholder="Seu email Financeiro" >
                 <span asp-validation-for="EmailFinanceiro" class="text-danger"></span>
                 <small class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
             </div>
@@ -147,6 +150,38 @@
 
     </div>
 
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="TelefonePrincipal"></label>
+                <input asp-for="TelefonePrincipal" class="form-control" placeholder="Seu Telefone Princiapl" onkeypress="$(this).mask('(00) 0000-0000')">
+                <span asp-validation-for="TelefonePrincipal" class="text-danger"></span>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="TelefoneComercial"></label>
+                <input asp-for="TelefoneComercial" class="form-control" placeholder="Seu Telefone Comercial" onkeypress="$(this).mask('(00) 0000-0000')">
+                <span asp-validation-for="TelefoneComercial" class="text-danger"></span>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="TelefoneFinanceiro"></label>
+                <input asp-for="TelefoneFinanceiro" class="form-control" placeholder="Seu Telefone Financeiro" onkeypress="$(this).mask('(00) 0000-0000')">
+                <span asp-validation-for="TelefoneFinanceiro" class="text-danger"></span>
+
+            </div>
+        </div>
+    </div>
 
 
     <div>

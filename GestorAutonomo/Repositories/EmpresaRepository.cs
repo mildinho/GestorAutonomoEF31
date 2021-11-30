@@ -33,6 +33,7 @@ namespace GestorAutonomo.Repositories
             }
             try
             {
+                empresa = AjustarCampos(empresa);
                 _context.Update(empresa);
                 await _context.SaveChangesAsync();
             }
@@ -63,6 +64,7 @@ namespace GestorAutonomo.Repositories
 
         public async Task InserirAsync(Empresa empresa)
         {
+            empresa = AjustarCampos(empresa);
             _context.Add(empresa);
             await _context.SaveChangesAsync();
         }
@@ -86,6 +88,31 @@ namespace GestorAutonomo.Repositories
         public async Task<Empresa> SelecionarPorCodigoAsync(int? Id)
         {
             return await _context.Empresa.FirstOrDefaultAsync(obj => obj.Id == Id);
+        }
+
+        public Empresa AjustarCampos(Empresa empresa)
+        {
+            if (!String.IsNullOrEmpty(empresa.CEP))
+            {
+                empresa.CEP = String.Join("", System.Text.RegularExpressions.Regex.Split(empresa.CEP, @"[^\d]"));
+            }
+
+            if (!String.IsNullOrEmpty(empresa.TelefoneComercial))
+            {
+                empresa.TelefoneComercial = String.Join("", System.Text.RegularExpressions.Regex.Split(empresa.TelefoneComercial, @"[^\d]"));
+            }
+
+            if (!String.IsNullOrEmpty(empresa.TelefoneFinanceiro))
+            {
+                empresa.TelefoneFinanceiro = String.Join("", System.Text.RegularExpressions.Regex.Split(empresa.TelefoneFinanceiro, @"[^\d]"));
+            }
+
+            if (!String.IsNullOrEmpty(empresa.TelefonePrincipal))
+            {
+                empresa.TelefonePrincipal = String.Join("", System.Text.RegularExpressions.Regex.Split(empresa.TelefonePrincipal, @"[^\d]"));
+            }
+
+            return empresa;
         }
     }
 

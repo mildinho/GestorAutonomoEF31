@@ -21,6 +21,9 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task<IEnumerable<Empresa>> ListarTodosRegistrosAsync();
 
+        Empresa AjustarCampos(Empresa empresa);
+
+
 
     }
 }

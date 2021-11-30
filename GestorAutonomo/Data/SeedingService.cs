@@ -20,7 +20,6 @@ namespace GestorAutonomo.Data
             if (!_context.UF.Any())
             {
 
-
                 UF uf01 = new UF(1, "AC", "ACRE");
                 UF uf02 = new UF(2, "AL", "ALAGOAS");
                 UF uf03 = new UF(3, "AP", "AMAPA");
@@ -51,22 +50,33 @@ namespace GestorAutonomo.Data
 
 
 
-                _context.UF.AddRangeAsync(uf01, uf02, uf03, uf04, uf05, uf06, uf07, uf08, uf09, uf10);
-                _context.UF.AddRangeAsync(uf11, uf12, uf13, uf14, uf15, uf16, uf17, uf18, uf19, uf20);
-                _context.UF.AddRangeAsync(uf21, uf22, uf23, uf24, uf25, uf26, uf27);
+                _context.UF.AddRange(uf01, uf02, uf03, uf04, uf05, uf06, uf07, uf08, uf09, uf10);
+                _context.UF.AddRange(uf11, uf12, uf13, uf14, uf15, uf16, uf17, uf18, uf19, uf20);
+                _context.UF.AddRange(uf21, uf22, uf23, uf24, uf25, uf26, uf27);
             }
+            _context.SaveChanges();
+
+
+
+
+            if (!_context.Login.Any())
+            {
+
+                Login login = new Login(1, "fer@uol.com.br", "123456");
+                _context.Login.Add(login);
+            }
+            _context.SaveChanges();
+
 
 
 
             if (!_context.Empresa.Any())
             {
 
-                Empresa empresa = new Empresa(1, 985, "Fernando Casagrande", "Gestor autonomo", DateTime.Now);
+                Empresa empresa = new Empresa(1, 985, "Fernando Casagrande", "Gestor autonomo", DateTime.Now, 1, "1921013000");
                 _context.Empresa.Add(empresa);
-            }
-            
-            
-            _context.SaveChangesAsync();
+            }           
+            _context.SaveChanges();
 
 
         }

@@ -51,11 +51,12 @@ namespace GestorAutonomo.Models
         [Display(Name = "Cidade")]
         public string Cidade { get; set; }
 
-        [Display(Name = "UF")]
-        public string UF { get; set; }
+       
 
         [Display(Name = "CEP")]
         public string CEP { get; set; }
+
+
 
         [Display(Name = "E-Mail")]
         [EmailAddress(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E004")]
@@ -70,13 +71,42 @@ namespace GestorAutonomo.Models
         [Display(Name = "E-Mail Gerencial")]
         public string EmailGerencial { get; set; }
 
-        public Empresa(int id, double cNPJ_CPF, string nome, string fantasia, DateTime data_Cadastro)
+
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [Display(Name = "Telefone Principal")]
+        [DataType(DataType.PhoneNumber)]
+        public string TelefonePrincipal { get; set; }
+
+        [Display(Name = "Telefone Comercial")]
+        [DataType(DataType.PhoneNumber)]
+        public string TelefoneComercial { get; set; }
+
+        [Display(Name = "Telefone Financeiro")]
+        [DataType(DataType.PhoneNumber)]
+        public string TelefoneFinanceiro { get; set; }
+
+
+
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [ForeignKey("UF")]
+        [Display(Name = "UF")] 
+        public int UFId { get; set; }
+
+        public virtual UF UF { get; set; }
+
+
+
+
+
+        public Empresa(int id, double cNPJ_CPF, string nome, string fantasia, DateTime data_Cadastro, int ufid, string telefone)
         {
             Id = id;
             CNPJ_CPF = cNPJ_CPF;
             Nome = nome;
             Fantasia = fantasia;
             Data_Cadastro = data_Cadastro;
+            UFId = ufid;
+            TelefonePrincipal = telefone;
         }
     }
 }
