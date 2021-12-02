@@ -26,7 +26,7 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="Nome"></label>
-                <input asp-for="Nome" class="form-control" placeholder="Informe a Razão Social">
+                <input asp-for="Nome" class="form-control" placeholder="Informe a Razão Social" autofocus>
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
         </div>
@@ -89,10 +89,10 @@
 
         <div class="col">
 
-            <div class="form-group col-md-6">
+            <div class="form-group">
                 <label asp-for="UFId"></label>
                 <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF">
-                    <option value="">Selecione</option>
+                    <option value="0">Selecione</option>
                 </select>
                 <span asp-validation-for="UFId" class="text-danger"></span>
             </div>
@@ -133,7 +133,7 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="EmailFinanceiro"></label>
-                <input asp-for="EmailFinanceiro" class="form-control" placeholder="Seu email Financeiro" >
+                <input asp-for="EmailFinanceiro" class="form-control" placeholder="Seu email Financeiro">
                 <span asp-validation-for="EmailFinanceiro" class="text-danger"></span>
                 <small class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
             </div>
@@ -159,9 +159,8 @@
 
             </div>
         </div>
-    </div>
 
-    <div class="row">
+
         <div class="col">
             <div class="form-group">
                 <label asp-for="TelefoneComercial"></label>
@@ -170,9 +169,7 @@
 
             </div>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col">
             <div class="form-group">
                 <label asp-for="TelefoneFinanceiro"></label>
@@ -182,7 +179,6 @@
             </div>
         </div>
     </div>
-
 
     <div>
         <br />

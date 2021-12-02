@@ -38,11 +38,13 @@ namespace GestorAutonomo
             services.AddScoped<IUFRepository, UFRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<ICategoriaProdutoRepository, CategoriaProdutoRepository>();
+            //services.AddScoped<IParceiroRepository, ParceiroRepository>();
 
             services.AddMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromHours(1);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });

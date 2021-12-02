@@ -33,7 +33,8 @@
                                     </div>
                                     <div class="col-4">
                                         <div class="dropdown-header">Categoria</div>
-                                        <a class="dropdown-item" href="#">Manutenção</a>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="CategoriaProduto" asp-area="Admin">Manutenção</a>
+
                                         <a class="dropdown-item" href="#">Relatórios</a>
                                     </div>
                                 </div>
@@ -142,6 +143,9 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/lib/font-awesome/js/all.min.js"></script>
+        <script src="~/lib/jquery.mask/jquery.mask.js"></script>
+
+
         @RenderSection("Scripts", required: false)
     </body>
     </html>

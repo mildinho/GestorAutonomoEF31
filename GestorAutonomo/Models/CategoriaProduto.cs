@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorAutonomo.Biblioteca.Lang;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,21 +12,23 @@ namespace GestorAutonomo.Models
     public class CategoriaProduto
     {
 
-        [Key]
         [Display(Name = "Código")]
         public int Id { get; set; }
 
 
-        [Display(Name = "Descrição")]
-        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [MinLength(4, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E002")]
+        [Display(Name = "Nome")]
         public string Descricao { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [MinLength(4, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E002")]
 
         [Display(Name = "Categoria Pai")]
         public int? CategoriaPaiId { get; set; }
 
         [ForeignKey("CategoriaPaiId")]
         public virtual CategoriaProduto CategoriaPai { get; set; }
-
 
 
 

@@ -1,19 +1,35 @@
 ﻿using GestorAutonomo.Biblioteca.Lang;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GestorAutonomo.Models
 {
-    [Table("CS_EMPRESA")]
-    public class Empresa
+    [Table("CS_PARCEIRO")]
+    public class Parceiro
     {
-        public Empresa()
-        {
-        }
 
         [Key]
+        [Display(Name = "Código")]
         public int Id { get; set; }
+
+        [Display(Name = "Cliente")]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        public int Cliente { get; set; } = 0;
+
+        [Display(Name = "Fornecedor")]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        public int Fornecedor { get; set; } = 0;
+
+        [Display(Name = "Vendedor")]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        public int Vendedor { get; set; } = 0;
+
+
+
 
         [Display(Name = "CNPJ / CNPJ")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
@@ -50,46 +66,38 @@ namespace GestorAutonomo.Models
         [Display(Name = "Cidade")]
         public string Cidade { get; set; }
 
-       
+
 
         [Display(Name = "CEP")]
         public string CEP { get; set; }
 
 
 
-        [Display(Name = "E-Mail")]
-        [DataType(DataType.EmailAddress)]
+        [Display(Name = "E-Mail Principal")]
         [EmailAddress(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E004")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Display(Name = "E-Mail Comercial")]
-        public string EmailComercial { get; set; }
-
-        [Display(Name = "E-Mail Financeiro")]
-        public string EmailFinanceiro { get; set; }
-
-        [Display(Name = "E-Mail Gerencial")]
-        public string EmailGerencial { get; set; }
+        [Display(Name = "E-Mail NF Eletronica")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E004")]
+        [DataType(DataType.EmailAddress)]
+        public string EmailNFE { get; set; }
+       
 
 
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [Display(Name = "Telefone Principal")]
         [DataType(DataType.PhoneNumber)]
-        public string TelefonePrincipal { get; set; }
+        public string Telefone01 { get; set; }
 
-        [Display(Name = "Telefone Comercial")]
+        [Display(Name = "Telefone Secundario")]
         [DataType(DataType.PhoneNumber)]
-        public string TelefoneComercial { get; set; }
-
-        [Display(Name = "Telefone Financeiro")]
-        [DataType(DataType.PhoneNumber)]
-        public string TelefoneFinanceiro { get; set; }
-
+        public string Telefone02 { get; set; }
 
 
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [ForeignKey("UF")]
-        [Display(Name = "UF")] 
+        [Display(Name = "UF")]
         public int UFId { get; set; }
 
         public virtual UF UF { get; set; }
@@ -98,15 +106,9 @@ namespace GestorAutonomo.Models
 
 
 
-        public Empresa(int id, double cNPJ_CPF, string nome, string fantasia, DateTime data_Cadastro, int ufid, string telefone)
-        {
-            Id = id;
-            CNPJ_CPF = cNPJ_CPF;
-            Nome = nome;
-            Fantasia = fantasia;
-            Data_Cadastro = data_Cadastro;
-            UFId = ufid;
-            TelefonePrincipal = telefone;
-        }
+
+
+
+
     }
 }
