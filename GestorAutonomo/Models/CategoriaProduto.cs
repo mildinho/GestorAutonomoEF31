@@ -21,8 +21,6 @@ namespace GestorAutonomo.Models
         [Display(Name = "Nome")]
         public string Descricao { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
-        [MinLength(4, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E002")]
 
         [Display(Name = "Categoria Pai")]
         public int? CategoriaPaiId { get; set; }
