@@ -5,9 +5,8 @@
     ViewData["Title"] = ViewBag.Crud.Titulo;
 }
 
-<h1>@ViewBag.Crud.Titulo</h1>
-<h3>@ViewBag.Crud.SubTitulo</h3>
-<h5>@ViewBag.Crud.Descricao</h5>
+
+@await Component.InvokeAsync("CRUD")
 
 
 
@@ -183,8 +182,12 @@
     <div>
         <br />
 
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <a asp-action="Index" asp-controller="Painel" class="btn btn-info">Voltar</a>
+        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Salvar</button>
+       
+        <a asp-action="Index" asp-controller="Painel" class="btn btn-outline-info"><i class="fas fa-step-backward"></i> Voltar</a>
+
+
+
     </div>
 
 </form>

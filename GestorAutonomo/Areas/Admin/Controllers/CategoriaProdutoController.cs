@@ -30,8 +30,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
 
-            crud.Descricao = "Aqui você poderá configurar seu Cadastro de Categoria";
+            
             crud.Titulo = "Categoria";
+            crud.Descricao = "Aqui você poderá configurar seu Cadastro de Categoria";
             crud.SubTitulo = "Dados para Categorizar seu Produto";
             crud.Operacao = Opcoes.Information;
             ViewBag.CRUD = crud;
@@ -49,8 +50,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Cadastrar()
         {
+            crud.Titulo = "Nova Categoria";
             crud.Descricao = "Aqui você poderá configurar seu Cadastro de Categoria";
-            crud.Titulo = "";
             crud.SubTitulo = "Inserir Nova Categoria";
             crud.Operacao = Opcoes.Create;
             ViewBag.CRUD = crud;

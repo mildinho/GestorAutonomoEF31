@@ -8,39 +8,27 @@
 
 }
 
-<h1>@ViewBag.Crud.Titulo</h1>
-<h3>@ViewBag.Crud.SubTitulo</h3>
-<h5>@ViewBag.Crud.Descricao</h5>
 
-
-<br />
-
-<a asp-action="Cadastrar" class="btn btn-primary">Cadastrar</a>
-<br />
-<br />
+@await Component.InvokeAsync("CRUD")
 
 <form method="get">
     <div class="row">
-        <div class="col-9">
-
-            <div class="form-group">
-                <label for="Pesquisar"></label>
-                <input type="Text" name="pesquisa" id="pesquisa" value="@pesquisa" class="form-control" placeholder="Digite a Descrição da Categoria">
-
-
-            </div>
-
-
-
+        <div class="col-9 form-group">
+            <input type="Text" name="pesquisa" id="pesquisa" value="@pesquisa" class="form-control" placeholder="Digite a Descrição da Categoria">
         </div>
-        <div class="col-3">
-            <button type="submit" class="btn btn-primary">Pesquisar</button>
+
+        <div class="col-3 px-3 text-right justify-content-end">
+
+            <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i> Pesquisar</button>
+
+            <a asp-action="Cadastrar" class="btn btn-outline-success"><i class="fas fa-file-upload"></i> Cadastrar</a>
+            
         </div>
 
     </div>
 </form>
 <br />
-<br />
+
 
 @if (TempData["msg_s"] != null)
 {
@@ -53,7 +41,7 @@
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
-                <tr>
+                <tr style="text-align:center">
                     <th scope="col">@Html.DisplayNameFor(model => model.First().Id)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.First().Descricao)</th>
                     <th scope="col">@Html.DisplayNameFor(model => model.First().CategoriaPaiId)</th>
@@ -71,9 +59,9 @@
                             -
                             @Html.DisplayFor(model => categoria.CategoriaPai.Descricao)
                         </td>
-                        <td>
-                            <a asp-action="Atualizar" asp-route-id="@categoria.Id" class="btn btn-secondary">Atualizar</a>
-                            <a asp-action="Excluir" asp-route-id="@categoria.Id" class="btn btn-danger">Excluir</a>
+                        <td style="text-align:center">
+                            <a asp-action="Atualizar" asp-route-id="@categoria.Id" class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i> Editar</a>
+                            <a asp-action="Excluir" asp-route-id="@categoria.Id" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> Excluir</a>
 
                         </td>
 
