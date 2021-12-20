@@ -7,7 +7,17 @@
 
 @await Component.InvokeAsync("CRUD")
 
-<form method="post">
+<form method="post" asp-action="Manutencao">
+
+    <input type="hidden" name="operacao" value="4">
+
+
+    @if (ViewBag.Crud.Operacao != 0)
+    {
+        <input type="hidden" asp-for="Id" />
+    }
+
+
     <div class="form-group">
         <label asp-for="Descricao"></label>
         <input asp-for="Descricao" class="form-control" placeholder="Digite a Descrição da Categoria">
@@ -22,6 +32,8 @@
         </select>
         <span asp-validation-for="CategoriaPaiId" class="text-danger"></span>
     </div>
+
     <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Salvar</button>
     <a asp-action="Index" class="btn btn-outline-info"><i class="fas fa-step-backward"></i> Voltar</a>
+
 </form>

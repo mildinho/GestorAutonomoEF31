@@ -1,34 +1,19 @@
 ﻿@model IPagedList<CategoriaProduto>
-
 @{
-
     ViewData["Title"] = ViewBag.Crud.Titulo;
-    var pesquisa = Context.Request.Query["pesquisa"];
-
-
 }
 
 
+@*Tela com os Dados do CRUD ( Titulo, SubTitulo e Descricao )*@
 @await Component.InvokeAsync("CRUD")
 
-<form method="get">
-    <div class="row">
-        <div class="col-9 form-group">
-            <input type="Text" name="pesquisa" id="pesquisa" value="@pesquisa" class="form-control" placeholder="Digite a Descrição da Categoria">
-        </div>
 
-        <div class="col-3 px-3 text-right justify-content-end">
+@*Tela de Pesquisa*@
+@await Component.InvokeAsync("Pesquisar", new
+    { placeholder = "Digite a Descrição da Categoria" ,
+      aspaction ="Cadastrar"} )
 
-            <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i> Pesquisar</button>
-
-            <a asp-action="Cadastrar" class="btn btn-outline-success"><i class="fas fa-file-upload"></i> Cadastrar</a>
-            
-        </div>
-
-    </div>
-</form>
 <br />
-
 
 @if (TempData["msg_s"] != null)
 {
@@ -42,10 +27,10 @@
         <table class="table table-bordered">
             <thead>
                 <tr style="text-align:center">
-                    <th scope="col">@Html.DisplayNameFor(model => model.First().Id)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.First().Descricao)</th>
-                    <th scope="col">@Html.DisplayNameFor(model => model.First().CategoriaPaiId)</th>
-                    <th scope="col">Ações</th>
+                    <th class="col-1">@Html.DisplayNameFor(model => model.First().Id)</th>
+                    <th class="col-6">@Html.DisplayNameFor(model => model.First().Descricao)</th>
+                    <th class="col-2">@Html.DisplayNameFor(model => model.First().CategoriaPaiId)</th>
+                    <th class="col-3">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +45,7 @@
                             @Html.DisplayFor(model => categoria.CategoriaPai.Descricao)
                         </td>
                         <td style="text-align:center">
-                            <a asp-action="Atualizar" asp-route-id="@categoria.Id" class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i> Editar</a>
+                            <a asp-action="Editar" asp-route-id="@categoria.Id" class="btn btn-outline-info mr-2"><i class="fas fa-pencil-alt"></i> Editar</a>
                             <a asp-action="Excluir" asp-route-id="@categoria.Id" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> Excluir</a>
 
                         </td>
@@ -80,4 +65,5 @@ else
     <div class="alert alert-info">
         <strong>Nenhum Registro Cadastrado!</strong>
     </div>
+
 }
