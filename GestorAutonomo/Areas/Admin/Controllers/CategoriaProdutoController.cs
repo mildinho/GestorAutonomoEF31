@@ -55,7 +55,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 crud.Titulo = "Excluir Categoria";
                 crud.Descricao = "CUIDADO ao Excluir uma Categoria, Este processo é irreversivel";
                 crud.SubTitulo = "Excluir Categoria";
-                crud.Operacao = Opcoes.Update;
+                crud.Operacao = Opcoes.Delete;
+            }
+            else if (opcoes == Opcoes.Read)
+            {
+                crud.Titulo = "Consultar Categoria";
+                crud.Descricao = "Aqui você poderá consultar seu Cadastro de Categoria";
+                crud.SubTitulo = "Consultar Categoria";
+                crud.Operacao = Opcoes.Read;
             }
 
             return crud;
@@ -105,14 +112,27 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Consultar(int Id)
+        {
 
+            ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
+
+            var categorias = await _repositoryCategoriaProduto.ListarTodosRegistrosAsync();
+            ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
+
+
+            var objCategoria = await _repositoryCategoriaProduto.SelecionarPorCodigoAsync(Id);
+
+            return View("Manutencao", objCategoria);
+        }
 
 
 
 
 
         [HttpPost]
-        public async Task<IActionResult> Manutencao([FromForm] CategoriaProduto categoria, int operacao)
+        public async Task<IActionResult> Manutencao([FromForm] CategoriaProduto categoria, Opcoes operacao)
         {
             if (ModelState.IsValid)
             {

@@ -9,10 +9,11 @@
 
 <form method="post" asp-action="Manutencao">
 
-    <input type="hidden" name="operacao" value="4">
+    <input type="hidden" name="operacao" value="@ViewBag.Crud.Operacao">
 
 
-    @if (ViewBag.Crud.Operacao != 0)
+
+    @if (ViewBag.Crud.Operacao != Opcoes.Create)
     {
         <input type="hidden" asp-for="Id" />
     }
@@ -33,7 +34,10 @@
         <span asp-validation-for="CategoriaPaiId" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Salvar</button>
+    @if (ViewBag.Crud.Operacao != Opcoes.Read)
+    {
+        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Salvar</button>
+    }
     <a asp-action="Index" class="btn btn-outline-info"><i class="fas fa-step-backward"></i> Voltar</a>
 
 </form>
