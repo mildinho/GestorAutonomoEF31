@@ -131,10 +131,35 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
 
+        [HttpGet]
+        public async Task<IActionResult> Deletar(int Id)
+        {
+
+            ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
+
+            var categorias = await _repositoryCategoriaProduto.ListarTodosRegistrosAsync();
+            ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
+
+
+            var objCategoria = await _repositoryCategoriaProduto.SelecionarPorCodigoAsync(Id);
+
+            return View("Manutencao", objCategoria);
+        }
+
+
+
+
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] CategoriaProduto categoria, Opcoes operacao)
         {
-            if (ModelState.IsValid)
+            if (Opcoes.Delete == (Opcoes)operacao)
+            {
+                await _repositoryCategoriaProduto.DeletarAsync(categoria.Id);
+                return RedirectToAction(nameof(Index));
+            }
+            else if (ModelState.IsValid)
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
@@ -146,16 +171,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                     await _repositoryCategoriaProduto.AtualizarAsync(categoria);
 
                 }
-                else if (Opcoes.Delete == (Opcoes)operacao)
-                {
-                    await _repositoryCategoriaProduto.DeletarAsync(categoria.Id);
 
-                }
                 return RedirectToAction(nameof(Index));
 
             }
-
-
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
 

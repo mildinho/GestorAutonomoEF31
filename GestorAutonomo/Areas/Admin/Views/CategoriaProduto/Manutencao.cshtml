@@ -21,23 +21,39 @@
 
     <div class="form-group">
         <label asp-for="Descricao"></label>
-        <input asp-for="Descricao" class="form-control" placeholder="Digite a Descrição da Categoria">
+
+        @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+        {
+            <input asp-for="Descricao" class="form-control" placeholder="Digite a Descrição da Categoria" disabled="disabled">
+        }
+        else
+        {
+            <input asp-for="Descricao" class="form-control" placeholder="Digite a Descrição da Categoria">
+        }
+
         <span asp-validation-for="Descricao" class="text-danger"></span>
     </div>
 
 
     <div class="form-group">
         <label asp-for="CategoriaPaiId"></label>
-        <select asp-for="CategoriaPaiId" class="form-control" asp-items="@ViewBag.Categorias">
-            <option value="">Selecione a Categoria</option>
-        </select>
+        @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+        {
+            <select asp-for="CategoriaPaiId" class="form-control" asp-items="@ViewBag.Categorias" disabled="disabled">
+                <option value="">Selecione a Categoria</option>
+            </select>
+        }
+        else
+        {
+            <select asp-for="CategoriaPaiId" class="form-control" asp-items="@ViewBag.Categorias">
+                <option value="">Selecione a Categoria</option>
+            </select>
+
+        }
         <span asp-validation-for="CategoriaPaiId" class="text-danger"></span>
     </div>
 
-    @if (ViewBag.Crud.Operacao != Opcoes.Read)
-    {
-        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Salvar</button>
-    }
-    <a asp-action="Index" class="btn btn-outline-info"><i class="fas fa-step-backward"></i> Voltar</a>
+   
+    @await Component.InvokeAsync("CRUD_Acao")
 
 </form>
