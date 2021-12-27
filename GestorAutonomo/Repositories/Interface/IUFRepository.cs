@@ -17,7 +17,7 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task<UF> SelecionarPorCodigoAsync(int? Id);
 
-        Task<IPagedList<UF>> ListarTodosRegistrosAsync(int? pagina);
+        Task<IPagedList<UF>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 
         Task<IEnumerable<UF>> ListarTodosRegistrosAsync();
 

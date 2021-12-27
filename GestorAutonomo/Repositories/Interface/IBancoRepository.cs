@@ -17,7 +17,7 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task<Banco> SelecionarPorCodigoAsync(int? Id);
 
-        Task<IPagedList<Banco>> ListarTodosRegistrosAsync(int? pagina);
+        Task<IPagedList<Banco>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 
         Task<IEnumerable<Banco>> ListarTodosRegistrosAsync();
 

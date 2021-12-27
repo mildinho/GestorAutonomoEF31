@@ -67,14 +67,23 @@ namespace GestorAutonomo.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IPagedList<Banco>> ListarTodosRegistrosAsync(int? pagina)
+        public async Task<IPagedList<Banco>> ListarTodosRegistrosAsync(int? pagina, string pesquisa)
         {
+
             int numeroPagina = pagina ?? 1;
             int RegistroPorPagina = _conf.GetValue<int>("RegistroPorPagina");
 
-            return await _context.Banco.ToPagedListAsync<Banco>(numeroPagina, RegistroPorPagina);
+            var objConsulta = _context.Banco.AsQueryable();
+            if (!string.IsNullOrEmpty(pesquisa))
+            {
+                objConsulta = objConsulta.Where(a => a.Descricao.Contains(pesquisa.Trim()));
+            }
+
+
+            return await objConsulta.ToPagedListAsync<Banco>(numeroPagina, RegistroPorPagina);
 
         }
+
 
         public async Task<IEnumerable<Banco>> ListarTodosRegistrosAsync()
         {

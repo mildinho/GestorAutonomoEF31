@@ -24,6 +24,7 @@ namespace GestorAutonomo.Models
 
 
         [Key]
+        [Display(Name = "Código")]
         public int Id { get; set; }
 
         [Display(Name = "UF")]
