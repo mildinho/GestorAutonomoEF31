@@ -4,6 +4,8 @@ using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,13 +14,13 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     [Area("Admin")]
     [LoginAutorizacao]
 
-    public class BancoController : Controller
+    public class ClienteController : Controller
     {
-        private readonly IBancoRepository _repositoryBanco;
+        private readonly IParceiroRepository _repositoryParceiro;
 
-        public BancoController(IBancoRepository repositoryBanco)
+        public ClienteController(IParceiroRepository parceiroRepository)
         {
-            _repositoryBanco = repositoryBanco;
+            _repositoryParceiro = parceiroRepository;
         }
 
 
@@ -28,38 +30,38 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             if (opcoes == Opcoes.Information)
             {
-                crud.Titulo = "Banco";
-                crud.Descricao = "Aqui você poderá configurar seu Banco Financeiro";
-                crud.SubTitulo = "Dados para Controlar seus Bancos";
+                crud.Titulo = "Cliente";
+                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Cliente";
+                crud.SubTitulo = "Dados do seu Cliente";
                 crud.Operacao = Opcoes.Information;
 
             }
             else if (opcoes == Opcoes.Create)
             {
-                crud.Titulo = "Incluir Banco Financeiro";
-                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Bancos Financeiros";
-                crud.SubTitulo = "Inserir Novo Banco";
+                crud.Titulo = "Incluir Cliente";
+                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Cliente";
+                crud.SubTitulo = "Inserir Novo Cliente";
                 crud.Operacao = Opcoes.Create;
             }
             else if (opcoes == Opcoes.Update)
             {
-                crud.Titulo = "Alterar Banco Financeiro";
-                crud.Descricao = "Aqui você poderá configurar seu Cadastro Bancos Financeiros";
-                crud.SubTitulo = "Alterar Banco Financeiro";
+                crud.Titulo = "Alterar Cliente";
+                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Cliente";
+                crud.SubTitulo = "Alterar Cliente";
                 crud.Operacao = Opcoes.Update;
             }
             else if (opcoes == Opcoes.Delete)
             {
-                crud.Titulo = "Excluir Banco Financeiro";
-                crud.Descricao = "CUIDADO ao Excluir um Banco, Este processo é irreversivel";
-                crud.SubTitulo = "Excluir Banco Financeiro";
+                crud.Titulo = "Excluir Cliente";
+                crud.Descricao = "CUIDADO ao Excluir um Cliente, Este processo é irreversivel";
+                crud.SubTitulo = "Excluir Cliente";
                 crud.Operacao = Opcoes.Delete;
             }
             else if (opcoes == Opcoes.Read)
             {
-                crud.Titulo = "Consultar Banco Financeiro";
-                crud.Descricao = "Aqui você poderá consultar seu Cadastro de Banco Financeiro";
-                crud.SubTitulo = "Consultar Banco Financeiro";
+                crud.Titulo = "Consultar Cliente";
+                crud.Descricao = "Aqui você poderá consultar seu Cadastro de Cliente";
+                crud.SubTitulo = "Consultar Clientes";
                 crud.Operacao = Opcoes.Read;
             }
 
@@ -72,7 +74,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
 
-            var registros = await _repositoryBanco.ListarTodosRegistrosAsync(pagina, pesquisa);
+            var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(pagina, pesquisa);
 
             return View(registros);
         }
@@ -83,7 +85,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Cadastrar()
         {
+
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Create);
+
+            var categorias = await _repositoryParceiro.ListarTodosRegistrosAsync();
+           
 
             return View("Manutencao");
         }
@@ -96,21 +102,24 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
 
-            var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
 
-            return View("Manutencao", objRegistros);
+            var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+
+            return View("Manutencao", objCategoria);
         }
 
 
         [HttpGet]
         public async Task<IActionResult> Consultar(int Id)
         {
+
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
 
-       
-            var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+           
 
-            return View("Manutencao", objRegistros);
+            var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+
+            return View("Manutencao", objCategoria);
         }
 
 
@@ -120,11 +129,15 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Deletar(int Id)
         {
+
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
 
-            var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+          
 
-            return View("Manutencao", objRegistros);
+
+            var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+
+            return View("Manutencao", objCategoria);
         }
 
 
@@ -133,23 +146,23 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Manutencao([FromForm] Banco banco, Opcoes operacao)
+        public async Task<IActionResult> Manutencao([FromForm] Parceiro parceiro, Opcoes operacao)
         {
             if (Opcoes.Delete == (Opcoes)operacao)
             {
-                await _repositoryBanco.DeletarAsync(banco.Id);
+                await _repositoryParceiro.DeletarAsync(parceiro.Id);
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
-                    await _repositoryBanco.InserirAsync(banco);
+                    await _repositoryParceiro.InserirAsync(parceiro);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-                    await _repositoryBanco.AtualizarAsync(banco);
+                    await _repositoryParceiro.AtualizarAsync(parceiro);
 
                 }
 
@@ -158,6 +171,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             }
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
+
+         
 
             return View();
 

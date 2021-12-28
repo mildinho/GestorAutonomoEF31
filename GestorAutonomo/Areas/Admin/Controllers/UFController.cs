@@ -3,10 +3,6 @@ using GestorAutonomo.Biblioteca.Filtro;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestorAutonomo.Areas.Admin.Controllers
@@ -85,11 +81,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Cadastrar()
         {
-
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Create);
-
-            var registros = await _repositoryUF.ListarTodosRegistrosAsync();
-            ViewBag.Categorias = registros.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             return View("Manutencao");
         }
@@ -99,12 +91,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(int Id)
         {
-
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
-
-            var registros = await _repositoryUF.ListarTodosRegistrosAsync();
-            ViewBag.Categorias = registros.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
-
 
             var objRegistros = await _repositoryUF.SelecionarPorCodigoAsync(Id);
 
@@ -115,12 +102,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Consultar(int Id)
         {
-
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
-
-            var registros = await _repositoryUF.ListarTodosRegistrosAsync();
-            ViewBag.Categorias = registros.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
-
 
             var objRegistros = await _repositoryUF.SelecionarPorCodigoAsync(Id);
 
@@ -134,12 +116,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Deletar(int Id)
         {
-
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
-
-            var registros = await _repositoryUF.ListarTodosRegistrosAsync();
-            ViewBag.Categorias = registros.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
-
 
             var objRegistros = await _repositoryUF.SelecionarPorCodigoAsync(Id);
 
@@ -177,9 +154,6 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             }
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
-
-            var registros = await _repositoryUF.ListarTodosRegistrosAsync();
-            ViewBag.Categorias = registros.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             return View();
 

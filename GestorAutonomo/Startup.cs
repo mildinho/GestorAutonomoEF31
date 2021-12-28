@@ -39,7 +39,7 @@ namespace GestorAutonomo
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IEmpresaRepository, EmpresaRepository>();
             services.AddScoped<ICategoriaProdutoRepository, CategoriaProdutoRepository>();
-            //services.AddScoped<IParceiroRepository, ParceiroRepository>();
+            services.AddScoped<IParceiroRepository, ParceiroRepository>();
 
             services.AddMemoryCache();
             services.AddSession(options =>
