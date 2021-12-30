@@ -12,48 +12,249 @@
     <input type="hidden" name="operacao" value="@ViewBag.Crud.Operacao">
 
 
-
     @if (ViewBag.Crud.Operacao != Opcoes.Create)
     {
         <input type="hidden" asp-for="Id" />
     }
 
 
-    <div class="form-group">
-        <label asp-for="Descricao"></label>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="CNPJ_CPF"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="CNPJ_CPF" class="form-control" placeholder="Informe o CPF ou CNPJ" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="CNPJ_CPF" class="form-control" placeholder="Informe o CPF ou CNPJ">
+                }
 
-        @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
-        {
-            <input asp-for="Descricao" class="form-control" placeholder="Digite a Descrição da Categoria" disabled="disabled">
-        }
-        else
-        {
-            <input asp-for="Descricao" class="form-control" placeholder="Digite a Descrição da Categoria">
-        }
+                <span asp-validation-for="CNPJ_CPF" class="text-danger"></span>
+            </div>
+        </div>
 
-        <span asp-validation-for="Descricao" class="text-danger"></span>
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Nome"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Nome" class="form-control" placeholder="Informe a Razão Social" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Nome" class="form-control" placeholder="Informe a Razão Social" autofocus>
+                }
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label asp-for="Fantasia"></label>
+
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Fantasia" class="form-control" placeholder="Informe o Nome Fantasia" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Fantasia" class="form-control" placeholder="Informe o Nome Fantasia">
+                }
+
+                <span asp-validation-for="Fantasia" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Endereco"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Endereco" class="form-control" placeholder="Informe o Endereço" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Endereco" class="form-control" placeholder="Informe o Endereço">
+                }
+                <span asp-validation-for="Endereco" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Numero"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Numero" class="form-control" placeholder="Informe o número" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Numero" class="form-control" placeholder="Informe o número">
+                }
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label asp-for="Bairro"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Bairro" class="form-control" placeholder="Informe o Bairro" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Bairro" class="form-control" placeholder="Informe o Bairro">
+                }
+                <span asp-validation-for="Bairro" class="text-danger"></span>
+            </div>
+        </div>
     </div>
 
 
     <div class="form-group">
-        <label asp-for="CategoriaPaiId"></label>
+        <label asp-for="Complemento"></label>
         @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
         {
-            <select asp-for="CategoriaPaiId" class="form-control" asp-items="@ViewBag.Categorias" disabled="disabled">
-                <option value="">Selecione a Categoria</option>
-            </select>
+            <input asp-for="Complemento" class="form-control" placeholder="Informe o Complemento do Endereço" disabled="disabled">
         }
         else
         {
-            <select asp-for="CategoriaPaiId" class="form-control" asp-items="@ViewBag.Categorias">
-                <option value="">Selecione a Categoria</option>
-            </select>
-
+            <input asp-for="Complemento" class="form-control" placeholder="Informe o Complemento do Endereço">
         }
-        <span asp-validation-for="CategoriaPaiId" class="text-danger"></span>
+        <span asp-validation-for="Complemento" class="text-danger"></span>
     </div>
 
-   
+    <div class="row">
+        <div class="col">
+
+            <div class="form-group">
+                <label asp-for="CEP"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="CEP" class="form-control" placeholder="Informe o CEP" onkeypress="$(this).mask('00.000-000')" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="CEP" class="form-control" placeholder="Informe o CEP" onkeypress="$(this).mask('00.000-000')">
+                }
+                <span asp-validation-for="CEP" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label asp-for="UFId"></label>
+                <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF">
+                    <option value="0">Selecione</option>
+                </select>
+                <span asp-validation-for="UFId" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label asp-for="Cidade"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Cidade" class="form-control" placeholder="Informe a Cidade" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Cidade" class="form-control" placeholder="Informe a Cidade">
+                }
+                <span asp-validation-for="Cidade" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Email" class="form-control" placeholder="Seu email" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Email" class="form-control" placeholder="Seu email">
+                }
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <small class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
+            </div>
+        </div>
+
+
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="EmailNFE"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="EmailNFE" class="form-control" placeholder="Seu email de NFE" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="EmailNFE" class="form-control" placeholder="Seu email de NFE">
+                }
+                <span asp-validation-for="EmailNFE" class="text-danger"></span>
+                <small class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Telefone01"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Telefone01" class="form-control" placeholder="Seu Telefone Princiapl" onkeypress="$(this).mask('(00) 0000-0000')" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Telefone01" class="form-control" placeholder="Seu Telefone Princiapl" onkeypress="$(this).mask('(00) 0000-0000')">
+                }
+                <span asp-validation-for="Telefone01" class="text-danger"></span>
+
+            </div>
+        </div>
+
+
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Telefone02"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="Telefone02" class="form-control" placeholder="Seu Telefone Comercial" onkeypress="$(this).mask('(00) 0000-0000')" disabled="disabled">
+                }
+                else
+                {
+                    <input asp-for="Telefone02" class="form-control" placeholder="Seu Telefone Comercial" onkeypress="$(this).mask('(00) 0000-0000')">
+                }
+                <span asp-validation-for="Telefone02" class="text-danger"></span>
+
+            </div>
+        </div>
+
+    </div>
+
+
     @await Component.InvokeAsync("CRUD_Acao")
 
 </form>

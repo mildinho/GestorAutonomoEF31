@@ -17,10 +17,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class ClienteController : Controller
     {
         private readonly IParceiroRepository _repositoryParceiro;
+        private readonly IUFRepository _repositoryUF;
 
-        public ClienteController(IParceiroRepository parceiroRepository)
+        private IEnumerable<UF> objUF;
+
+        public ClienteController(IParceiroRepository parceiroRepository, IUFRepository uf)
         {
             _repositoryParceiro = parceiroRepository;
+            _repositoryUF = uf;
         }
 
 
@@ -71,8 +75,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
-
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
+         
+            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(pagina, pesquisa);
 
@@ -88,6 +94,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Create);
 
+            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
+
             var categorias = await _repositoryParceiro.ListarTodosRegistrosAsync();
            
 
@@ -102,6 +111,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
 
+            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
 
@@ -115,7 +126,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
 
-           
+            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
+
 
             var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
 
@@ -132,8 +145,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
 
-          
-
+            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
 
@@ -171,8 +184,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             }
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
+            
+            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-         
 
             return View();
 
