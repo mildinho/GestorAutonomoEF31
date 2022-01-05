@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using GestorAutonomo.Repositories;
 using GestorAutonomo.Repositories.Interface;
 using GestorAutonomo.Biblioteca.Middleware;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GestorAutonomo
 {
@@ -62,7 +63,21 @@ namespace GestorAutonomo
             services.AddScoped<Sessao>();
             services.AddScoped<SessaoUsuario>();
 
+            services.AddMvc(options =>
+            {
+                options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(x => "O campo deve ser preenchido");
+                options.ModelBindingMessageProvider.SetValueIsInvalidAccessor(x => "Valor Inválido");
+                options.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor((x, y) => "O valor não é válido.");
+                options.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(x => "Não foi fornecido um valor para o campo {0}.");
+                options.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(() => "Campo obrigatório.");
+                options.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(() => "É necessário que o body na requisição não esteja vazio.");
+                options.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor((x) => "O valor '{0}' não é válido.");
+                options.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(() => "O valor fornecido é inválido.");
+                options.ModelBindingMessageProvider.SetNonPropertyValueMustBeANumberAccessor(() => "O campo deve ser um número.");
+                options.ModelBindingMessageProvider.SetUnknownValueIsInvalidAccessor((x) => "O valor fornecido é inválido para {0}.");
+                options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(x => "O campo {0} deve ser um número.");
 
+            }).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

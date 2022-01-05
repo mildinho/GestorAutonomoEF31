@@ -16,6 +16,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
     public class ClienteController : Controller
     {
+
+        //--RESOLVER A DATA DE CADASTRO(FAZER QUE SEJA AUTOMATICA QUANDO NAO EXISTIR);
+    
+
         private readonly IParceiroRepository _repositoryParceiro;
         private readonly IUFRepository _repositoryUF;
 
@@ -114,9 +118,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             objUF = await _repositoryUF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
 
-            return View("Manutencao", objCategoria);
+            return View("Manutencao", obj01);
         }
 
 
@@ -130,9 +134,23 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
 
-            var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
 
-            return View("Manutencao", objCategoria);
+            return View("Manutencao", obj01);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public async Task<IActionResult> Existe_CPF_CNPJ(double CNPJ_CPF)
+        {
+            var obj01 = await _repositoryParceiro.SelecionarPorCNPJ_CPFAsync(CNPJ_CPF);
+            if (obj01 == null)
+            {
+                return Json(true);
+            }
+           else
+            {
+                return Json("Documento Já Existente na Base");
+            }
         }
 
 
@@ -148,10 +166,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             objUF = await _repositoryUF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var objCategoria = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
 
-            return View("Manutencao", objCategoria);
+            return View("Manutencao", obj01);
         }
+
+        
 
 
 
@@ -161,6 +181,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] Parceiro parceiro, Opcoes operacao)
         {
+            parceiro.Cliente = 1;
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _repositoryParceiro.DeletarAsync(parceiro.Id);

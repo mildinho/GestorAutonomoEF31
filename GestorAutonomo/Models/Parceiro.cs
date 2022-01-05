@@ -1,4 +1,5 @@
 ﻿using GestorAutonomo.Biblioteca.Lang;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,6 +34,8 @@ namespace GestorAutonomo.Models
 
         [Display(Name = "CNPJ / CNPJ")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [RegularExpression("^[0-9]{1,14}$", ErrorMessage = "Informe somente os Números")]
+        [Remote(action: "Existe_CPF_CNPJ", controller:"Cliente", areaName:"Admin")]
         public double CNPJ_CPF { get; set; }
 
 
@@ -49,7 +52,7 @@ namespace GestorAutonomo.Models
 
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.Date)]
-        public DateTime Data_Cadastro { get; set; }
+        public DateTime Data_Cadastro { get; set; } = DateTime.Now;
 
         [Display(Name = "Endereço")]
         public string Endereco { get; set; }
@@ -82,7 +85,7 @@ namespace GestorAutonomo.Models
         [EmailAddress(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E004")]
         [DataType(DataType.EmailAddress)]
         public string EmailNFE { get; set; }
-       
+
 
 
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]

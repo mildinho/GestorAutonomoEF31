@@ -2,13 +2,14 @@
 using GestorAutonomo.Data;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using Newtonsoft.Json;
 
 namespace GestorAutonomo.Repositories
 {
@@ -97,14 +98,20 @@ namespace GestorAutonomo.Repositories
             return await _context.Parceiro.FirstOrDefaultAsync(obj => obj.Id == Id);
         }
 
+
+        public async Task<Parceiro> SelecionarPorCNPJ_CPFAsync(double documento)
+        {
+            return await _context.Parceiro.FirstOrDefaultAsync(obj => obj.CNPJ_CPF == documento);
+        }
+
+
+
         public Parceiro AjustarCampos(Parceiro parceiro)
         {
-           
-
             return parceiro;
         }
 
-       
+
     }
 
 }

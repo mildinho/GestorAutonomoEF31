@@ -10,6 +10,7 @@
 <form method="post" asp-action="Manutencao">
 
     <input type="hidden" name="operacao" value="@ViewBag.Crud.Operacao">
+    
 
 
     @if (ViewBag.Crud.Operacao != Opcoes.Create)
@@ -154,9 +155,20 @@
 
             <div class="form-group">
                 <label asp-for="UFId"></label>
-                <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF">
-                    <option value="0">Selecione</option>
-                </select>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF" disabled="disabled">
+                        <option value="0">Selecione</option>
+                    </select>
+                }
+                else
+                {
+                    <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF">
+                        <option value="0">Selecione</option>
+                    </select>
+                }
+
+
                 <span asp-validation-for="UFId" class="text-danger"></span>
             </div>
 

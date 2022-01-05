@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using Newtonsoft.Json;
 
 namespace GestorAutonomo.Repositories.Interface
 {
@@ -16,6 +17,8 @@ namespace GestorAutonomo.Repositories.Interface
         Task DeletarAsync(int Id);
 
         Task<Parceiro> SelecionarPorCodigoAsync(int? Id);
+        
+        Task<Parceiro> SelecionarPorCNPJ_CPFAsync(double documento);
 
         Task<IPagedList<Parceiro>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 
