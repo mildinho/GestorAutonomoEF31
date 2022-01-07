@@ -10,12 +10,13 @@
 <form method="post" asp-action="Manutencao">
 
     <input type="hidden" name="operacao" value="@ViewBag.Crud.Operacao">
-    
+
 
 
     @if (ViewBag.Crud.Operacao != Opcoes.Create)
     {
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Data_Cadastro" />
     }
 
 
@@ -23,13 +24,14 @@
         <div class="col">
             <div class="form-group">
                 <label asp-for="CNPJ_CPF"></label>
-                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                @if (ViewBag.Crud.Operacao == Opcoes.Create || String.IsNullOrEmpty(Model.CNPJ_CPF.ToString()))
                 {
-                    <input asp-for="CNPJ_CPF" class="form-control" placeholder="Informe o CPF ou CNPJ" disabled="disabled">
+                    <input asp-for="CNPJ_CPF" class="form-control" placeholder="Informe o CPF ou CNPJ">
                 }
                 else
                 {
-                    <input asp-for="CNPJ_CPF" class="form-control" placeholder="Informe o CPF ou CNPJ">
+                    <input asp-for="CNPJ_CPF" class="form-control" placeholder="Informe o CPF ou CNPJ" disabled="disabled">
+                    <input type="hidden" asp-for="CNPJ_CPF" />
                 }
 
                 <span asp-validation-for="CNPJ_CPF" class="text-danger"></span>
@@ -158,13 +160,13 @@
                 @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
                 {
                     <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF" disabled="disabled">
-                        <option value="0">Selecione</option>
+                        <option value="">Selecione</option>
                     </select>
                 }
                 else
                 {
                     <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF">
-                        <option value="0">Selecione</option>
+                        <option value="">Selecione</option>
                     </select>
                 }
 

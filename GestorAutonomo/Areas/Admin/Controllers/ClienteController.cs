@@ -140,9 +140,13 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         }
 
         [AcceptVerbs("Get", "Post")]
-        public async Task<IActionResult> Existe_CPF_CNPJ(double CNPJ_CPF)
+        public async Task<IActionResult> Existe_CPF_CNPJ(double CNPJ_CPF, Opcoes operacao)
         {
-            var obj01 = await _repositoryParceiro.SelecionarPorCNPJ_CPFAsync(CNPJ_CPF);
+            Parceiro obj01 = null;
+            if (Opcoes.Create == (Opcoes)operacao)
+                obj01 = await _repositoryParceiro.SelecionarPorCNPJ_CPFAsync(CNPJ_CPF);
+
+
             if (obj01 == null)
             {
                 return Json(true);
@@ -191,11 +195,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
+                    parceiro.Data_Cadastro = DateTime.Now;
                     await _repositoryParceiro.InserirAsync(parceiro);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
+
+                   
                     await _repositoryParceiro.AtualizarAsync(parceiro);
 
                 }

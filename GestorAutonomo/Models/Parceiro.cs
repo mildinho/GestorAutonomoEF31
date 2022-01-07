@@ -35,7 +35,7 @@ namespace GestorAutonomo.Models
         [Display(Name = "CNPJ / CNPJ")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [RegularExpression("^[0-9]{1,14}$", ErrorMessage = "Informe somente os Números")]
-        [Remote(action: "Existe_CPF_CNPJ", controller:"Cliente", areaName:"Admin")]
+        [Remote(action: "Existe_CPF_CNPJ", controller:"Cliente", areaName:"Admin", AdditionalFields = "operacao")]
         public double CNPJ_CPF { get; set; }
 
 
@@ -50,9 +50,13 @@ namespace GestorAutonomo.Models
         [MinLength(3, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E002")]
         public string Fantasia { get; set; }
 
+        [Display(Name = "Data da Alteracao")]
+        [DataType(DataType.Date)]
+        public DateTime Data_Alteracao { get; set; } = DateTime.Now;
+
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.Date)]
-        public DateTime Data_Cadastro { get; set; } = DateTime.Now;
+        public DateTime Data_Cadastro { get; set; }
 
         [Display(Name = "Endereço")]
         public string Endereco { get; set; }

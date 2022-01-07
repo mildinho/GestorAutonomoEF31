@@ -2,14 +2,13 @@
 using GestorAutonomo.Data;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
-using Newtonsoft.Json;
+using System;
 
 namespace GestorAutonomo.Repositories
 {
@@ -30,11 +29,13 @@ namespace GestorAutonomo.Repositories
         {
             if (!await _context.Parceiro.AnyAsync(x => x.Id == parceiro.Id))
             {
-                throw new NotFoundException("Codigo nao encontrado");
+                throw new NotFoundException("Código não encontrado");
             }
             try
             {
                 parceiro = AjustarCampos(parceiro);
+        
+                    
                 _context.Update(parceiro);
                 await _context.SaveChangesAsync();
             }
@@ -66,6 +67,9 @@ namespace GestorAutonomo.Repositories
         public async Task InserirAsync(Parceiro parceiro)
         {
             parceiro = AjustarCampos(parceiro);
+
+           
+
             _context.Add(parceiro);
             await _context.SaveChangesAsync();
         }
