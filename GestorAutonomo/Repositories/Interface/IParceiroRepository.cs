@@ -20,13 +20,15 @@ namespace GestorAutonomo.Repositories.Interface
         
         Task<Parceiro> SelecionarPorCNPJ_CPFAsync(double documento);
 
-        Task<IPagedList<Parceiro>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
+        Task<IPagedList<Parceiro>> ListarTodosRegistrosAsync(TipoParceiro tipo, int? pagina, string pesquisa);
 
-        Task<IEnumerable<Parceiro>> ListarTodosRegistrosAsync();
+        Task<IEnumerable<Parceiro>> ListarTodosRegistrosAsync(TipoParceiro tipo);
 
         Parceiro AjustarCampos(Parceiro parceiro);
 
 
 
     }
+
+   
 }

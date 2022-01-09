@@ -14,18 +14,17 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     [Area("Admin")]
     [LoginAutorizacao]
 
-    public class ClienteController : Controller
+    public class FornecedorController : Controller
     {
 
-        //--RESOLVER A DATA DE CADASTRO(FAZER QUE SEJA AUTOMATICA QUANDO NAO EXISTIR);
-    
+       
 
         private readonly IParceiroRepository _repositoryParceiro;
         private readonly IUFRepository _repositoryUF;
 
         private IEnumerable<UF> objUF;
 
-        public ClienteController(IParceiroRepository parceiroRepository, IUFRepository uf)
+        public FornecedorController(IParceiroRepository parceiroRepository, IUFRepository uf)
         {
             _repositoryParceiro = parceiroRepository;
             _repositoryUF = uf;
@@ -38,38 +37,38 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             if (opcoes == Opcoes.Information)
             {
-                crud.Titulo = "Cliente";
-                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Cliente";
-                crud.SubTitulo = "Dados do seu Cliente";
+                crud.Titulo = "Fornecedor";
+                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Fornecedor";
+                crud.SubTitulo = "Dados do seu Fornecedor";
                 crud.Operacao = Opcoes.Information;
 
             }
             else if (opcoes == Opcoes.Create)
             {
-                crud.Titulo = "Incluir Cliente";
-                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Cliente";
-                crud.SubTitulo = "Inserir Novo Cliente";
+                crud.Titulo = "Incluir Fornecedor";
+                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Fornecedor";
+                crud.SubTitulo = "Inserir Novo Fornecedor";
                 crud.Operacao = Opcoes.Create;
             }
             else if (opcoes == Opcoes.Update)
             {
-                crud.Titulo = "Alterar Cliente";
-                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Cliente";
-                crud.SubTitulo = "Alterar Cliente";
+                crud.Titulo = "Alterar Fornecedor";
+                crud.Descricao = "Aqui você poderá configurar seu Cadastro de Fornecedor";
+                crud.SubTitulo = "Alterar Fornecedor";
                 crud.Operacao = Opcoes.Update;
             }
             else if (opcoes == Opcoes.Delete)
             {
-                crud.Titulo = "Excluir Cliente";
-                crud.Descricao = "CUIDADO ao Excluir um Cliente, Este processo é irreversivel";
-                crud.SubTitulo = "Excluir Cliente";
+                crud.Titulo = "Excluir Fornecedor";
+                crud.Descricao = "CUIDADO ao Excluir um Fornecedor, Este processo é irreversivel";
+                crud.SubTitulo = "Excluir Fornecedor";
                 crud.Operacao = Opcoes.Delete;
             }
             else if (opcoes == Opcoes.Read)
             {
-                crud.Titulo = "Consultar Cliente";
-                crud.Descricao = "Aqui você poderá consultar seu Cadastro de Cliente";
-                crud.SubTitulo = "Consultar Clientes";
+                crud.Titulo = "Consultar Fornecedor";
+                crud.Descricao = "Aqui você poderá consultar seu Cadastro de Fornecedor";
+                crud.SubTitulo = "Consultar Fornecedor";
                 crud.Operacao = Opcoes.Read;
             }
 
@@ -84,7 +83,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             objUF = await _repositoryUF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Cliente, pagina, pesquisa);
+            var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Fornecedor,  pagina, pesquisa);
 
             return View(registros);
         }
@@ -101,7 +100,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             objUF = await _repositoryUF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var categorias = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Cliente);
+            var categorias = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Fornecedor);
            
 
             return View("Manutencao");
@@ -185,7 +184,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] Parceiro parceiro, Opcoes operacao)
         {
-            parceiro.Cliente = 1;
+            parceiro.Fornecedor = 1;
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _repositoryParceiro.DeletarAsync(parceiro.Id);

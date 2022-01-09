@@ -74,13 +74,23 @@ namespace GestorAutonomo.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IPagedList<Parceiro>> ListarTodosRegistrosAsync(int? pagina, string pesquisa)
+        public async Task<IPagedList<Parceiro>> ListarTodosRegistrosAsync(TipoParceiro tipo, int? pagina, string pesquisa)
         {
 
             int numeroPagina = pagina ?? 1;
             int RegistroPorPagina = _conf.GetValue<int>("RegistroPorPagina");
 
             var objConsulta = _context.Parceiro.AsQueryable();
+
+            if (tipo == TipoParceiro.Cliente)
+                objConsulta = objConsulta.Where(a => a.Cliente == 1 );
+            else if (tipo == TipoParceiro.Fornecedor)
+                objConsulta = objConsulta.Where(a => a.Fornecedor == 1);
+            else if (tipo == TipoParceiro.Vendedor)
+                objConsulta = objConsulta.Where(a => a.Vendedor == 1);
+
+
+
             if (!string.IsNullOrEmpty(pesquisa))
             {
                 objConsulta = objConsulta.Where(a => a.Nome.Contains(pesquisa.Trim()));
@@ -91,9 +101,20 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task<IEnumerable<Parceiro>> ListarTodosRegistrosAsync()
+        public async Task<IEnumerable<Parceiro>> ListarTodosRegistrosAsync(TipoParceiro tipo)
         {
-            return await _context.Parceiro.ToListAsync();
+            var objConsulta = _context.Parceiro.AsQueryable();
+            
+            if (tipo == TipoParceiro.Cliente) 
+                objConsulta = objConsulta.Where(a => a.Cliente == 1);
+            else if (tipo == TipoParceiro.Fornecedor)
+                    objConsulta = objConsulta.Where(a => a.Fornecedor == 1);
+            else if (tipo == TipoParceiro.Vendedor)
+                objConsulta = objConsulta.Where(a => a.Vendedor == 1);
+
+            return await objConsulta.ToListAsync();
+
+           
 
         }
 
@@ -117,5 +138,8 @@ namespace GestorAutonomo.Repositories
 
 
     }
+
+
+   
 
 }
