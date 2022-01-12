@@ -19,6 +19,8 @@ namespace GestorAutonomo.Data
         public DbSet<Banco> Banco { get; set; }
         public DbSet<Login> Login { get; set; }
         public DbSet<Parceiro> Parceiro { get; set; }
+        public DbSet<Produto> Produto { get; set; }
+        public DbSet<PontosEstoque> PontosEstoque { get; set; }
 
 
     }
