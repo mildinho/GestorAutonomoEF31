@@ -79,6 +79,23 @@ namespace GestorAutonomo.Data
             _context.SaveChanges();
 
 
+            if (!_context.CategoriaProduto.Any())
+            {
+
+                CategoriaProduto categoriaProduto01 = new CategoriaProduto(1, "Livros", null);
+
+
+                CategoriaProduto categoriaProduto02 = new CategoriaProduto(2, "Livros Terror", 1);
+                CategoriaProduto categoriaProduto03 = new CategoriaProduto(3, "Livros Romance", 1);
+
+                _context.CategoriaProduto.AddRange(categoriaProduto01);
+                _context.CategoriaProduto.AddRange(categoriaProduto02);
+                _context.CategoriaProduto.AddRange(categoriaProduto03);
+
+             
+            }
+            _context.SaveChanges();
+
         }
     }
 }

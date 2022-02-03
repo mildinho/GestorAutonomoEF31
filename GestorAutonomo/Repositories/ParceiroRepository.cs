@@ -14,7 +14,7 @@ namespace GestorAutonomo.Repositories
 {
     public class ParceiroRepository : IParceiroRepository
     {
-        private IConfiguration _conf;
+        private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
         public ParceiroRepository(GestorAutonomoContext context, IConfiguration configuration)

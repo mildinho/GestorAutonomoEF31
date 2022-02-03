@@ -31,5 +31,18 @@ namespace GestorAutonomo.Models
 
 
 
+
+        public CategoriaProduto()
+        {
+        }
+
+
+        public CategoriaProduto(int id, string descricao, int? categoriaPaiId)
+        {
+            Id = id;
+            Descricao = descricao;
+            CategoriaPaiId = categoriaPaiId;
+           
+        }
     }
 }
