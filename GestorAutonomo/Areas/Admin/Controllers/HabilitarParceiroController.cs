@@ -89,13 +89,25 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Manutencao(int Id, int tipo)
+        public async Task<IActionResult> Manutencao(int Id, int tipo, int LigadoDesligado)
         {
 
             var parceiro2 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
-            if (parceiro2 != null)
+
+            if (parceiro2 != null && tipo <= 3) 
             {
-                parceiro2.Fornecedor = 1;
+                if (tipo == 1)
+                {
+
+                } else if (tipo == 2)
+                {
+
+                } else if (tipo == 3)
+                {
+
+                }
+
+
                 await _repositoryParceiro.AtualizarAsync(parceiro2);
             }
 

@@ -36,7 +36,7 @@
                         <th class="col-6">@Html.DisplayNameFor(model => model.First().Nome)</th>
                         <th class="col-2">@Html.DisplayNameFor(model => model.First().CNPJ_CPF)</th>
                         <th class="col-2">Tipo</th>
-                      
+
                     </tr>
                 </thead>
                 <tbody>
@@ -54,22 +54,22 @@
                             <td>
 
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="@String.Concat("C", parceiro.Id.ToString())" checked="@(parceiro.Cliente == 1)" onclick="triggerLink(@parceiro.Id,1)">
+                                    <input type="checkbox" class="custom-control-input" name="chkCliente" id="@String.Concat("C", parceiro.Id.ToString())" checked="@(parceiro.Cliente == 1)" onclick="LigaDesligaParceiro(@parceiro.Id,1">
                                     <label class="custom-control-label font-weight-bold" for="@String.Concat("C", parceiro.Id.ToString())">Cliente</label>
                                 </div>
 
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="@String.Concat("F", parceiro.Id.ToString())" checked="@(parceiro.Fornecedor == 1)">
+                                    <input type="checkbox" class="custom-control-input" name="chkFornecedor" id="@String.Concat("F", parceiro.Id.ToString())" checked="@(parceiro.Fornecedor == 1)" onclick="LigaDesligaParceiro(@parceiro.Id,2)">
                                     <label class="custom-control-label font-weight-bold" for="@String.Concat("F", parceiro.Id.ToString())">Fornecedor</label>
                                 </div>
 
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="@String.Concat("V", parceiro.Id.ToString())" checked="@(parceiro.Vendedor == 1)">
+                                    <input type="checkbox" class="custom-control-input" name="chkVendedor" id="@String.Concat("V", parceiro.Id.ToString())" checked="@(parceiro.Vendedor == 1)" onclick="LigaDesligaParceiro(@parceiro.Id,3)">
                                     <label class="custom-control-label font-weight-bold" for="@String.Concat("V", parceiro.Id.ToString())">Vendedor</label>
                                 </div>
                             </td>
 
-                          
+
                         </tr>
                     }
                 </tbody>
@@ -92,28 +92,60 @@ else
 
 
 <script>
-    function triggerLink(id, parceiro) {
+    function LigaDesligaParceiro(id, parceiro) {
+        /*
+        var chklista = $('input[name="chkCliente"]:checked').toArray().map(function (check) {
+            return $(check).val();
+        });
 
-        alert(id);
+
+
+        var resultado = $('input[name=identificador]').is(':checked')
+
+        var resultado = $('input[name='+identificador+']:checked').val();
+
+
+        */
+
+
+        var identificador='';
+        var status = 0;
+
+        if (parceiro == 1) {
+            identificador = '#C' + id;
+            var teucumyfriend = $(identificador);
+
+            if (teucumyfriend.is(":checked")) {
+                status = 1;
+            }
+
+        } else if (parceiro == 2) {
+
+        } else if (parceiro == 3) {
+
+        }
+
+
+
+
+        alert(identificador);
+        alert(status);
+
         $.ajax({
             type: "POST",
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/text",
                 "RequestVerificationToken": gettoken()
             },
-            
+
             url: "/Admin/HabilitarParceiro/Manutencao/",
-            data: { "Id": 1, "tipo": 1 },
+            data: { "Id": id, "tipo": parceiro, "LigadoDesligado": status },
             success: function (response) {
-                alert("Tudo Lindo: " );
 
             },
             failure: function (response) {
-                alert(response.responseText);
+                console.log(response.responseText);
             },
             error: function (response) {
-                alert(response.responseText);
                 console.log(response.responseText);
             }
         });
