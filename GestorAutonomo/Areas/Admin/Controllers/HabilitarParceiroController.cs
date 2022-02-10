@@ -61,7 +61,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
 
-            var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Cliente, pagina, pesquisa);
+            var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Todos, pagina, pesquisa);
 
             return View(registros);
         }
@@ -92,23 +92,23 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         public async Task<IActionResult> Manutencao(int Id, int tipo, int LigadoDesligado)
         {
 
-            var parceiro2 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var parceiro = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
 
-            if (parceiro2 != null && tipo <= 3) 
+            if (parceiro != null && tipo <= 3) 
             {
                 if (tipo == 1)
                 {
-
+                    parceiro.Cliente = LigadoDesligado;
                 } else if (tipo == 2)
                 {
-
+                    parceiro.Fornecedor = LigadoDesligado;
                 } else if (tipo == 3)
                 {
-
+                    parceiro.Vendedor = LigadoDesligado;
                 }
 
 
-                await _repositoryParceiro.AtualizarAsync(parceiro2);
+                await _repositoryParceiro.AtualizarAsync(parceiro);
             }
 
             return RedirectToAction(nameof(Index));

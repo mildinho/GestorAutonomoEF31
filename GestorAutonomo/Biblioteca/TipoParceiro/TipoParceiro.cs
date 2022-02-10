@@ -2,6 +2,6 @@
 {
     Cliente = 1,
     Fornecedor = 2,
-    Vendedor = 3
-
+    Vendedor = 3,
+    Todos = 0
 }
