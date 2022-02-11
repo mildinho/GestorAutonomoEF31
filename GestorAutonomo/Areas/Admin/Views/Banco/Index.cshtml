@@ -10,8 +10,10 @@
 
 @*Tela de Pesquisa*@
 @await Component.InvokeAsync("Pesquisar", new
-    { placeholder = "Digite o Nome do Banco" ,
-      aspaction ="Cadastrar"} )
+    {
+    placeholder = "Digite o Nome do Banco",
+      aspaction = "Cadastrar"
+})
 
 <br />
 
@@ -37,17 +39,17 @@
                 @foreach (Banco banco in Model)
                 {
                     <tr>
-                        <th scope="row" class="text-center" >@banco.Id</th>
+                        <th scope="row" class="text-center">@banco.Id</th>
                         <td>@banco.Codigo</td>
                         <td>
                             @Html.DisplayFor(model => banco.Descricao)
-                          
+
                         </td>
                         <td class="text-center">
                             <a asp-action="Editar" asp-route-id="@banco.Id" class="btn btn-outline-info mr-2" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></a>
                             <a asp-action="Consultar" asp-route-id="@banco.Id" class="btn btn-outline-warning mr-2" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="fas fa-book-open"></i></a>
                             <a asp-action="Deletar" asp-route-id="@banco.Id" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fas fa-trash-alt"></i></a>
-                         
+
                         </td>
 
                     </tr>
@@ -62,8 +64,8 @@
 else
 {
 
-    <div class="alert alert-info">
-        <strong>Nenhum Registro Cadastrado!</strong>
-    </div>
+    @*Tela Informando que nao ha registros *@
+    @await Component.InvokeAsync("SemRegistro")
+
 
 }

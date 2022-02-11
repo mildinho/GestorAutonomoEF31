@@ -10,8 +10,10 @@
 
 @*Tela de Pesquisa*@
 @await Component.InvokeAsync("Pesquisar", new
-    { placeholder = "Digite o Nome do Cliente" ,
-      aspaction ="Cadastrar"} )
+    {
+    placeholder = "Digite o Nome do Cliente",
+      aspaction = "Cadastrar"
+})
 
 <br />
 
@@ -36,23 +38,23 @@
             <tbody>
                 @foreach (Parceiro parceiro in Model)
                 {
-                <tr>
-                    <th scope="row" class="text-center">@parceiro.Id</th>
-                   
-                    <td> @Html.DisplayFor(model => parceiro.Nome)</td>
-                    <td>
+                    <tr>
+                        <th scope="row" class="text-center">@parceiro.Id</th>
 
-                        @parceiro.CNPJ_CPF
+                        <td> @Html.DisplayFor(model => parceiro.Nome)</td>
+                        <td>
 
-                    </td>
-                    <td class="text-center">
-                        <a asp-action="Editar" asp-route-id="@parceiro.Id" class="btn btn-outline-info mr-2" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                        <a asp-action="Consultar" asp-route-id="@parceiro.Id" class="btn btn-outline-warning mr-2" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="fas fa-book-open"></i></a>
-                        <a asp-action="Deletar" asp-route-id="@parceiro.Id" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                            @parceiro.CNPJ_CPF
 
-                    </td>
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Editar" asp-route-id="@parceiro.Id" class="btn btn-outline-info mr-2" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></a>
+                            <a asp-action="Consultar" asp-route-id="@parceiro.Id" class="btn btn-outline-warning mr-2" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="fas fa-book-open"></i></a>
+                            <a asp-action="Deletar" asp-route-id="@parceiro.Id" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fas fa-trash-alt"></i></a>
 
-                </tr>
+                        </td>
+
+                    </tr>
                 }
             </tbody>
         </table>
@@ -64,8 +66,9 @@
 else
 {
 
-    <div class="alert alert-info">
-        <strong>Nenhum Registro Cadastrado!</strong>
-    </div>
+
+    @*Tela Informando que nao ha registros *@
+    @await Component.InvokeAsync("SemRegistro")
+
 
 }

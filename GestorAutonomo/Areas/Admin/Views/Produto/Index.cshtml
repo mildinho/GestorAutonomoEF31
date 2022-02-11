@@ -1,4 +1,4 @@
-﻿@model IPagedList<Parceiro>
+﻿@model IPagedList<Produto>
 @{
     ViewData["Title"] = ViewBag.Crud.Titulo;
 }
@@ -11,7 +11,7 @@
 @*Tela de Pesquisa*@
 @await Component.InvokeAsync("Pesquisar", new
     {
-    placeholder = "Digite o Nome do Fornecedor",
+    placeholder = "Digite os Dados do Produto",
       aspaction = "Cadastrar"
 })
 
@@ -30,26 +30,27 @@
             <thead>
                 <tr style="text-align:center">
                     <th class="col-1">@Html.DisplayNameFor(model => model.First().Id)</th>
-                    <th class="col-7">@Html.DisplayNameFor(model => model.First().Nome)</th>
-                    <th class="col-2">@Html.DisplayNameFor(model => model.First().CNPJ_CPF)</th>
+                    <th class="col-7">@Html.DisplayNameFor(model => model.First().Referencia)</th>
+                    <th class="col-2">@Html.DisplayNameFor(model => model.First().Descricao)</th>
                     <th class="col-2">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (Parceiro parceiro in Model)
+                @foreach (Produto produto in Model)
                 {
                     <tr>
-                        <th scope="row" class="text-center">@parceiro.Id</th>
-                        <td> @Html.DisplayFor(model => parceiro.Nome)</td>
+                        <th scope="row" class="text-center">@produto.Id</th>
+
+                        <td> @Html.DisplayFor(model => produto.Referencia)</td>
                         <td>
 
-                            @parceiro.CNPJ_CPF
+                            @produto.Descricao
 
                         </td>
                         <td class="text-center">
-                            <a asp-action="Editar" asp-route-id="@parceiro.Id" class="btn btn-outline-info mr-2" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></a>
-                            <a asp-action="Consultar" asp-route-id="@parceiro.Id" class="btn btn-outline-warning mr-2" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="fas fa-book-open"></i></a>
-                            <a asp-action="Deletar" asp-route-id="@parceiro.Id" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                            <a asp-action="Editar" asp-route-id="@produto.Id" class="btn btn-outline-info mr-2" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></a>
+                            <a asp-action="Consultar" asp-route-id="@produto.Id" class="btn btn-outline-warning mr-2" data-toggle="tooltip" data-placement="top" title="Consultar"><i class="fas fa-book-open"></i></a>
+                            <a asp-action="Deletar" asp-route-id="@produto.Id" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir"><i class="fas fa-trash-alt"></i></a>
 
                         </td>
 
@@ -64,6 +65,7 @@
 }
 else
 {
+
 
     @*Tela Informando que nao ha registros *@
     @await Component.InvokeAsync("SemRegistro")

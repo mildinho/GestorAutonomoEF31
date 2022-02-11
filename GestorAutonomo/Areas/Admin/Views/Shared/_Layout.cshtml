@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
 <body>
     <header>
@@ -28,8 +30,9 @@
                                 <div class="row" style="width:900px">
                                     <div class="col-4">
                                         <div class="dropdown-header"><h5 class="font-weight-bolder">Produto</h5></div>
-                                        <a class="dropdown-item" href="#">Manutenção</a>
-                                        <a class="dropdown-item" href="#">Relatórios</a>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="Produto" asp-area="Admin">Manutenção</a>
+
+                                          <a class="dropdown-item" href="#">Relatórios</a>
                                     </div>
                                     <div class="col-4">
                                         <div class="dropdown-header"><h5 class="font-weight-bolder">Categoria</h5></div>

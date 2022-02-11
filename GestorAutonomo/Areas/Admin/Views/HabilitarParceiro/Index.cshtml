@@ -84,9 +84,9 @@
 else
 {
 
-    <div class="alert alert-info">
-        <strong>Nenhum Registro Cadastrado!</strong>
-    </div>
+    @*Tela Informando que nao ha registros *@
+    @await Component.InvokeAsync("SemRegistro")
+
 
 }
 
