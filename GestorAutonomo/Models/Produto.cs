@@ -13,10 +13,9 @@ namespace GestorAutonomo.Models
 
         [Key]
         [Display(Name = "Código")]
-
         public int Id { get; set; }
 
-
+       
         [Display(Name = "Referencia")]
         [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
         public string Referencia { get; set; }
@@ -35,5 +34,25 @@ namespace GestorAutonomo.Models
         public DateTime Data_Cadastro { get; set; }
 
 
+        [Display(Name = "Altura")]
+        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
+        public double Altura { get; set; }
+
+        [Display(Name = "Largura")]
+        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
+        public double Largura { get; set; }
+
+        [Display(Name = "Comprimento")]
+        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
+        public double Comprimento { get; set; }
+
+
+
+
+        public PontosEstoque PontosEstoque { get; set; }
+        public CategoriaProduto CategoriaProduto { get; set; }
+
+
     }
 }
+

@@ -13,7 +13,6 @@ namespace GestorAutonomo.Models
 
         [Key]
         [Display(Name = "Código")]
-
         public int Id { get; set; }
 
         [Display(Name = "Descrição")]
@@ -21,5 +20,17 @@ namespace GestorAutonomo.Models
         public string Descricao { get; set; }
 
 
+
+
+        public PontosEstoque()
+        {
+
+        }
+
+        public PontosEstoque(int id, string descricao)
+        {
+            Id = id;
+            Descricao = descricao;
+        }
     }
 }

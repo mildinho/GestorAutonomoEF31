@@ -75,8 +75,20 @@ namespace GestorAutonomo.Data
 
                 Empresa empresa = new Empresa(1, 985, "Fernando Casagrande", "Gestor autonomo", DateTime.Now, 1, "1921013000");
                 _context.Empresa.Add(empresa);
-            }           
+            }
             _context.SaveChanges();
+
+
+            if (!_context.PontosEstoque.Any())
+            {
+
+                PontosEstoque pontosEstoque01 = new PontosEstoque(1, "Picking");
+                PontosEstoque pontosEstoque02 = new PontosEstoque(2, "Apoio");
+                PontosEstoque pontosEstoque03 = new PontosEstoque(3, "Porta Palete");
+                _context.PontosEstoque.AddRange(pontosEstoque01, pontosEstoque02, pontosEstoque03);
+            }
+            _context.SaveChanges();
+
 
 
             if (!_context.CategoriaProduto.Any())
@@ -92,7 +104,7 @@ namespace GestorAutonomo.Data
                 _context.CategoriaProduto.AddRange(categoriaProduto02);
                 _context.CategoriaProduto.AddRange(categoriaProduto03);
 
-             
+
             }
             _context.SaveChanges();
 
