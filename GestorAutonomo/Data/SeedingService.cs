@@ -95,8 +95,6 @@ namespace GestorAutonomo.Data
             {
 
                 CategoriaProduto categoriaProduto01 = new CategoriaProduto(1, "Livros", null);
-
-
                 CategoriaProduto categoriaProduto02 = new CategoriaProduto(2, "Livros Terror", 1);
                 CategoriaProduto categoriaProduto03 = new CategoriaProduto(3, "Livros Romance", 1);
 
@@ -104,6 +102,18 @@ namespace GestorAutonomo.Data
                 _context.CategoriaProduto.AddRange(categoriaProduto02);
                 _context.CategoriaProduto.AddRange(categoriaProduto03);
 
+
+            }
+            _context.SaveChanges();
+
+
+            if (!_context.Produto.Any())
+            {
+
+                Produto Produto01 = new Produto(1, "CAR80", "LUBRIFICANTE AUTOMOTIVO");
+                
+                _context.Produto.AddRange(Produto01);
+                
 
             }
             _context.SaveChanges();

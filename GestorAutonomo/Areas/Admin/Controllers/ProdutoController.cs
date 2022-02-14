@@ -18,15 +18,18 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     {
 
         //--RESOLVER A DATA DE CADASTRO(FAZER QUE SEJA AUTOMATICA QUANDO NAO EXISTIR);
-    
+
 
         private readonly IProdutoRepository _repositoryProduto;
-       
+        private readonly ICategoriaProdutoRepository _repositoryCategoria;
+        private readonly IImagemRepository _repositoryImagem;
 
-         public ProdutoController(IProdutoRepository produtoRepository)
+
+        public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria)
         {
-            _repositoryProduto = produtoRepository;
-           
+            _repositoryProduto = produto;
+            _repositoryCategoria = categoria;
+          
         }
 
 
@@ -78,7 +81,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
-         
+
             var registros = await _repositoryProduto.ListarTodosRegistrosAsync(pagina, pesquisa);
 
             return View(registros);
@@ -92,8 +95,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Create);
-        
-        
+
+            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
+
             return View("Manutencao");
         }
 
@@ -105,7 +110,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
 
-     
+            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
+
+
             var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
 
             return View("Manutencao", obj01);
@@ -151,13 +159,13 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
 
-         
+
             var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
 
             return View("Manutencao", obj01);
         }
 
-        
+
 
 
 
@@ -167,7 +175,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] Produto produto, Opcoes operacao)
         {
-           
+
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _repositoryProduto.DeletarAsync(produto.Id);
@@ -183,8 +191,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-
-                   
+                    produto.Data_Alteracao = DateTime.Now;
                     await _repositoryProduto.AtualizarAsync(produto);
 
                 }
@@ -194,8 +201,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             }
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
-            
-     
+
+
             return View();
 
         }

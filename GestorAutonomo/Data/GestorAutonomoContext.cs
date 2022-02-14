@@ -21,6 +21,7 @@ namespace GestorAutonomo.Data
         public DbSet<Parceiro> Parceiro { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<PontosEstoque> PontosEstoque { get; set; }
+        public DbSet<Imagem> imagems { get; set; }
 
 
     }
