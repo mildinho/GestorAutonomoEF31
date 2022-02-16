@@ -20,7 +20,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
     public class EmpresaController : Controller
     {
-        private CRUD crud = new CRUD();
+        private readonly CRUD crud = new CRUD();
         private IEnumerable<UF> objUF;
 
         private readonly IEmpresaRepository _repositoryEmpresa;

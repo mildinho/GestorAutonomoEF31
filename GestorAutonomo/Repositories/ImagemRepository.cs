@@ -9,7 +9,7 @@ namespace GestorAutonomo.Repositories
     public class ImagemRepository : IImagemRepository
     {
 
-        private readonly IConfiguration _conf;
+
         private readonly GestorAutonomoContext _context;
         public ImagemRepository(GestorAutonomoContext context)
         {

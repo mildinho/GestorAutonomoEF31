@@ -8,11 +8,11 @@ namespace GestorAutonomo.Biblioteca.Componentes
 {
     public class SemRegistroViewComponent : ViewComponent
     {
-        
 
-        public async Task<IViewComponentResult> InvokeAsync()
+
+        public IViewComponentResult Invoke()
         {
-           
+
             return View();
         }
 

@@ -22,7 +22,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         }
 
 
-        private CRUD ConfiguraMensagem(Opcoes opcoes)
+        private Task<CRUD> ConfiguraMensagem(Opcoes opcoes)
         {
             CRUD crud = new CRUD();
 
@@ -63,14 +63,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 crud.Operacao = Opcoes.Read;
             }
 
-            return crud;
+            return Task.FromResult(crud);
         }
 
 
         public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
 
-            ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
+            ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Information);
 
             var registros = await _repositoryBanco.ListarTodosRegistrosAsync(pagina, pesquisa);
 
@@ -83,7 +83,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Cadastrar()
         {
-            ViewBag.CRUD = ConfiguraMensagem(Opcoes.Create);
+            ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Create);
 
             return View("Manutencao");
         }
@@ -94,7 +94,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         public async Task<IActionResult> Editar(int Id)
         {
 
-            ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
+            ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Update);
 
             var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
 
@@ -105,7 +105,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Consultar(int Id)
         {
-            ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
+            ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Read);
 
        
             var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
@@ -120,7 +120,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Deletar(int Id)
         {
-            ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
+            ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Delete);
 
             var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
 
@@ -157,7 +157,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             }
 
-            ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
+            ViewBag.CRUD = await ConfiguraMensagem((Opcoes)operacao);
 
             return View();
 

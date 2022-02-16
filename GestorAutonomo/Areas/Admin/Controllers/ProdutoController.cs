@@ -22,8 +22,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
         private readonly IProdutoRepository _repositoryProduto;
         private readonly ICategoriaProdutoRepository _repositoryCategoria;
-        private readonly IImagemRepository _repositoryImagem;
-
+       
 
         public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria)
         {

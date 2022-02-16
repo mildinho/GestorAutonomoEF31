@@ -8,9 +8,9 @@ namespace GestorAutonomo.Biblioteca.CRUD
 {
     public class CRUD_AcaoViewComponent : ViewComponent
     {
-        
 
-        public async Task<IViewComponentResult> InvokeAsync()
+
+        public IViewComponentResult Invoke()
         {
             return View();
         }
