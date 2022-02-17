@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/limonte-sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="~/lib/w3-css/w3.min.css" />
+
+
 </head>
 <body>
     <header>
@@ -28,35 +32,37 @@
                 </div>
 
                 <!-- Button to Open the Modal -->
-                
-                    <a class="btn btn-dark btn-sm " asp-area="" asp-controller="Home" asp-action="Autenticar">Login</a>
-                </li>
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
 
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2021 - Gestor Autônomo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Politica de Privacidade</a>
+                <a class="btn btn-dark btn-sm " asp-area="" asp-controller="Home" asp-action="Autenticar">Login</a>
+             
             </div>
-        </footer>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Gestor Autônomo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Politica de Privacidade</a>
+        </div>
+    </footer>
 
 
 
 
 
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/lib/font-awesome/js/all.min.js"></script>
-        <script src="~/lib/jquery.mask/jquery.mask.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="~/lib/jquery.mask/jquery.mask.js"></script>
+    <script src="~/lib/limonte-sweetalert2/sweetalert2.all.min.js"></script>
 
 
-        @RenderSection("Scripts", required: false)
-    </body>
-    </html>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -17,6 +17,7 @@ namespace GestorAutonomo.Data
         public void Seed()
         {
 
+
             if (!_context.UF.Any())
             {
 
@@ -89,6 +90,17 @@ namespace GestorAutonomo.Data
             }
             _context.SaveChanges();
 
+            if (!_context.Banco.Any())
+            {
+
+                Banco bc01 = new Banco(1, "237", "BRADESCO");
+                Banco bc02 = new Banco(2, "341", "ITAU");
+                Banco bc03 = new Banco(3, "001", "BRASIL");
+                Banco bc04 = new Banco(4, "999", "CARTEIRA");
+
+                _context.Banco.AddRange(bc01, bc02, bc03, bc04);
+            }
+            _context.SaveChanges();
 
 
             if (!_context.CategoriaProduto.Any())

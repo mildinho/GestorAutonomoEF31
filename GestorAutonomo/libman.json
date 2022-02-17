@@ -9,6 +9,14 @@
     {
       "library": "jquery.mask@1.14.16",
       "destination": "wwwroot/lib/jquery.mask/"
+    },
+    {
+      "library": "limonte-sweetalert2@11.4.0",
+      "destination": "wwwroot/lib/limonte-sweetalert2/"
+    },
+    {
+      "library": "w3-css@4.1.0",
+      "destination": "wwwroot/lib/w3-css/"
     }
   ]
 }

@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="~/lib/limonte-sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="~/lib/w3-css/w3.min.css" />
+
 
 </head>
 <body>
@@ -32,7 +34,7 @@
                                         <div class="dropdown-header"><h5 class="font-weight-bolder">Produto</h5></div>
                                         <a class="dropdown-item" asp-action="Index" asp-controller="Produto" asp-area="Admin">Manutenção</a>
 
-                                          <a class="dropdown-item" href="#">Relatórios</a>
+                                        <a class="dropdown-item" href="#">Relatórios</a>
                                     </div>
                                     <div class="col-4">
                                         <div class="dropdown-header"><h5 class="font-weight-bolder">Categoria</h5></div>
@@ -149,8 +151,9 @@
 
 
                 </div>
+            </div>
 
-                <a class="btn btn-dark btn-sm " asp-area="Admin" asp-controller="Painel" asp-action="Logout">Sair</a>
+            <a class="btn btn-dark btn-sm " asp-area="Admin" asp-controller="Painel" asp-action="Logout">Sair</a>
         </nav>
     </header>
     <div class="container">
@@ -175,6 +178,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script src="~/lib/jquery.mask/jquery.mask.js"></script>
+    <script src="~/lib/limonte-sweetalert2/sweetalert2.all.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
@@ -189,4 +193,4 @@
 
     @RenderSection("Scripts", required: false)
 </body>
-    </html>
+</html>

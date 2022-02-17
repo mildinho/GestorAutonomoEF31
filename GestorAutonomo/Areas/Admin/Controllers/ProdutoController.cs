@@ -92,7 +92,6 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Cadastrar()
         {
-
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Create);
 
             var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
@@ -106,7 +105,6 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(int Id)
         {
-
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
 
             var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
@@ -124,6 +122,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
+
+            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
 
@@ -158,6 +159,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
 
+            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
 
@@ -178,6 +181,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _repositoryProduto.DeletarAsync(produto.Id);
+
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)
@@ -201,6 +205,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
 
+            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             return View();
 

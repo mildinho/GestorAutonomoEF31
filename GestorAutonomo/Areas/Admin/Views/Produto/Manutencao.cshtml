@@ -7,7 +7,7 @@
 
 @await Component.InvokeAsync("CRUD")
 
-<form method="post" asp-action="Manutencao">
+<form method="post" name="ManutencaoXX" id="ManutencaoXX" asp-action="Manutencao">
 
     <input type="hidden" name="operacao" value="@ViewBag.Crud.Operacao">
 
@@ -33,9 +33,19 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label asp-for="CategoriaId"></label>
-                    <select asp-for="CategoriaId" class="form-control" asp-items="@ViewBag.Categorias">
-                        <option value="">Selecione</option>
-                    </select>
+                    @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                    {
+                        <select asp-for="CategoriaId" class="form-control" asp-items="@ViewBag.Categorias" disabled="disabled">
+                            <option value="">Selecione a Categoria</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <select asp-for="CategoriaId" class="form-control" asp-items="@ViewBag.Categorias">
+                            <option value="">Selecione a Categoria</option>
+                        </select>
+
+                    }
                     <span asp-validation-for="CategoriaId" class="text-danger"></span>
                 </div>
 

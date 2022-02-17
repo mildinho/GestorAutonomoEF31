@@ -36,20 +36,34 @@ namespace GestorAutonomo.Models
 
 
         [Display(Name = "Altura")]
-        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
-        public double Altura { get; set; }
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [Range(2, 105, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E006")]
+        public int Altura { get; set; }
+
+
+
 
         [Display(Name = "Largura")]
-        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
-        public double Largura { get; set; }
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [Range(11, 105, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E006")]
+        public int Largura { get; set; }
+
+
+
 
         [Display(Name = "Comprimento")]
-        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
-        public double Comprimento { get; set; }
+        [Range(16, 105, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E006")]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        public int Comprimento { get; set; }
+
+
 
         [Display(Name = "Peso")]
-        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [Range(0.001, 30, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E006")]
         public double Peso { get; set; }
+
+
 
         [Display(Name = "Preço de Venda")]
         [DataType(DataType.Currency)]
@@ -66,7 +80,6 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
         public double PrecoMedio { get; set; }
 
-        //public virtual ICollection<PontosEstoque> PontosEstoque { get; set; }
 
 
 
@@ -74,14 +87,11 @@ namespace GestorAutonomo.Models
         [ForeignKey("Categoria")]
         [Display(Name = "Categoria")]
         public int CategoriaId { get; set; }
-       
-        public CategoriaProduto CategoriaProduto { get; set; }
-
-        //public virtual ICollection<Imagem> Imagens { get; set; }
 
 
 
-
+        public virtual ICollection<PontosEstoque> PontosEstoque { get; set; }
+        public virtual ICollection<Imagem> Imagens { get; set; }
 
 
         public Produto(int id, string referencia, string descricao)
@@ -90,9 +100,9 @@ namespace GestorAutonomo.Models
             Referencia = referencia;
             Descricao = descricao;
             Data_Cadastro = DateTime.Now;
-            Altura = 22.56;
-            Largura = 67.58;
-            Comprimento = 89.23;
+            Altura = 22;
+            Largura = 66;
+            Comprimento = 89;
             Peso = 14;
             CategoriaId = 1;
             PrecoVenda = 10;
