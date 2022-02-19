@@ -123,7 +123,13 @@ else
             url: "/Admin/HabilitarParceiro/Manutencao/",
             data: { "Id": id, "tipo": parceiro, "LigadoDesligado": status },
             success: function (response) {
-
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Alteração Realizada',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
             },
             failure: function (response) {
                 console.log(response.responseText);
