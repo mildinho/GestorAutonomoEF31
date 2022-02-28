@@ -12,7 +12,37 @@ $(document).ready(function () {
 
     frm_manutencao_delete();
 
+
 });
+
+
+function justNumbers(text) {
+    var numbers = text.replace(/[^0-9]/g, '');
+    return parseInt(numbers);
+};
+
+
+function buscar_cep() {
+
+    var campo = document.getElementById('cep_parceiro');
+    campo = justNumbers(campo.value);
+
+
+    $.ajax({
+        url: "https://viacep.com.br/ws/" + campo + "/json/",
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            if (response.erro != true) {
+
+                document.getElementById('endereco_parceiro').value = response.logradouro;
+                document.getElementById('complemento_parceiro').value = response.complemento;
+                document.getElementById('bairro_parceiro').value = response.bairro;
+                document.getElementById('cidade_parceiro').value = response.localidade;
+            }
+        }
+    });
+}
 
 function frm_manutencao_delete() {
     $(".gestor-btn-excluir").click(function (e) {
@@ -29,19 +59,19 @@ function frm_manutencao_delete() {
             cancelButtonText: 'Não',
         }).then((result) => {
             if (result.isConfirmed) {
-           
+
                 Swal.fire(
                     {
                         title: 'Excluido!',
-                        text:'Registro Excluido do Sistema.',
-                        icon:'success'}
+                        text: 'Registro Excluido do Sistema.',
+                        icon: 'success'
+                    }
                 );
-               
+
                 document.getElementById("frm_manutencao_delete").submit();
             }
         });
+    })
+};
 
-        
 
-    });
-}

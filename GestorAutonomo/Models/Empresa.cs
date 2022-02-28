@@ -33,6 +33,7 @@ namespace GestorAutonomo.Models
 
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Data_Cadastro { get; set; }
 
         [Display(Name = "Endereço")]

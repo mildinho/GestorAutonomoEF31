@@ -75,7 +75,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
-            ViewBag.CRUD =  await ConfiguraMensagem(Opcoes.Information);
+            ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Information);
 
 
             var registros = await _repositoryPontoEstoque.ListarTodosRegistrosAsync(pagina, pesquisa);
@@ -89,10 +89,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Cadastrar()
         {
-
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Create);
-
-        
             return View("Manutencao");
         }
 
@@ -106,6 +103,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             var obj01 = await _repositoryPontoEstoque.SelecionarPorCodigoAsync(Id);
 
+            if (obj01 == null)
+                return View("NoDataFound");
+
             return View("Manutencao", obj01);
         }
 
@@ -117,18 +117,23 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Read);
 
             var obj01 = await _repositoryPontoEstoque.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
+
 
             return View("Manutencao", obj01);
         }
 
-      
+
         [HttpGet]
         public async Task<IActionResult> Deletar(int Id)
         {
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Delete);
-    
+
             var obj01 = await _repositoryPontoEstoque.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
             return View("Manutencao", obj01);
         }
@@ -143,10 +148,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] PontosEstoque parceiro, Opcoes operacao)
         {
-     
+
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _repositoryPontoEstoque.DeletarAsync(parceiro.Id);
+
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)
@@ -158,10 +164,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-
-
                     await _repositoryPontoEstoque.AtualizarAsync(parceiro);
-
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -170,8 +173,15 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = await ConfiguraMensagem((Opcoes)operacao);
 
-           return View();
+            return View();
 
         }
+
+
+
+
     }
+
+
+
 }

@@ -96,9 +96,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Update);
 
-            var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
-            return View("Manutencao", objRegistros);
+
+            return View("Manutencao", obj01);
         }
 
 
@@ -108,9 +111,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Read);
 
        
-            var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
-            return View("Manutencao", objRegistros);
+            return View("Manutencao", obj01);
         }
 
 
@@ -122,9 +127,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Delete);
 
-            var objRegistros = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
-            return View("Manutencao", objRegistros);
+            return View("Manutencao", obj01);
         }
 
 

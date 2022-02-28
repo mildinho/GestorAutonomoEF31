@@ -26,6 +26,14 @@ namespace GestorAutonomo.Models
         public string Descricao { get; set; }
 
 
+        [Display(Name = "Data de Cadastro")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime Data_Cadastro { get; set; }
+
+
+
         public Banco()
         {
 

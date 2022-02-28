@@ -74,6 +74,31 @@
     </div>
 
     <div class="row">
+        <div class="col-3">
+
+            <div class="form-group">
+                <label asp-for="CEP"></label>
+                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
+                {
+                    <input asp-for="CEP" class="form-control" placeholder="Informe o CEP" onkeypress="$(this).mask('00.000-000')" disabled="disabled">
+                }
+                else
+                {
+                    <div class="input-group-append">
+                        <input asp-for="CEP" class="form-control" placeholder="Informe o CEP" onkeypress="$(this).mask('00.000-000')" id="cep_parceiro">
+
+                        <div class="input-group-text" style="background-color: #FFF" onclick="buscar_cep()">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                }
+                <span asp-validation-for="CEP" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
 
         <div class="col">
             <div class="form-group">
@@ -84,7 +109,7 @@
                 }
                 else
                 {
-                    <input asp-for="Endereco" class="form-control" placeholder="Informe o Endereço">
+                    <input asp-for="Endereco" class="form-control" placeholder="Informe o Endereço" id="endereco_parceiro">
                 }
                 <span asp-validation-for="Endereco" class="text-danger"></span>
             </div>
@@ -115,7 +140,7 @@
                 }
                 else
                 {
-                    <input asp-for="Bairro" class="form-control" placeholder="Informe o Bairro">
+                    <input asp-for="Bairro" class="form-control" placeholder="Informe o Bairro" id="bairro_parceiro">
                 }
                 <span asp-validation-for="Bairro" class="text-danger"></span>
             </div>
@@ -131,28 +156,13 @@
         }
         else
         {
-            <input asp-for="Complemento" class="form-control" placeholder="Informe o Complemento do Endereço">
+            <input asp-for="Complemento" class="form-control" placeholder="Informe o Complemento do Endereço" id="complemento_parceiro">
         }
         <span asp-validation-for="Complemento" class="text-danger"></span>
     </div>
 
     <div class="row">
-        <div class="col">
-
-            <div class="form-group">
-                <label asp-for="CEP"></label>
-                @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
-                {
-                    <input asp-for="CEP" class="form-control" placeholder="Informe o CEP" onkeypress="$(this).mask('00.000-000')" disabled="disabled">
-                }
-                else
-                {
-                    <input asp-for="CEP" class="form-control" placeholder="Informe o CEP" onkeypress="$(this).mask('00.000-000')">
-                }
-                <span asp-validation-for="CEP" class="text-danger"></span>
-            </div>
-        </div>
-
+       
         <div class="col">
 
             <div class="form-group">
@@ -176,7 +186,7 @@
 
         </div>
 
-        <div class="col">
+        <div class="col"> 
 
             <div class="form-group">
                 <label asp-for="Cidade"></label>
@@ -186,7 +196,7 @@
                 }
                 else
                 {
-                    <input asp-for="Cidade" class="form-control" placeholder="Informe a Cidade">
+                    <input asp-for="Cidade" class="form-control" placeholder="Informe a Cidade" id="cidade_parceiro" >
                 }
                 <span asp-validation-for="Cidade" class="text-danger"></span>
             </div>

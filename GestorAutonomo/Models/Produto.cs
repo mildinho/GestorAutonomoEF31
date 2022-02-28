@@ -28,10 +28,12 @@ namespace GestorAutonomo.Models
 
         [Display(Name = "Data da Alteracao")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Data_Alteracao { get; set; } = DateTime.Now;
 
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Data_Cadastro { get; set; }
 
 
