@@ -14,7 +14,7 @@ namespace GestorAutonomo.Repositories
 {
     public class LoginRepository : ILoginRepository
     {
-        private IConfiguration _conf;
+        private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
         public LoginRepository(GestorAutonomoContext context, IConfiguration configuration)
@@ -33,7 +33,10 @@ namespace GestorAutonomo.Repositories
             }
             try
             {
-                _context.Update(login);
+                //_context.Update(login);
+                _context.Entry(login).State = EntityState.Modified;
+                _context.Entry(login).Property(p => p.Data_Cadastro).IsModified = false;
+
                 await _context.SaveChangesAsync();
             }
             catch (DBConcurrencyException e)

@@ -112,6 +112,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
             var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
             return View("Manutencao", obj01);
         }
@@ -127,30 +129,13 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
             return View("Manutencao", obj01);
         }
 
-        //[AcceptVerbs("Get", "Post")]
-        //public async Task<IActionResult> Existe_CPF_CNPJ(double CNPJ_CPF, Opcoes operacao)
-        //{
-        //    Parceiro obj01 = null;
-        //    if (Opcoes.Create == (Opcoes)operacao)
-        //        obj01 = await _repositoryParceiro.SelecionarPorCNPJ_CPFAsync(CNPJ_CPF);
-
-
-        //    if (obj01 == null)
-        //    {
-        //        return Json(true);
-        //    }
-        //   else
-        //    {
-        //        return Json("Documento Já Existente na Base");
-        //    }
-        //}
-
-
-
+      
 
 
         [HttpGet]
@@ -163,6 +148,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
             return View("Manutencao", obj01);
         }
@@ -188,13 +175,13 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
-                    produto.Data_Cadastro = DateTime.Now;
+                  
                     await _repositoryProduto.InserirAsync(produto);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-                    produto.Data_Alteracao = DateTime.Now;
+                   
                     await _repositoryProduto.AtualizarAsync(produto);
 
                 }

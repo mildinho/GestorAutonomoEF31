@@ -34,9 +34,12 @@ namespace GestorAutonomo.Repositories
             try
             {
                 produto = AjustarCampos(produto);
-        
-                    
-                _context.Update(produto);
+
+
+                //_context.Update(produto);
+                _context.Entry(produto).State = EntityState.Modified;
+                _context.Entry(produto).Property(p => p.Data_Cadastro).IsModified = false;
+
                 await _context.SaveChangesAsync();
             }
             catch (DBConcurrencyException e)

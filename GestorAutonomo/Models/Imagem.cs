@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GestorAutonomo.Models
 {
@@ -10,6 +12,20 @@ namespace GestorAutonomo.Models
 
         //Banco de Dados
         public int ProdutoId { get; set; }
+
+        [Display(Name = "Data de Cadastro")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime Data_Cadastro { get; set; }
+
+
+        [Display(Name = "Data de Alteração")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime Data_Alteracao { get; set; }
+
 
         //POO
         [ForeignKey("ProdutoId")]

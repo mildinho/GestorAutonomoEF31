@@ -33,6 +33,12 @@ namespace GestorAutonomo.Models
         public DateTime Data_Cadastro { get; set; }
 
 
+        [Display(Name = "Data de Alteração")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime Data_Alteracao { get; set; }
+
 
         public Banco()
         {

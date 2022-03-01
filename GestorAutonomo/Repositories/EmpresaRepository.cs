@@ -14,7 +14,7 @@ namespace GestorAutonomo.Repositories
 {
     public class EmpresaRepository : IEmpresaRepository
     {
-        private IConfiguration _conf;
+        private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
         public EmpresaRepository(GestorAutonomoContext context, IConfiguration configuration)
@@ -34,7 +34,11 @@ namespace GestorAutonomo.Repositories
             try
             {
                 empresa = AjustarCampos(empresa);
-                _context.Update(empresa);
+                //_context.Update(empresa);
+
+                _context.Entry(empresa).Property(p => p.Data_Cadastro).IsModified = false;
+                _context.Entry(empresa).State = EntityState.Modified;
+
                 await _context.SaveChangesAsync();
             }
             catch (DBConcurrencyException e)

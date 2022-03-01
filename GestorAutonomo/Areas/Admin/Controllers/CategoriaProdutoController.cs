@@ -106,9 +106,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
 
-            var objCategoria = await _repositoryCategoriaProduto.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryCategoriaProduto.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
-            return View("Manutencao", objCategoria);
+
+            return View("Manutencao", obj01);
         }
 
 
@@ -122,9 +125,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
 
-            var objCategoria = await _repositoryCategoriaProduto.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryCategoriaProduto.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
-            return View("Manutencao", objCategoria);
+            return View("Manutencao", obj01);
         }
 
 
@@ -141,9 +146,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
 
-            var objCategoria = await _repositoryCategoriaProduto.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _repositoryCategoriaProduto.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
-            return View("Manutencao", objCategoria);
+            return View("Manutencao", obj01);
         }
 
 

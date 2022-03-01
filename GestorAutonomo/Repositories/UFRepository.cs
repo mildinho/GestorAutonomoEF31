@@ -14,7 +14,7 @@ namespace GestorAutonomo.Repositories
 {
     public class UFRepository : IUFRepository
     {
-        private IConfiguration _conf;
+        private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
         public UFRepository(GestorAutonomoContext context, IConfiguration configuration)
@@ -33,7 +33,10 @@ namespace GestorAutonomo.Repositories
             }
             try
             {
-                _context.Update(uf);
+                //_context.Update(uf);
+                _context.Entry(uf).State = EntityState.Modified;
+                _context.Entry(uf).Property(p => p.Data_Cadastro).IsModified = false;
+
                 await _context.SaveChangesAsync();
             }
             catch (DBConcurrencyException e)

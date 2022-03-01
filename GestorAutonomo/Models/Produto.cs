@@ -26,15 +26,18 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
         public string Descricao { get; set; }
 
-        [Display(Name = "Data da Alteracao")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime Data_Alteracao { get; set; } = DateTime.Now;
-
+       
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Data_Cadastro { get; set; }
+
+        [Display(Name = "Data de Alteração")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime Data_Alteracao { get; set; }
 
 
         [Display(Name = "Altura")]
@@ -86,11 +89,11 @@ namespace GestorAutonomo.Models
 
 
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
-        [ForeignKey("Categoria")]
+        [ForeignKey("CategoriaProduto")]
         [Display(Name = "Categoria")]
         public int CategoriaId { get; set; }
-
-
+        public virtual CategoriaProduto CategoriaProduto { get; set; }
+        
 
         public virtual ICollection<PontosEstoque> PontosEstoque { get; set; }
         public virtual ICollection<Imagem> Imagens { get; set; }
@@ -101,7 +104,6 @@ namespace GestorAutonomo.Models
             Id = id;
             Referencia = referencia;
             Descricao = descricao;
-            Data_Cadastro = DateTime.Now;
             Altura = 22;
             Largura = 66;
             Comprimento = 89;

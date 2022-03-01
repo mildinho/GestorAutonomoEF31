@@ -14,7 +14,7 @@ namespace GestorAutonomo.Repositories
 {
     public class BancoRepository : IBancoRepository
     {
-        private IConfiguration _conf;
+        private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
         public BancoRepository(GestorAutonomoContext context, IConfiguration configuration)
@@ -32,9 +32,13 @@ namespace GestorAutonomo.Repositories
                 throw new NotFoundException("Codigo nao encontrado");
             }
             try
+
             {
-                _context.Update(banco);
+                //_context.Update(banco);
+                _context.Entry(banco).State = EntityState.Modified;
+                _context.Entry(banco).Property(p => p.Data_Cadastro).IsModified = false;
                 await _context.SaveChangesAsync();
+
             }
             catch (DBConcurrencyException e)
             {

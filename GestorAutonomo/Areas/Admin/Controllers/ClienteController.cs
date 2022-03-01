@@ -119,6 +119,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
             return View("Manutencao", obj01);
         }
@@ -135,6 +137,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
             var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
             return View("Manutencao", obj01);
         }
@@ -171,6 +175,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
             return View("Manutencao", obj01);
         }
@@ -195,7 +201,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
-                    parceiro.Data_Cadastro = DateTime.Now;
+                   
                     await _repositoryParceiro.InserirAsync(parceiro);
 
                 }

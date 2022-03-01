@@ -74,7 +74,7 @@ namespace GestorAutonomo.Data
             if (!_context.Empresa.Any())
             {
 
-                Empresa empresa = new Empresa(1, 985, "Fernando Casagrande", "Gestor autonomo", DateTime.Now, 1, "1921013000");
+                Empresa empresa = new Empresa(1, 985, "Fernando Casagrande", "Gestor autonomo", 1, "1921013000");
                 _context.Empresa.Add(empresa);
             }
             _context.SaveChanges();

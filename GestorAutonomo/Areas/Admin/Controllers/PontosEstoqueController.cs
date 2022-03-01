@@ -17,8 +17,6 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class PontosEstoqueController : Controller
     {
 
-
-
         private readonly IPontosEstoqueRepository _repositoryPontoEstoque;
 
         public PontosEstoqueController(IPontosEstoqueRepository pontosEstoqueRepository)

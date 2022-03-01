@@ -80,6 +80,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
 
             var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            if (obj01 == null)
+                return View("NoDataFound");
 
             return View("Manutencao", obj01);
         }

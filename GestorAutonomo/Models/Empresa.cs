@@ -30,11 +30,23 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [MinLength(3, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E002")]
         public string Fantasia { get; set; }
-
+       
+        
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Data_Cadastro { get; set; }
+
+
+
+        [Display(Name = "Data de Alteração")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime Data_Alteracao { get; set; }
+
+
 
         [Display(Name = "Endereço")]
         public string Endereco { get; set; }
@@ -99,13 +111,12 @@ namespace GestorAutonomo.Models
 
 
 
-        public Empresa(int id, double cNPJ_CPF, string nome, string fantasia, DateTime data_Cadastro, int ufid, string telefone)
+        public Empresa(int id, double cNPJ_CPF, string nome, string fantasia, int ufid, string telefone)
         {
             Id = id;
             CNPJ_CPF = cNPJ_CPF;
             Nome = nome;
             Fantasia = fantasia;
-            Data_Cadastro = data_Cadastro;
             UFId = ufid;
             TelefonePrincipal = telefone;
         }

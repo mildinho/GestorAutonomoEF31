@@ -14,7 +14,7 @@ namespace GestorAutonomo.Repositories
 {
     public class CategoriaProdutoRepository : ICategoriaProdutoRepository
     {
-        private IConfiguration _conf;
+        private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
         public CategoriaProdutoRepository(GestorAutonomoContext context, IConfiguration configuration)
@@ -34,7 +34,11 @@ namespace GestorAutonomo.Repositories
             try
             {
                 categoria = AjustarCampos(categoria);
-                _context.Update(categoria);
+                //_context.Update(categoria);
+
+                _context.Entry(categoria).State = EntityState.Modified;
+                _context.Entry(categoria).Property(p => p.Data_Cadastro).IsModified = false;
+
                 await _context.SaveChangesAsync();
             }
             catch (DBConcurrencyException e)

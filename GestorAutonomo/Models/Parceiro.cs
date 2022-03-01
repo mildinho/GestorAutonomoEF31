@@ -49,16 +49,20 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [MinLength(3, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E002")]
         public string Fantasia { get; set; }
-
-        [Display(Name = "Data da Alteracao")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime Data_Alteracao { get; set; } = DateTime.Now;
-
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime Data_Cadastro { get; set; }
+
+        [Display(Name = "Data de Alteração")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime Data_Alteracao { get; set; }
+
+
+
 
         [Display(Name = "Endereço")]
         public string Endereco { get; set; }
