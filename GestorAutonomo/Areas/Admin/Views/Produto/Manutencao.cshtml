@@ -32,21 +32,21 @@
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label asp-for="CategoriaId"></label>
+                    <label asp-for="CategoriaProdutoId"></label>
                     @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
                     {
-                        <select asp-for="CategoriaId" class="form-control" asp-items="@ViewBag.Categorias" disabled="disabled">
+                        <select asp-for="CategoriaProdutoId" class="form-control" asp-items="@ViewBag.Categorias" disabled="disabled">
                             <option value="">Selecione a Categoria</option>
                         </select>
                     }
                     else
                     {
-                        <select asp-for="CategoriaId" class="form-control" asp-items="@ViewBag.Categorias">
+                        <select asp-for="CategoriaProdutoId" class="form-control" asp-items="@ViewBag.Categorias">
                             <option value="">Selecione a Categoria</option>
                         </select>
 
                     }
-                    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    <span asp-validation-for="CategoriaProdutoId" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-md-6">
@@ -172,11 +172,11 @@
                         </div>
                         @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
                         {
-                            <input asp-for="PrecoVenda" class="form-control dinheiro" disabled="disabled" />
+                            <input asp-for="PrecoVenda" id="PrecoVenda" class="form-control dinheiro" disabled="disabled" />
                         }
                         else
                         {
-                            <input asp-for="PrecoVenda" class="form-control dinheiro"   />
+                            <input asp-for="PrecoVenda" id="PrecoVenda" class="form-control dinheiro" />
 
                         }
 

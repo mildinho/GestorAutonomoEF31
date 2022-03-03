@@ -7,13 +7,39 @@
 // Write your JavaScript code.
 $(document).ready(function () {
 
-
-    $('.dinheiro').mask('000.000.000.000.000,00', { reverse: true });
+    $('.dinheiro').mask('000.000.000.000.000,0000', { reverse: true });
 
     frm_manutencao_delete();
 
+    $("#frm_manutencao_update").submit(function (event) {
+        document.getElementById('PrecoVenda').value = AjustaPreco('PrecoVenda');
+    });
 
 });
+
+function AjustaPreco(campo) {
+    var Conteudo = document.getElementById(campo).value;
+    var resultado = "";
+    var validacao;
+    for (let i = 0; i < Conteudo.length; i = i + 1) {
+        validacao = Conteudo.substring(i, i + 1);
+
+        if ('0123456789.,'.indexOf(validacao) != -1) {
+            if (validacao == ",") {
+                resultado = resultado + ".";
+            }
+            else if (validacao == ".") {
+               
+            } else {
+                resultado = resultado + validacao;
+            }
+        }
+
+    }
+
+    //document.getElementById(campo).value = resultado;
+    return resultado;
+};
 
 
 function justNumbers(text) {

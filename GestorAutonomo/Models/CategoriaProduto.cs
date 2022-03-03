@@ -42,9 +42,7 @@ namespace GestorAutonomo.Models
         public DateTime Data_Alteracao { get; set; }
 
 
-
-
-        public CategoriaProduto()
+       public CategoriaProduto()
         {
         }
 

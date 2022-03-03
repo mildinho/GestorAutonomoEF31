@@ -39,14 +39,14 @@ namespace GestorAutonomo.Repositories
 
         public void Excluir(int Id)
         {
-            Imagem obj = _context.imagems.Find(Id);
+            Imagem obj = _context.Imagems.Find(Id);
             _context.Remove(obj);
             _context.SaveChanges();
         }
 
         public void ExcluirImagensProduto(int ProdutoId)
         {
-            List<Imagem> obj = _context.imagems.Where(a => a.ProdutoId == ProdutoId).ToList();
+            List<Imagem> obj = _context.Imagems.Where(a => a.ProdutoId == ProdutoId).ToList();
 
             foreach (Imagem item in obj)
             {

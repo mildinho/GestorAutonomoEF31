@@ -13,6 +13,8 @@ namespace GestorAutonomo.Data
             : base(options)
         {
         }
+
+
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<CategoriaProduto> CategoriaProduto { get; set; }
         public DbSet<UF> UF { get; set; }
@@ -21,7 +23,7 @@ namespace GestorAutonomo.Data
         public DbSet<Parceiro> Parceiro { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<PontosEstoque> PontosEstoque { get; set; }
-        public DbSet<Imagem> imagems { get; set; }
+        public DbSet<Imagem> Imagems { get; set; }
 
 
     }

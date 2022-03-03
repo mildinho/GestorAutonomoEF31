@@ -69,21 +69,20 @@ namespace GestorAutonomo.Models
         public double Peso { get; set; }
 
 
-
+        [Column(TypeName = "decimal(18,4)")]
         [Display(Name = "Preço de Venda")]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [DisplayFormat(DataFormatString = "{0:###.##00}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
-        public double PrecoVenda { get; set; }
+        public decimal PrecoVenda { get; set; }
 
         [Display(Name = "Preço de Custo")]
-        [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
-        public double PrecoCusto { get; set; }
+        //[DataType(DataType.Currency)]
+        public double? PrecoCusto { get; set; }
 
         [Display(Name = "Preço Médio")]
-        [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
-        public double PrecoMedio { get; set; }
+        //[DataType(DataType.Currency)]
+        public double? PrecoMedio { get; set; }
 
 
 
@@ -91,7 +90,7 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [ForeignKey("CategoriaProduto")]
         [Display(Name = "Categoria")]
-        public int CategoriaId { get; set; }
+        public int CategoriaProdutoId { get; set; }
         public virtual CategoriaProduto CategoriaProduto { get; set; }
         
 
@@ -108,11 +107,10 @@ namespace GestorAutonomo.Models
             Largura = 66;
             Comprimento = 89;
             Peso = 14;
-            CategoriaId = 1;
             PrecoVenda = 10;
             PrecoMedio = 5;
             PrecoCusto = 5;
-            CategoriaId = 2;
+            CategoriaProdutoId = 2;
 
         }
 
