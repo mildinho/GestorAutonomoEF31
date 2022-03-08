@@ -1,4 +1,5 @@
-﻿using GestorAutonomo.Biblioteca.CRUD;
+﻿using GestorAutonomo.Biblioteca.Arquivo;
+using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
@@ -17,17 +18,17 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class ProdutoController : Controller
     {
 
-        //--RESOLVER A DATA DE CADASTRO(FAZER QUE SEJA AUTOMATICA QUANDO NAO EXISTIR);
-
-
+      
         private readonly IProdutoRepository _repositoryProduto;
         private readonly ICategoriaProdutoRepository _repositoryCategoria;
+        private readonly IImagemRepository _repositoryImagem;
        
 
-        public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria)
+        public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria, IImagemRepository imagem)
         {
             _repositoryProduto = produto;
             _repositoryCategoria = categoria;
+            _repositoryImagem = imagem;
           
         }
 
@@ -166,7 +167,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
 
             if (Opcoes.Delete == (Opcoes)operacao)
+
             {
+                
+                GerenciadorArquivo.ExcluirImagensProduto(produto.Imagens.ToList());
+                _repositoryImagem.ExcluirImagensProduto(produto.Id);
+
                 await _repositoryProduto.DeletarAsync(produto.Id);
 
                 return RedirectToAction(nameof(Index));

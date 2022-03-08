@@ -43,6 +43,7 @@ namespace GestorAutonomo
             services.AddScoped<IParceiroRepository, ParceiroRepository>();
             services.AddScoped<IPontosEstoqueRepository, PontosEstoqueRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IImagemRepository, ImagemRepository>();
 
             services.AddMemoryCache();
             services.AddSession(options =>

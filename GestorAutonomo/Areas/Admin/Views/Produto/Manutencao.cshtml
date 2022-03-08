@@ -120,7 +120,7 @@
                     <div class="input-group mb-2">
                         @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
                         {
-                            <input asp-for="Altura"  class="form-control" disabled="disabled" />
+                            <input asp-for="Altura" class="form-control" disabled="disabled" />
                         }
                         else
                         {
@@ -156,13 +156,52 @@
 
         </div>
         <div class="tab-pane fade" id="nav-estoque" role="tabpanel" aria-labelledby="nav-estoque-tab">Dados referente ao Quantidade de Estoque</div>
-        <div class="tab-pane fade" id="nav-imagens" role="tabpanel" aria-labelledby="nav-imagens-tab">Imagens do Produto</div>
-       
-        
-        
-        
+        <div class="tab-pane fade" id="nav-imagens" role="tabpanel" aria-labelledby="nav-imagens-tab">
+            Imagens do Produto
+
+
+            @{
+                List<Imagem> Imagens = new List<Imagem>();
+                if (Model != null)
+                {
+                    Imagens = Model.Imagens.ToList();
+                }
+            }
+            <div class="row Imagens">
+                @for (int i = 0; i < 6; i++)
+                {
+                    @if (Imagens.ElementAtOrDefault(i) != null)
+                    {
+                        <div class="col-md-4">
+                            <input type="file" class="input-file" />
+                            <div class="container-img-thumbnail">
+                                <span class="helper"></span><img src="@Imagens.ElementAtOrDefault(i).Caminho" class="img-thumbnail img-upload" />
+                            </div>
+                            <div class="btn btn-danger btn-imagem-excluir">X</div>
+                            <input type="text" name="imagem" value="@Imagens.ElementAtOrDefault(i).Caminho" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4">
+                            <input type="file" class="input-file" />
+                            <div class="container-img-thumbnail">
+                                <span class="helper"></span><img src="~/images/imagem-padrao.png" class="img-thumbnail img-upload" />
+                            </div>
+                            <div class="btn btn-danger btn-imagem-excluir btn-ocultar">X</div>
+                            <input type="text" name="imagem" />
+                        </div>
+                    }
+                }
+            </div>
+
+        </div>
+
+
+
+
         <div class="tab-pane fade" id="nav-precos" role="tabpanel" aria-labelledby="nav-precos-tab">
-         
+
             <div class="row">
                 <div class="form-group col-md-3">
                     <label asp-for="PrecoVenda"></label>
@@ -176,7 +215,7 @@
                         }
                         else
                         {
-                            <input asp-for="PrecoVenda" id="PrecoVenda" class="form-control dinheiro" />
+                            <input asp-for="PrecoVenda" id="PrecoVenda" class="form-control dinheiro" data-val="false" />
 
                         }
 
@@ -196,7 +235,7 @@
                         }
                         else
                         {
-                            <input asp-for="PrecoCusto" class="form-control dinheiro"  />
+                            <input asp-for="PrecoCusto" class="form-control dinheiro" data-val="false" />
 
                         }
 
@@ -213,11 +252,11 @@
                         </div>
                         @if (ViewBag.Crud.Operacao == Opcoes.Read || ViewBag.Crud.Operacao == Opcoes.Delete)
                         {
-                            <input asp-for="PrecoMedio"  class="form-control dinheiro" disabled="disabled" />
+                            <input asp-for="PrecoMedio" class="form-control dinheiro" disabled="disabled" />
                         }
                         else
                         {
-                            <input asp-for="PrecoMedio" class="form-control dinheiro"  />
+                            <input asp-for="PrecoMedio" class="form-control dinheiro" data-val="false" />
 
                         }
 
@@ -226,7 +265,7 @@
                 </div>
 
 
-                
+
             </div>
         </div>
 
@@ -235,3 +274,12 @@
     @await Component.InvokeAsync("CRUD_Acao")
 
 </form>
+
+
+<script>
+     function gettoken() {
+        var token = '@Html.AntiForgeryToken()';
+        token = $(token).val();
+        return token;
+   }
+</script>
