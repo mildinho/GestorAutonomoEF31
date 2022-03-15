@@ -12,12 +12,12 @@ using System;
 
 namespace GestorAutonomo.Repositories
 {
-    public class ProdutoRepository : IProdutoRepository
+    public class DuplicataRepository : IDuplicataRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public ProdutoRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public DuplicataRepository(GestorAutonomoContext context, IConfiguration configuration)
         {
             _context = context;
             _conf = configuration;
@@ -25,20 +25,20 @@ namespace GestorAutonomo.Repositories
         }
 
 
-        public async Task AtualizarAsync(Produto produto)
+        public async Task AtualizarAsync(Duplicata duplicata)
         {
-            if (!await _context.Produto.AnyAsync(x => x.Id == produto.Id))
+            if (!await _context.Duplicatas.AnyAsync(x => x.Id == duplicata.Id))
             {
                 throw new NotFoundException("Código não encontrado");
             }
             try
             {
-                produto = AjustarCampos(produto);
+                duplicata = AjustarCampos(duplicata);
 
 
                 //_context.Update(produto);
-                _context.Entry(produto).State = EntityState.Modified;
-                _context.Entry(produto).Property(p => p.Data_Cadastro).IsModified = false;
+                _context.Entry(duplicata).State = EntityState.Modified;
+                _context.Entry(duplicata).Property(p => p.Data_Cadastro).IsModified = false;
 
                 await _context.SaveChangesAsync();
             }
@@ -53,7 +53,7 @@ namespace GestorAutonomo.Repositories
         {
             try
             {
-                Produto obj = await SelecionarPorCodigoAsync(Id);
+                Duplicata obj = await SelecionarPorCodigoAsync(Id);
                 if (obj != null)
                 {
 
@@ -67,38 +67,38 @@ namespace GestorAutonomo.Repositories
             }
         }
 
-        public async Task InserirAsync(Produto produto)
+        public async Task InserirAsync(Duplicata duplicata)
         {
-            produto = AjustarCampos(produto);
+            duplicata = AjustarCampos(duplicata);
 
            
 
-            _context.Add(produto);
+            _context.Add(duplicata);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IPagedList<Produto>> ListarTodosRegistrosAsync( int? pagina, string pesquisa)
+        public async Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync( int? pagina, string pesquisa)
         {
 
             int numeroPagina = pagina ?? 1;
             int RegistroPorPagina = _conf.GetValue<int>("RegistroPorPagina");
 
-            var objConsulta = _context.Produto.AsQueryable();
+            var objConsulta = _context.Duplicatas.AsQueryable();
 
             
             if (!string.IsNullOrEmpty(pesquisa))
             {
-                objConsulta = objConsulta.Where(a => a.Descricao.Contains(pesquisa.Trim()));
+                //objConsulta = objConsulta.Where(a => a.Descricao.Contains(pesquisa.Trim()));
             }
 
 
-            return await objConsulta.ToPagedListAsync<Produto>(numeroPagina, RegistroPorPagina);
+            return await objConsulta.ToPagedListAsync<Duplicata>(numeroPagina, RegistroPorPagina);
 
         }
 
-        public async Task<IEnumerable<Produto>> ListarTodosRegistrosAsync()
+        public async Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync()
         {
-            var objConsulta = _context.Produto.AsQueryable();
+            var objConsulta = _context.Duplicatas.AsQueryable();
             
          
             return await objConsulta.ToListAsync();
@@ -107,21 +107,21 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task<Produto> SelecionarPorCodigoAsync(int? Id)
+        public async Task<Duplicata> SelecionarPorCodigoAsync(int? Id)
         {
-            return await _context.Produto.Include(obj => obj.Imagens).FirstOrDefaultAsync(obj => obj.Id == Id);
+            return await _context.Duplicatas.FirstOrDefaultAsync(obj => obj.Id == Id);
         }
 
 
      
 
 
-        public Produto AjustarCampos(Produto produto)
+        public Duplicata AjustarCampos(Duplicata duplicata)
         {
-            return produto;
+            return duplicata;
         }
 
-
+      
     }
 
 

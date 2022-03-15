@@ -1,5 +1,6 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GestorAutonomo.Areas.Admin.Controllers
@@ -163,6 +165,18 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             if (Opcoes.Delete == (Opcoes)operacao)
             {
+               
+                List<CategoriaProduto> obj = await _repositoryCategoriaProduto.ObterCategoriasPorCategoriaPai( categoria.Id);
+                if(obj.Count > 0)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var item in obj)
+                    {
+                        sb.Append($"'{item.Descricao}', ");
+                    }
+                    TempData["msg_e"] = string.Format(Mensagem.MSG_E007, sb.ToString());
+                    return RedirectToAction(nameof(Index));
+                }
                 await _repositoryCategoriaProduto.DeletarAsync(categoria.Id);
                 return RedirectToAction(nameof(Index));
             }

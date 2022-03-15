@@ -26,7 +26,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             if (opcoes == Opcoes.Information)
             {
-                crud.Titulo = "UF";
+                crud.Titulo = "Unidade Federatival";
                 crud.Descricao = "Aqui você poderá configurar sua Unidade Federativa";
                 crud.SubTitulo = "Dados para Controlar as Unidades Federativas";
                 crud.Operacao = Opcoes.Information;
@@ -55,7 +55,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             }
             else if (opcoes == Opcoes.Read)
             {
-                crud.Titulo = "Consultar UF";
+                crud.Titulo = "Consultar Unidade Federatival";
                 crud.Descricao = "Aqui você poderá consultar sua Unidade Federativa";
                 crud.SubTitulo = "Consultar UF";
                 crud.Operacao = Opcoes.Read;

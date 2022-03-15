@@ -21,6 +21,8 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task<IEnumerable<CategoriaProduto>> ListarTodosRegistrosAsync();
 
+        Task<List<CategoriaProduto>> ObterCategoriasPorCategoriaPai(int? Id);
+
         CategoriaProduto AjustarCampos(CategoriaProduto categoriaProduto);
 
 

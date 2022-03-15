@@ -191,6 +191,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                     await _repositoryProduto.AtualizarAsync(produto);
 
                 }
+                List<Imagem> ListaImagens = GerenciadorArquivo.MoverImagensProduto(new List<string>(Request.Form["imagem"]), produto.Id);
+
+                _repositoryImagem.CadastrarImagens(ListaImagens, produto.Id);
 
                 return RedirectToAction(nameof(Index));
 

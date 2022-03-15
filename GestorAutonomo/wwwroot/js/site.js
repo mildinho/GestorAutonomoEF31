@@ -132,7 +132,7 @@ function AjaxUploadImagemProduto() {
 
             },
             success: function () {
-                Imagem.attr("src", "/images/imagem-padrao.png");
+                Imagem.attr("src", "/images/produtos.jpg");
                 BtnExcluir.addClass("btn-ocultar");
                 CampoHidden.val("");
                 InputFile.val("");

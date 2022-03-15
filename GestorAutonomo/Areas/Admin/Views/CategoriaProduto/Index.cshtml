@@ -22,6 +22,10 @@
     <p class="alert alert-success">@TempData["msg_s"]</p>
 }
 
+@if (TempData["msg_e"] != null)
+{
+    <p class="alert alert-danger">@TempData["msg_e"]</p>
+}
 
 @if (Model.Count > 0)
 {

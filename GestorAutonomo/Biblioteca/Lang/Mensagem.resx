@@ -135,6 +135,12 @@
   <data name="MSG_E006" xml:space="preserve">
     <value>O Valor do Campo {0} não se encontra em {1} e {2}!</value>
   </data>
+  <data name="MSG_E007" xml:space="preserve">
+    <value>Não é possível excluir Categoria pois existem categorias vinculadas: {0}</value>
+  </data>
+  <data name="MSG_E008" xml:space="preserve">
+    <value>Não é possível excluir Categoria pois existem Produtos vinculados: {0}</value>
+  </data>
   <data name="MSG_S001" xml:space="preserve">
     <value>Registro Salvo com Sucesso!</value>
   </data>
