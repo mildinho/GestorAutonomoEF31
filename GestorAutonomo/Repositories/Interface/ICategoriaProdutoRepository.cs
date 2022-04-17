@@ -23,6 +23,8 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task<List<CategoriaProduto>> ObterCategoriasPorCategoriaPai(int? Id);
 
+        Task<List<Produto>> ObterProdutosPorCategoria(int Id);
+
         CategoriaProduto AjustarCampos(CategoriaProduto categoriaProduto);
 
 

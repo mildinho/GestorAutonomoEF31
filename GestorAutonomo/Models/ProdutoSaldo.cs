@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorAutonomo.Biblioteca.Lang;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,7 +17,21 @@ namespace GestorAutonomo.Models
         public int Id { get; set; }
 
 
-        //TODO: fazer referent ao ponto de estoque
+
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [ForeignKey("Produto")]
+        [Display(Name = "Código do Produto")]
+        public int ProdutoId { get; set; }
+        public virtual Produto Produto { get; set; }
+
+
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [ForeignKey("PontosEstoque")]
+        [Display(Name = "Código do Ponto de Produto")]
+        public int PontosEstoqueId { get; set; }
+        public virtual PontosEstoque PontosEstoque { get; set; }
+
+
 
         [Display(Name = "Saldo")]
         [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]

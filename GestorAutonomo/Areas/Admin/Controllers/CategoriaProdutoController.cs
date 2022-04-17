@@ -177,6 +177,15 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                     TempData["msg_e"] = string.Format(Mensagem.MSG_E007, sb.ToString());
                     return RedirectToAction(nameof(Index));
                 }
+
+                List<Produto> obj02 = await _repositoryCategoriaProduto.ObterProdutosPorCategoria(categoria.Id);
+                if (obj02.Count > 0)
+                {
+
+                    TempData["msg_e"] = "Existem Produtos Nesta Categoria";
+                    return RedirectToAction(nameof(Index));
+                }
+
                 await _repositoryCategoriaProduto.DeletarAsync(categoria.Id);
                 return RedirectToAction(nameof(Index));
             }

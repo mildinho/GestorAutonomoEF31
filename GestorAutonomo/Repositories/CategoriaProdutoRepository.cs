@@ -112,6 +112,11 @@ namespace GestorAutonomo.Repositories
         {
             return await _context.CategoriaProduto.Where(obj => obj.CategoriaPaiId == Id).ToListAsync();
         }
+
+        public async Task<List<Produto>> ObterProdutosPorCategoria(int Id)
+        {
+            return await _context.Produto.Where(obj => obj.CategoriaProdutoId == Id).ToListAsync();
+        }
     }
 
 }
