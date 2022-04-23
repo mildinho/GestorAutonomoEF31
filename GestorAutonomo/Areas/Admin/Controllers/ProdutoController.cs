@@ -18,18 +18,21 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class ProdutoController : Controller
     {
 
-      
+
         private readonly IProdutoRepository _repositoryProduto;
         private readonly ICategoriaProdutoRepository _repositoryCategoria;
         private readonly IImagemRepository _repositoryImagem;
-       
+        private readonly IProdutoSaldoRepository _repositoryProdutoSaldo;
 
-        public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria, IImagemRepository imagem)
+
+        public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria, IImagemRepository imagem, IProdutoSaldoRepository produtoSaldo)
         {
             _repositoryProduto = produto;
             _repositoryCategoria = categoria;
             _repositoryImagem = imagem;
-          
+            _repositoryProdutoSaldo = produtoSaldo;
+
+
         }
 
 
@@ -136,7 +139,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             return View("Manutencao", obj01);
         }
 
-      
+
 
 
         [HttpGet]
@@ -169,8 +172,18 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             if (Opcoes.Delete == (Opcoes)operacao)
 
             {
-                
-                GerenciadorArquivo.ExcluirImagensProduto(produto.Imagens.ToList());
+                List<ProdutoSaldo> obj01 = await _repositoryProdutoSaldo.ObterPontosPorProduto(produto.Id, true);
+                if (obj01.Count > 0)
+                {
+
+                    TempData["msg_e"] = "Existem Produtos Cadastrados no Ponto de Estoque";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                if (produto.Imagens != null)
+                {
+                    GerenciadorArquivo.ExcluirImagensProduto(produto.Imagens.ToList());
+                }
                 _repositoryImagem.ExcluirImagensProduto(produto.Id);
 
                 await _repositoryProduto.DeletarAsync(produto.Id);
@@ -181,13 +194,13 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
-                  
+
                     await _repositoryProduto.InserirAsync(produto);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-                   
+
                     await _repositoryProduto.AtualizarAsync(produto);
 
                 }

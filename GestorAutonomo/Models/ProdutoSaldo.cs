@@ -54,5 +54,25 @@ namespace GestorAutonomo.Models
         public DateTime Data_Alteracao { get; set; }
 
 
+
+
+
+        public ProdutoSaldo()
+        {
+                
+        }
+
+
+        public ProdutoSaldo(int Produto, int PontoEstoque, int SaldoInicial, int ReservaInicial)
+        {
+            ProdutoId = Produto;
+            PontosEstoqueId = PontoEstoque;
+            Saldo = SaldoInicial;
+            Reserva = ReservaInicial;
+        }
     }
+
+
+
+  
 }

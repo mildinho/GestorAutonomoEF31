@@ -123,12 +123,29 @@ namespace GestorAutonomo.Data
             {
 
                 Produto Produto01 = new Produto(1, "CAR80", "LUBRIFICANTE AUTOMOTIVO");
-                
-                _context.Produto.AddRange(Produto01);
-                
+                Produto Produto02 = new Produto(2, "ZM501", "PASTILHAS DE FREIO JUPITER");
+
+                _context.Produto.AddRange(Produto01, Produto02);
+
 
             }
             _context.SaveChanges();
+
+
+            if (!_context.ProdutoSaldo.Any())
+            {
+
+                ProdutoSaldo ProdutoSaldo01 = new ProdutoSaldo(1, 1, 10, 1);
+                ProdutoSaldo ProdutoSaldo02 = new ProdutoSaldo(1, 2, 0, 0);
+                ProdutoSaldo ProdutoSaldo03 = new ProdutoSaldo(2, 1, 55, 55);
+                
+                _context.ProdutoSaldo.AddRange(ProdutoSaldo01, ProdutoSaldo02, ProdutoSaldo03);
+
+
+            }
+            _context.SaveChanges();
+
+
 
         }
     }

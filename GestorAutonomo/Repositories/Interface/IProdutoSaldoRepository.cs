@@ -21,9 +21,9 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task<IEnumerable<ProdutoSaldo>> ListarTodosRegistrosAsync();
 
-        Task<List<ProdutoSaldo>> ObterProdutosPorPonto(int Id);
+        Task<List<ProdutoSaldo>> ObterProdutosPorPonto(int Id, bool SomenteComSaldo);
         
-        Task<List<ProdutoSaldo>> ObterPontosPorProduto(int Id);
+        Task<List<ProdutoSaldo>> ObterPontosPorProduto(int Id, bool SomenteComSaldo);
 
         ProdutoSaldo AjustarCampos(ProdutoSaldo ProdutoSaldo);
 
