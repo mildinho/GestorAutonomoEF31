@@ -145,6 +145,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _repositoryBanco.DeletarAsync(banco.Id);
+
+                TempData["show_excluido"] = "Excluido";
+
+
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)

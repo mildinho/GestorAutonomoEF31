@@ -187,6 +187,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 _repositoryImagem.ExcluirImagensProduto(produto.Id);
 
                 await _repositoryProduto.DeletarAsync(produto.Id);
+                TempData["show_excluido"] = "Excluido";
+
 
                 return RedirectToAction(nameof(Index));
             }

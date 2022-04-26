@@ -12,6 +12,7 @@ $(document).ready(function () {
     $('.dinheiro').mask('000.000.000.000.000,0000', { reverse: true });
 
     frm_manutencao_delete();
+    
 
     $("#frm_manutencao_update").submit(function (event) {
         document.getElementById('PrecoVenda').value = AjustaPreco('PrecoVenda');
@@ -83,6 +84,17 @@ function buscar_cep() {
         }
     });
 }
+function show_registro_excluido() {
+   
+    Swal.fire(
+        {
+            title: 'Excluido!',
+            text: 'Registro Excluido do Sistema.',
+            icon: 'success'
+        }
+    );
+}
+
 
 function frm_manutencao_delete() {
     $(".gestor-btn-excluir").click(function (e) {
@@ -100,13 +112,13 @@ function frm_manutencao_delete() {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                Swal.fire(
-                    {
-                        title: 'Excluido!',
-                        text: 'Registro Excluido do Sistema.',
-                        icon: 'success'
-                    }
-                );
+                //Swal.fire(
+                //    {
+                //        title: 'Excluido!',
+                //        text: 'Registro Excluido do Sistema.',
+                //        icon: 'success'
+                //    }
+                //);
 
                 document.getElementById("frm_manutencao_delete").submit();
             }

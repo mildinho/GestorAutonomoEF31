@@ -187,6 +187,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 }
 
                 await _repositoryCategoriaProduto.DeletarAsync(categoria.Id);
+
+                TempData["show_excluido"] = "Excluido";
+
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)

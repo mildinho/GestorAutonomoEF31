@@ -150,7 +150,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _repositoryPontoEstoque.DeletarAsync(parceiro.Id);
-
+                TempData["show_excluido"] = "Excluido";
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)

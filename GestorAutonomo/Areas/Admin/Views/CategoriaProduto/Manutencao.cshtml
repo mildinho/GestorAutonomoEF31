@@ -42,7 +42,7 @@
             <select asp-for="CategoriaPaiId" class="form-control" asp-items="@ViewBag.Categorias" disabled="disabled">
                 <option value="">Selecione a Categoria</option>
             </select>
-           
+
         }
         else
         {
@@ -54,7 +54,7 @@
         <span asp-validation-for="CategoriaPaiId" class="text-danger"></span>
     </div>
 
-   
+
     @await Component.InvokeAsync("CRUD_Acao")
 
 </form>

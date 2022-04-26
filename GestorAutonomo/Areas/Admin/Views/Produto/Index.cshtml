@@ -28,6 +28,15 @@
     <p class="alert alert-danger">@TempData["msg_e"]</p>
 }
 
+@if (TempData["show_excluido"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            show_registro_excluido();
+        };
+    </script>
+}
+
 
 @if (Model.Count > 0)
 {
