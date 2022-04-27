@@ -12,6 +12,9 @@
 
 
 </head>
+
+
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -164,8 +167,8 @@
 
     <br />
     <br />
-    
-    <footer class="border-top text-muted fixed-bottom navbar-expand-sm" >
+
+    <footer class="border-top text-muted fixed-bottom navbar-expand-sm">
         <div class="container">
             &copy; 2021 - Gestor Autônomo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Politica de Privacidade</a>
         </div>
@@ -192,6 +195,7 @@
         });
     </script>
 
+    @Html.Raw(AlertHandler.RenderNotifications());
 
 
     @RenderSection("Scripts", required: false)

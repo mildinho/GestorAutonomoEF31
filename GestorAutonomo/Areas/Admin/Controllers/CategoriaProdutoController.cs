@@ -1,6 +1,7 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
 using GestorAutonomo.Biblioteca.Lang;
+using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         public CategoriaProdutoController(ICategoriaProdutoRepository categoriaProdutoRepository)
         {
             _repositoryCategoriaProduto = categoriaProdutoRepository;
+          
         }
 
 
@@ -188,7 +190,8 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
                 await _repositoryCategoriaProduto.DeletarAsync(categoria.Id);
 
-                TempData["show_excluido"] = "Excluido";
+                //TempData["show_excluido"] = "Excluido";
+                AlertNotification.Warning("Excluido");
 
                 return RedirectToAction(nameof(Index));
             }

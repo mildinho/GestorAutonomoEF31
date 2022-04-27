@@ -15,6 +15,8 @@ using GestorAutonomo.Repositories;
 using GestorAutonomo.Repositories.Interface;
 using GestorAutonomo.Biblioteca.Middleware;
 using Microsoft.AspNetCore.Mvc;
+using GestorAutonomo.Biblioteca.Notification;
+using Microsoft.AspNetCore.Http;
 
 namespace GestorAutonomo
 {
@@ -65,6 +67,7 @@ namespace GestorAutonomo
 
             services.AddScoped<SeedingService>();
 
+            
             services.AddScoped<Sessao>();
             services.AddScoped<SessaoUsuario>();
 
@@ -91,7 +94,7 @@ namespace GestorAutonomo
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService, IHttpContextAccessor accessor)
         {
 
             var enUS = new CultureInfo("en-US");
@@ -105,6 +108,9 @@ namespace GestorAutonomo
             };
 
             app.UseRequestLocalization(localizationOptions);
+
+            AlertHandler.SetHttpContextAccessor(accessor);
+
 
 
             if (env.IsDevelopment())
