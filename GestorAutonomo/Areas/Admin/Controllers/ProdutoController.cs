@@ -1,6 +1,7 @@
 ﻿using GestorAutonomo.Biblioteca.Arquivo;
 using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -187,7 +188,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 _repositoryImagem.ExcluirImagensProduto(produto.Id);
 
                 await _repositoryProduto.DeletarAsync(produto.Id);
-                TempData["show_excluido"] = "Excluido";
+                AlertNotification.Warning("Registro Excluído");
 
 
                 return RedirectToAction(nameof(Index));

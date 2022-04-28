@@ -1,5 +1,6 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -146,7 +147,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 await _repositoryBanco.DeletarAsync(banco.Id);
 
-                TempData["show_excluido"] = "Excluido";
+                AlertNotification.Warning("Registro Excluído");
 
 
                 return RedirectToAction(nameof(Index));

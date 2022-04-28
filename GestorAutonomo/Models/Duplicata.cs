@@ -20,6 +20,21 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         public TipoDuplicata TipoDuplicata { get; set; } = 0;
 
+        [Display(Name = "Numero do Documento")]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        public double Documento { get; set; }
+
+        [Display(Name = "Parcela do Documento")]
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        public double Parcela { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
+        [ForeignKey("Parceiro")]
+        [Display(Name = "Código do Parceiro")]
+        public int ParceiroId { get; set; }
+        public virtual Parceiro Parceiro { get; set; }
+
+
 
         [Display(Name = "Data de Emissão")]
         [DataType(DataType.Date)]
@@ -65,8 +80,14 @@ namespace GestorAutonomo.Models
         [Display(Name = "Nosso Número")]
         public string Nosso_Numero { get; set; }
 
+        [Display(Name = "Número da Remessa")]
+        public string Remessa_Numero { get; set; }
 
 
+        [Display(Name = "Data Registro Banco")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime Data_Registro_Banco { get; set; }
 
 
         [Display(Name = "Data de Cadastro")]

@@ -190,8 +190,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
                 await _repositoryCategoriaProduto.DeletarAsync(categoria.Id);
 
-                //TempData["show_excluido"] = "Excluido";
-                AlertNotification.Warning("Excluido");
+                AlertNotification.Warning("Registro Excluído");
 
                 return RedirectToAction(nameof(Index));
             }

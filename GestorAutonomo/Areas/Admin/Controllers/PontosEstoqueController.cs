@@ -1,5 +1,6 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -150,7 +151,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _repositoryPontoEstoque.DeletarAsync(parceiro.Id);
-                TempData["show_excluido"] = "Excluido";
+                AlertNotification.Warning("Registro Excluído");
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)

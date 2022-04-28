@@ -1,5 +1,6 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             if (opcoes == Opcoes.Information)
             {
-                crud.Titulo = "Unidade Federatival";
+                crud.Titulo = "Unidade Federativa";
                 crud.Descricao = "Aqui você poderá configurar sua Unidade Federativa";
                 crud.SubTitulo = "Dados para Controlar as Unidades Federativas";
                 crud.Operacao = Opcoes.Information;
@@ -55,7 +56,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             }
             else if (opcoes == Opcoes.Read)
             {
-                crud.Titulo = "Consultar Unidade Federatival";
+                crud.Titulo = "Consultar Unidade Federativa";
                 crud.Descricao = "Aqui você poderá consultar sua Unidade Federativa";
                 crud.SubTitulo = "Consultar UF";
                 crud.Operacao = Opcoes.Read;
@@ -142,7 +143,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 await _repositoryUF.DeletarAsync(uf.Id);
 
-                TempData["show_excluido"] = "Excluido";
+                AlertNotification.Warning("Registro Excluído");
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)
