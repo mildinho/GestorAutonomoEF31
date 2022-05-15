@@ -152,10 +152,33 @@
                     <span asp-validation-for="Comprimento" class="text-danger"></span>
                 </div>
             </div>
+        </div>
 
+        <div class="tab-pane fade" id="nav-estoque" role="tabpanel" aria-labelledby="nav-estoque-tab">
+            Quantidade em Estoque
+            <div class="row">
+
+                @{ foreach (var item in Model.ProdutoSaldo)
+                    {
+                        <div class="form-group col-md-6">
+                            <label>@item.PontosEstoque.Descricao</label>
+                            <div class="input-group mb-2">
+                                <label>Saldo</label>
+                                
+                                <input type="text" value=@item.Saldo class="form-control" disabled="disabled" />
+                            </div>
+                            <div class="input-group mb-2">
+                                <label>Reserva</label>
+                                <input type="text" value=@item.Reserva class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+
+                    }
+
+                }
+            </div>
 
         </div>
-        <div class="tab-pane fade" id="nav-estoque" role="tabpanel" aria-labelledby="nav-estoque-tab">Dados referente ao Quantidade de Estoque</div>
         <div class="tab-pane fade" id="nav-imagens" role="tabpanel" aria-labelledby="nav-imagens-tab">
             Imagens do Produto
 

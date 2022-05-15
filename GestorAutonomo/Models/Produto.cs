@@ -93,6 +93,9 @@ namespace GestorAutonomo.Models
         public int CategoriaProdutoId { get; set; }
         public virtual CategoriaProduto CategoriaProduto { get; set; }
         
+        
+        public virtual ICollection<ProdutoSaldo> ProdutoSaldo { get; set; }
+        
 
         public virtual ICollection<Imagem> Imagens { get; set; }
 
