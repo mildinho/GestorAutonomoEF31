@@ -3,6 +3,8 @@
 @{
 
     ViewData["Title"] = ViewBag.Crud.Titulo;
+
+
 }
 
 @await Component.InvokeAsync("CRUD")
@@ -155,23 +157,39 @@
         </div>
 
         <div class="tab-pane fade" id="nav-estoque" role="tabpanel" aria-labelledby="nav-estoque-tab">
-            Quantidade em Estoque
-            <div class="row">
+            <h4>Quantidade e Disponibilidade nos Pontos de Estoque</h4>
+            <br />
+
+            <div class="col">
 
                 @{ foreach (var item in Model.ProdutoSaldo)
                     {
-                        <div class="form-group col-md-6">
-                            <label>@item.PontosEstoque.Descricao</label>
-                            <div class="input-group mb-2">
-                                <label>Saldo</label>
-                                
-                                <input type="text" value=@item.Saldo class="form-control" disabled="disabled" />
-                            </div>
-                            <div class="input-group mb-2">
-                                <label>Reserva</label>
-                                <input type="text" value=@item.Reserva class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
+
+                        var disponivel = item.Saldo - item.Reserva;
+
+
+                        <label>@item.PontosEstoque.Descricao</label>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Saldo</th>
+                                    <th scope="col">Reserva</th>
+                                    <th scope="col">Disponível</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                <tr>
+                                    <td>@item.Saldo</td>
+                                    <td>@item.Reserva</td>
+                                    <td>@(disponivel)</td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <br />
 
                     }
 
