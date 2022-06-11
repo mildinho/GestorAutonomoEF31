@@ -145,6 +145,18 @@ namespace GestorAutonomo.Data
             }
             _context.SaveChanges();
 
+            if (!_context.Duplicatas.Any())
+            {
+
+                Duplicata duplicata01 = new Duplicata();
+                Duplicata duplicata02 = new Duplicata();
+                Duplicata duplicata03 = new Duplicata();
+
+                _context.Duplicatas.AddRange(duplicata01, duplicata02, duplicata03);
+
+
+            }
+            _context.SaveChanges();
 
 
         }

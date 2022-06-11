@@ -96,7 +96,7 @@ namespace GestorAutonomo.Repositories
 
             if (!string.IsNullOrEmpty(pesquisa))
             {
-                objConsulta = objConsulta.Where(a => a.Nome.Contains(pesquisa.Trim()));
+                objConsulta = objConsulta.Where(a => a.Nome.Contains(pesquisa.Trim()) || a.CNPJ_CPF.ToString().Contains(pesquisa.Trim()) );
             }
 
 

@@ -40,42 +40,31 @@
                         <th class="col-1">@Html.DisplayNameFor(model => model.First().Id)</th>
                         <th class="col-6">@Html.DisplayNameFor(model => model.First().Nome)</th>
                         <th class="col-2">@Html.DisplayNameFor(model => model.First().CNPJ_CPF)</th>
-                        <th class="col-2">Tipo</th>
+                        <th class="col-2">Ações</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (Parceiro parceiro in Model)
                     {
-                        <tr>
-                            <th scope="row" class="text-center">@parceiro.Id</th>
+                    <tr>
+                        <th scope="row" class="text-center">@parceiro.Id</th>
 
-                            <td> @Html.DisplayFor(model => parceiro.Nome)</td>
-                            <td>
+                        <td> @Html.DisplayFor(model => parceiro.Nome)</td>
+                        <td>
 
-                                @parceiro.CNPJ_CPF
+                            @parceiro.CNPJ_CPF
 
-                            </td>
-                            <td>
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Baixar" asp-route-id="@parceiro.Id" class="btn btn-outline-secondary mr-2" data-toggle="tooltip" data-placement="top" title="Baixar"><i class="fas fa-money-bill-wave"></i></a>
+                            <a asp-action="Manutencao" asp-route-id="@parceiro.Id" class="btn btn-outline-warning mr-2" data-toggle="tooltip" data-placement="top" title="Manutencao"><i class="fas fa-book-open"></i></a>
+                            <a asp-action="Historico" asp-route-id="@parceiro.Id" class="btn btn-outline-info" data-toggle="tooltip" data-placement="top" title="Historico"><i class="fas fa-book-open"></i></a>
 
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="@String.Concat("C", parceiro.Id.ToString())" checked="@(parceiro.Cliente == 1)" onclick="LigaDesligaParceiro(@parceiro.Id,1)">
-                                    <label class="custom-control-label font-weight-bold" for="@String.Concat("C", parceiro.Id.ToString())">Cliente</label>
-                                </div>
-
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="@String.Concat("F", parceiro.Id.ToString())" checked="@(parceiro.Fornecedor == 1)" onclick="LigaDesligaParceiro(@parceiro.Id,2)">
-                                    <label class="custom-control-label font-weight-bold" for="@String.Concat("F", parceiro.Id.ToString())">Fornecedor</label>
-                                </div>
-
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="@String.Concat("V", parceiro.Id.ToString())" checked="@(parceiro.Vendedor == 1)" onclick="LigaDesligaParceiro(@parceiro.Id,3)">
-                                    <label class="custom-control-label font-weight-bold" for="@String.Concat("V", parceiro.Id.ToString())">Vendedor</label>
-                                </div>
-                            </td>
+                        </td>
 
 
-                        </tr>
+                    </tr>
                     }
                 </tbody>
             </table>

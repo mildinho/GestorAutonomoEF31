@@ -22,7 +22,7 @@ namespace GestorAutonomo.Models
 
         [Display(Name = "Numero do Documento")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
-        public double Documento { get; set; }
+        public string Documento { get; set; }
 
         [Display(Name = "Parcela do Documento")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
@@ -102,7 +102,19 @@ namespace GestorAutonomo.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime Data_Alteracao { get; set; }
 
+        public Duplicata(int id, TipoDuplicata tipo, string documento, int parcela, int IdParceiro)
+        {
+            Id = id;
+            TipoDuplicata = tipo;
+            Documento = documento;
+            Parcela = parcela;
+            ParceiroId = IdParceiro;
+            Data_Emissao = DateTime.Now;
+            Data_Vencimento = DateTime.Now.AddDays(15);
 
+
+
+        }
     }
 }
 

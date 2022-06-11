@@ -18,9 +18,9 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task<Duplicata> SelecionarPorCodigoAsync(int? Id);
              
-        Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync( int? pagina, string pesquisa);
+        Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro, int? pagina);
 
-        Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync();
+        Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro);
 
         Duplicata AjustarCampos(Duplicata duplicata);
 

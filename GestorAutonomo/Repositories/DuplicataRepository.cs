@@ -77,28 +77,21 @@ namespace GestorAutonomo.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync( int? pagina, string pesquisa)
+        public async Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro, int? pagina)
         {
 
             int numeroPagina = pagina ?? 1;
             int RegistroPorPagina = _conf.GetValue<int>("RegistroPorPagina");
 
-            var objConsulta = _context.Duplicatas.AsQueryable();
-
-            
-            if (!string.IsNullOrEmpty(pesquisa))
-            {
-                //objConsulta = objConsulta.Where(a => a.Descricao.Contains(pesquisa.Trim()));
-            }
-
+            var objConsulta = _context.Duplicatas.Where(x => x.ParceiroId == IdParceiro).AsQueryable();
 
             return await objConsulta.ToPagedListAsync<Duplicata>(numeroPagina, RegistroPorPagina);
 
         }
 
-        public async Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync()
+        public async Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro)
         {
-            var objConsulta = _context.Duplicatas.AsQueryable();
+            var objConsulta = _context.Duplicatas.Where(x => x.ParceiroId == IdParceiro).AsQueryable();
             
          
             return await objConsulta.ToListAsync();
