@@ -9,11 +9,7 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface IUFRepository : IGenericoRepository<UF>
     {
-        Task InserirAsync(UF uf);
-
         Task AtualizarAsync(UF uf);
-
-        Task DeletarAsync(int Id);
 
         Task<IPagedList<UF>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 

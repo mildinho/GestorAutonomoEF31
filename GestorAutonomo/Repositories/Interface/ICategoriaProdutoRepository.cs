@@ -9,11 +9,8 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface ICategoriaProdutoRepository : IGenericoRepository<CategoriaProduto>
     {
-        Task InserirAsync(CategoriaProduto categoriaProduto);
-
+       
         Task AtualizarAsync(CategoriaProduto categoriaProduto);
-
-        Task DeletarAsync(int Id);
 
          Task<IPagedList<CategoriaProduto>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 

@@ -46,29 +46,6 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task DeletarAsync(int Id)
-        {
-            try
-            {
-                Login obj = await SelecionarPorCodigoAsync(Id);
-                if (obj != null)
-                {
-
-                    _context.Remove(obj);
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException e)
-            {
-                throw new IntegrityException(e.Message);
-            }
-        }
-
-        public async Task InserirAsync(Login login)
-        {
-            _context.Add(login);
-            await _context.SaveChangesAsync();
-        }
 
         public async Task<IPagedList<Login>> ListarTodosRegistrosAsync(int? pagina)
         {
@@ -89,7 +66,7 @@ namespace GestorAutonomo.Repositories
         public async Task<Login> SelecionarPorEmailSenhaAsync(string Email, string Senha)
         {
             return await _context.Login.Where(m => m.EMail == Email && m.Password == Senha).FirstOrDefaultAsync();
-            
+
         }
 
     }

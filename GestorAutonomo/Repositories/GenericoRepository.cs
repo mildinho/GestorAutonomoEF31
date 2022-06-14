@@ -1,4 +1,5 @@
-﻿using GestorAutonomo.Data;
+﻿using GestorAutonomo.Biblioteca.Exceptions;
+using GestorAutonomo.Data;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,18 +13,44 @@ namespace GestorAutonomo.Repositories
     public class GenericoRepository<Tabela> : IGenericoRepository<Tabela> where Tabela : class
     {
         private readonly GestorAutonomoContext _context;
-     
+
 
         public GenericoRepository(GestorAutonomoContext context)
         {
             _context = context;
-        
+
         }
+
+        public async Task InserirAsync(Tabela tabela)
+        {
+            await _context.Set<Tabela>().AddAsync(tabela);
+            await _context.SaveChangesAsync();
+        }
+
+
+
         public async Task<Tabela> SelecionarPorCodigoAsync(int Id)
         {
             return await _context.Set<Tabela>().FindAsync(Id);
         }
 
-     
+
+
+        public async Task DeletarAsync(int Id)
+        {
+            try
+            {
+                var obj = await SelecionarPorCodigoAsync(Id);
+                if (obj != null)
+                {
+                    _context.Set<Tabela>().Remove(obj);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
+        }
     }
 }

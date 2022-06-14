@@ -10,11 +10,8 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface IParceiroRepository : IGenericoRepository<Parceiro>
     {
-        Task InserirAsync(Parceiro parceiro);
-
+    
         Task AtualizarAsync(Parceiro parceiro);
-
-        Task DeletarAsync(int Id);
 
         Task<Parceiro> SelecionarPorCNPJ_CPFAsync(double documento);
 

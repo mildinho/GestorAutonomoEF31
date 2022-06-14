@@ -9,11 +9,8 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface IBancoRepository : IGenericoRepository<Banco>
     {
-        Task InserirAsync(Banco banco);
 
         Task AtualizarAsync(Banco banco);
-
-        Task DeletarAsync(int Id);
 
         Task<IPagedList<Banco>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 

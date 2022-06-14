@@ -9,11 +9,7 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface ILoginRepository : IGenericoRepository<Login>
     {
-        Task InserirAsync(Login login);
-
         Task AtualizarAsync(Login login);
-
-        Task DeletarAsync(int Id);
 
         Task<Login> SelecionarPorEmailSenhaAsync(string Email, string Senha);
 

@@ -48,34 +48,8 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task DeletarAsync(int Id)
-        {
-            try
-            {
-                PontosEstoque obj = await SelecionarPorCodigoAsync(Id);
-                if (obj != null)
-                {
 
-                    _context.Remove(obj);
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException e)
-            {
-                throw new IntegrityException(e.Message);
-            }
-        }
-
-        public async Task InserirAsync(PontosEstoque pontos)
-        {
-            pontos = AjustarCampos(pontos);
-
-           
-
-            _context.Add(pontos);
-            await _context.SaveChangesAsync();
-        }
-
+ 
         public async Task<IPagedList<PontosEstoque>> ListarTodosRegistrosAsync( int? pagina, string pesquisa)
         {
 

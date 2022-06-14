@@ -49,33 +49,7 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task DeletarAsync(int Id)
-        {
-            try
-            {
-                Parceiro obj = await SelecionarPorCodigoAsync(Id);
-                if (obj != null)
-                {
-
-                    _context.Remove(obj);
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException e)
-            {
-                throw new IntegrityException(e.Message);
-            }
-        }
-
-        public async Task InserirAsync(Parceiro parceiro)
-        {
-            parceiro = AjustarCampos(parceiro);
-
-
-
-            _context.Add(parceiro);
-            await _context.SaveChangesAsync();
-        }
+  
 
         public async Task<IPagedList<Parceiro>> ListarTodosRegistrosAsync(TipoParceiro tipo, int? pagina, string pesquisa)
         {

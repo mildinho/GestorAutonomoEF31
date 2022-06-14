@@ -46,31 +46,7 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task DeletarAsync(int Id)
-        {
-            try
-            {
-                UF obj = await SelecionarPorCodigoAsync(Id);
-                if (obj != null)
-                {
-
-                    _context.Remove(obj);
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException e)
-            {
-                throw new IntegrityException(e.Message);
-            }
-        }
-
-        public async Task InserirAsync(UF uf)
-        {
-            _context.Add(uf);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<IPagedList<UF>> ListarTodosRegistrosAsync(int? pagina, string pesquisa)
+       public async Task<IPagedList<UF>> ListarTodosRegistrosAsync(int? pagina, string pesquisa)
         {
 
             int numeroPagina = pagina ?? 1;

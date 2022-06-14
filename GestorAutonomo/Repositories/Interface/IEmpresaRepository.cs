@@ -9,11 +9,8 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface IEmpresaRepository : IGenericoRepository<Empresa>
     {
-        Task InserirAsync(Empresa empresa);
-
+    
         Task AtualizarAsync(Empresa empresa);
-
-        Task DeletarAsync(int Id);
 
          Task<IPagedList<Empresa>> ListarTodosRegistrosAsync(int? pagina);
 
