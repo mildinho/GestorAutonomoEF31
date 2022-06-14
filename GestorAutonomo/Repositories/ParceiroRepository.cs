@@ -12,12 +12,12 @@ using System;
 
 namespace GestorAutonomo.Repositories
 {
-    public class ParceiroRepository : IParceiroRepository
+    public class ParceiroRepository : GenericoRepository<Parceiro>, IParceiroRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public ParceiroRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public ParceiroRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -71,7 +71,7 @@ namespace GestorAutonomo.Repositories
         {
             parceiro = AjustarCampos(parceiro);
 
-           
+
 
             _context.Add(parceiro);
             await _context.SaveChangesAsync();
@@ -86,7 +86,7 @@ namespace GestorAutonomo.Repositories
             var objConsulta = _context.Parceiro.AsQueryable();
 
             if (tipo == TipoParceiro.Cliente)
-                objConsulta = objConsulta.Where(a => a.Cliente == 1 );
+                objConsulta = objConsulta.Where(a => a.Cliente == 1);
             else if (tipo == TipoParceiro.Fornecedor)
                 objConsulta = objConsulta.Where(a => a.Fornecedor == 1);
             else if (tipo == TipoParceiro.Vendedor)
@@ -96,7 +96,7 @@ namespace GestorAutonomo.Repositories
 
             if (!string.IsNullOrEmpty(pesquisa))
             {
-                objConsulta = objConsulta.Where(a => a.Nome.Contains(pesquisa.Trim()) || a.CNPJ_CPF.ToString().Contains(pesquisa.Trim()) );
+                objConsulta = objConsulta.Where(a => a.Nome.Contains(pesquisa.Trim()) || a.CNPJ_CPF.ToString().Contains(pesquisa.Trim()));
             }
 
 
@@ -107,25 +107,19 @@ namespace GestorAutonomo.Repositories
         public async Task<IEnumerable<Parceiro>> ListarTodosRegistrosAsync(TipoParceiro tipo)
         {
             var objConsulta = _context.Parceiro.AsQueryable();
-            
-            if (tipo == TipoParceiro.Cliente) 
+
+            if (tipo == TipoParceiro.Cliente)
                 objConsulta = objConsulta.Where(a => a.Cliente == 1);
             else if (tipo == TipoParceiro.Fornecedor)
-                    objConsulta = objConsulta.Where(a => a.Fornecedor == 1);
+                objConsulta = objConsulta.Where(a => a.Fornecedor == 1);
             else if (tipo == TipoParceiro.Vendedor)
                 objConsulta = objConsulta.Where(a => a.Vendedor == 1);
 
             return await objConsulta.ToListAsync();
 
-           
+
 
         }
-
-        public async Task<Parceiro> SelecionarPorCodigoAsync(int? Id)
-        {
-            return await _context.Parceiro.FirstOrDefaultAsync(obj => obj.Id == Id);
-        }
-
 
         public async Task<Parceiro> SelecionarPorCNPJ_CPFAsync(double documento)
         {
@@ -143,6 +137,6 @@ namespace GestorAutonomo.Repositories
     }
 
 
-   
+
 
 }

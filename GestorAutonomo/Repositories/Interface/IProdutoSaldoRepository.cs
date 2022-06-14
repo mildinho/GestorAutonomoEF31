@@ -7,15 +7,13 @@ using X.PagedList;
 
 namespace GestorAutonomo.Repositories.Interface
 {
-    public interface IProdutoSaldoRepository
+    public interface IProdutoSaldoRepository : IGenericoRepository<ProdutoSaldo>
     {
         Task InserirAsync(ProdutoSaldo ProdutoSaldo);
 
         Task AtualizarAsync(ProdutoSaldo ProdutoSaldo);
 
         Task DeletarAsync(int Id);
-
-        Task<ProdutoSaldo> SelecionarPorCodigoAsync(int? Id);
 
         Task<IPagedList<ProdutoSaldo>> ListarTodosRegistrosAsync(int? pagina);
 

@@ -12,12 +12,12 @@ using System;
 
 namespace GestorAutonomo.Repositories
 {
-    public class DuplicataRepository : IDuplicataRepository
+    public class DuplicataRepository : GenericoRepository<Duplicata>, IDuplicataRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public DuplicataRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public DuplicataRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -99,15 +99,6 @@ namespace GestorAutonomo.Repositories
            
 
         }
-
-        public async Task<Duplicata> SelecionarPorCodigoAsync(int? Id)
-        {
-            return await _context.Duplicatas.FirstOrDefaultAsync(obj => obj.Id == Id);
-        }
-
-
-     
-
 
         public Duplicata AjustarCampos(Duplicata duplicata)
         {

@@ -12,12 +12,12 @@ using X.PagedList;
 
 namespace GestorAutonomo.Repositories
 {
-    public class CategoriaProdutoRepository : ICategoriaProdutoRepository
+    public class CategoriaProdutoRepository : GenericoRepository<CategoriaProduto>, ICategoriaProdutoRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public CategoriaProdutoRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public CategoriaProdutoRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -96,11 +96,6 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task<CategoriaProduto> SelecionarPorCodigoAsync(int? Id)
-        {
-            return await _context.CategoriaProduto.FirstOrDefaultAsync(obj => obj.Id == Id);
-        }
-
         public CategoriaProduto AjustarCampos(CategoriaProduto categoria)
         {
            
@@ -117,6 +112,8 @@ namespace GestorAutonomo.Repositories
         {
             return await _context.Produto.Where(obj => obj.CategoriaProdutoId == Id).ToListAsync();
         }
+
+      
     }
 
 }

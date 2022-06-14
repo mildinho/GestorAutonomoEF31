@@ -7,7 +7,7 @@ using X.PagedList;
 
 namespace GestorAutonomo.Repositories.Interface
 {
-    public interface IBancoRepository
+    public interface IBancoRepository : IGenericoRepository<Banco>
     {
         Task InserirAsync(Banco banco);
 
@@ -15,12 +15,7 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task DeletarAsync(int Id);
 
-        Task<Banco> SelecionarPorCodigoAsync(int? Id);
-
         Task<IPagedList<Banco>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
-
-        Task<IEnumerable<Banco>> ListarTodosRegistrosAsync();
-
 
     }
 }

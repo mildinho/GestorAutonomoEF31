@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace GestorAutonomo.Repositories.Interface
 {
-    public interface IParceiroRepository
+    public interface IParceiroRepository : IGenericoRepository<Parceiro>
     {
         Task InserirAsync(Parceiro parceiro);
 
@@ -16,8 +16,6 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task DeletarAsync(int Id);
 
-        Task<Parceiro> SelecionarPorCodigoAsync(int? Id);
-        
         Task<Parceiro> SelecionarPorCNPJ_CPFAsync(double documento);
 
         Task<IPagedList<Parceiro>> ListarTodosRegistrosAsync(TipoParceiro tipo, int? pagina, string pesquisa);

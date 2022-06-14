@@ -102,19 +102,19 @@ namespace GestorAutonomo.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime Data_Alteracao { get; set; }
 
-        public Duplicata(int id, TipoDuplicata tipo, string documento, int parcela, int IdParceiro)
-        {
-            Id = id;
-            TipoDuplicata = tipo;
-            Documento = documento;
-            Parcela = parcela;
-            ParceiroId = IdParceiro;
-            Data_Emissao = DateTime.Now;
-            Data_Vencimento = DateTime.Now.AddDays(15);
+        //public Duplicata(int id, TipoDuplicata tipo, string documento, int parcela, int IdParceiro)
+        //{
+        //    Id = id;
+        //    TipoDuplicata = tipo;
+        //    Documento = documento;
+        //    Parcela = parcela;
+        //    ParceiroId = IdParceiro;
+        //    Data_Emissao = DateTime.Now;
+        //    Data_Vencimento = DateTime.Now.AddDays(15);
 
 
 
-        }
+        //}
     }
 }
 

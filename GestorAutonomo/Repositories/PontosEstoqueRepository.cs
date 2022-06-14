@@ -12,12 +12,12 @@ using System;
 
 namespace GestorAutonomo.Repositories
 {
-    public class PontosEstoqueRepository : IPontosEstoqueRepository
+    public class PontosEstoqueRepository : GenericoRepository<PontosEstoque>, IPontosEstoqueRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public PontosEstoqueRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public PontosEstoqueRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -106,15 +106,7 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task<PontosEstoque> SelecionarPorCodigoAsync(int? Id)
-        {
-            return await _context.PontosEstoque.FirstOrDefaultAsync(obj => obj.Id == Id);
-        }
-
-
      
-
-
         public PontosEstoque AjustarCampos(PontosEstoque pontos)
         {
             return pontos;

@@ -12,12 +12,12 @@ using X.PagedList;
 
 namespace GestorAutonomo.Repositories
 {
-    public class BancoRepository : IBancoRepository
+    public class BancoRepository : GenericoRepository<Banco>,  IBancoRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public BancoRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public BancoRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -89,16 +89,13 @@ namespace GestorAutonomo.Repositories
         }
 
 
-        public async Task<IEnumerable<Banco>> ListarTodosRegistrosAsync()
-        {
-            return await _context.Banco.ToListAsync();
+        //public async Task<IEnumerable<Banco>> ListarTodosRegistrosAsync()
+        //{
+        //    return await _context.Banco.ToListAsync();
 
-        }
+        //}
 
-        public async Task<Banco> SelecionarPorCodigoAsync(int? Id)
-        {
-            return await _context.Banco.FirstOrDefaultAsync(obj => obj.Id == Id);
-        }
+       
     }
 
 }

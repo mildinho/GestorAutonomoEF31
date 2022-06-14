@@ -12,12 +12,12 @@ using X.PagedList;
 
 namespace GestorAutonomo.Repositories
 {
-    public class EmpresaRepository : IEmpresaRepository
+    public class EmpresaRepository : GenericoRepository<Empresa>, IEmpresaRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public EmpresaRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public EmpresaRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -87,11 +87,6 @@ namespace GestorAutonomo.Repositories
         {
             return await _context.Empresa.ToListAsync();
 
-        }
-
-        public async Task<Empresa> SelecionarPorCodigoAsync(int? Id)
-        {
-            return await _context.Empresa.FirstOrDefaultAsync(obj => obj.Id == Id);
         }
 
         public Empresa AjustarCampos(Empresa empresa)

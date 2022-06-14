@@ -12,12 +12,12 @@ using X.PagedList;
 
 namespace GestorAutonomo.Repositories
 {
-    public class UFRepository : IUFRepository
+    public class UFRepository : GenericoRepository<UF>, IUFRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public UFRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public UFRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -93,10 +93,7 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task<UF> SelecionarPorCodigoAsync(int? Id)
-        {
-            return await _context.UF.FirstOrDefaultAsync(obj => obj.Id == Id);
-        }
+   
     }
 
 }

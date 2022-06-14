@@ -7,7 +7,7 @@ using X.PagedList;
 
 namespace GestorAutonomo.Repositories.Interface
 {
-    public interface IEmpresaRepository
+    public interface IEmpresaRepository : IGenericoRepository<Empresa>
     {
         Task InserirAsync(Empresa empresa);
 
@@ -15,9 +15,7 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task DeletarAsync(int Id);
 
-        Task<Empresa> SelecionarPorCodigoAsync(int? Id);
-
-        Task<IPagedList<Empresa>> ListarTodosRegistrosAsync(int? pagina);
+         Task<IPagedList<Empresa>> ListarTodosRegistrosAsync(int? pagina);
 
         Task<IEnumerable<Empresa>> ListarTodosRegistrosAsync();
 

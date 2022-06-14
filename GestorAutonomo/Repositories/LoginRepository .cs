@@ -12,12 +12,12 @@ using X.PagedList;
 
 namespace GestorAutonomo.Repositories
 {
-    public class LoginRepository : ILoginRepository
+    public class LoginRepository : GenericoRepository<Login>, ILoginRepository
     {
         private readonly IConfiguration _conf;
         private readonly GestorAutonomoContext _context;
 
-        public LoginRepository(GestorAutonomoContext context, IConfiguration configuration)
+        public LoginRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -84,11 +84,6 @@ namespace GestorAutonomo.Repositories
         {
             return await _context.Login.ToListAsync();
 
-        }
-
-        public async Task<Login> SelecionarPorCodigoAsync(int? Id)
-        {
-            return await _context.Login.FirstOrDefaultAsync(obj => obj.Id == Id);
         }
 
         public async Task<Login> SelecionarPorEmailSenhaAsync(string Email, string Senha)
