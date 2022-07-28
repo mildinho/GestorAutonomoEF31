@@ -11,8 +11,6 @@ namespace GestorAutonomo.Repositories.Interface
     public interface IParceiroRepository : IGenericoRepository<Parceiro>
     {
     
-        Task AtualizarAsync(Parceiro parceiro);
-
         Task<Parceiro> SelecionarPorCNPJ_CPFAsync(double documento);
 
         Task<IPagedList<Parceiro>> ListarTodosRegistrosAsync(TipoParceiro tipo, int? pagina, string pesquisa);

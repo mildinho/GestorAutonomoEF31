@@ -19,10 +19,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     {
 
         private readonly IPontosEstoqueRepository _repositoryPontoEstoque;
+        private readonly IUnitOfWork _uow;
 
-        public PontosEstoqueController(IPontosEstoqueRepository pontosEstoqueRepository)
+        public PontosEstoqueController(IPontosEstoqueRepository pontosEstoqueRepository, IUnitOfWork uow)
         {
             _repositoryPontoEstoque = pontosEstoqueRepository;
+            _uow = uow;
 
         }
 

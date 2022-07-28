@@ -24,31 +24,8 @@ namespace GestorAutonomo.Repositories
 
         }
 
-
-        public async Task AtualizarAsync(Banco banco)
-        {
-            if (!await _context.Banco.AnyAsync(x => x.Id == banco.Id))
-            {
-                throw new NotFoundException("Codigo nao encontrado");
-            }
-            try
-
-            {
-                //_context.Update(banco);
-                _context.Entry(banco).State = EntityState.Modified;
-                _context.Entry(banco).Property(p => p.Data_Cadastro).IsModified = false;
-                await _context.SaveChangesAsync();
-
-            }
-            catch (DBConcurrencyException e)
-            {
-                throw new DBConcurrencyException(e.Message);
-            }
-
-        }
-
-
        
+
         public async Task<IPagedList<Banco>> ListarTodosRegistrosAsync(int? pagina, string pesquisa)
         {
 

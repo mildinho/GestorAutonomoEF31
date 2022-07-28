@@ -9,10 +9,8 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface ICategoriaProdutoRepository : IGenericoRepository<CategoriaProduto>
     {
-       
-        Task AtualizarAsync(CategoriaProduto categoriaProduto);
 
-         Task<IPagedList<CategoriaProduto>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
+        Task<IPagedList<CategoriaProduto>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 
         Task<List<CategoriaProduto>> ObterCategoriasPorCategoriaPai(int? Id);
 

@@ -10,9 +10,10 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task InserirAsync(Tabela tabela);
 
-        Task<Tabela> SelecionarPorCodigoAsync(int Id);
+        Task AtualizarAsync(Tabela tabela);
 
         Task DeletarAsync(int Id);
-       
+
+        Task<Tabela> SelecionarPorCodigoAsync(int Id);
     }
 }

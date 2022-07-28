@@ -25,30 +25,6 @@ namespace GestorAutonomo.Repositories
         }
 
 
-        public async Task AtualizarAsync(Empresa empresa)
-        {
-            if (!await _context.Empresa.AnyAsync(x => x.Id == empresa.Id))
-            {
-                throw new NotFoundException("Codigo nao encontrado");
-            }
-            try
-            {
-                empresa = AjustarCampos(empresa);
-                //_context.Update(empresa);
-
-                _context.Entry(empresa).Property(p => p.Data_Cadastro).IsModified = false;
-                _context.Entry(empresa).State = EntityState.Modified;
-
-                await _context.SaveChangesAsync();
-            }
-            catch (DBConcurrencyException e)
-            {
-                throw new DBConcurrencyException(e.Message);
-            }
-
-        }
-
-
 
 
         public async Task<IPagedList<Empresa>> ListarTodosRegistrosAsync(int? pagina)

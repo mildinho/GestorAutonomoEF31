@@ -16,12 +16,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     {
         private readonly IParceiroRepository _repositoryParceiro;
         private readonly IDuplicataRepository _repositoryDuplicata;
+        private readonly IUnitOfWork _uow;
 
 
-        public CPagarController(IParceiroRepository parceiroRepository, IDuplicataRepository duplicataRepository)
+        public CPagarController(IParceiroRepository parceiroRepository, IDuplicataRepository duplicataRepository, IUnitOfWork uow)
         {
             _repositoryParceiro = parceiroRepository;
             _repositoryDuplicata = duplicataRepository;
+            _uow = uow;
 
         }
 

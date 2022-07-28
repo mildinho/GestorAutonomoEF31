@@ -24,28 +24,7 @@ namespace GestorAutonomo.Repositories
 
         }
 
-
-        public async Task AtualizarAsync(Login login)
-        {
-            if (!await _context.Login.AnyAsync(x => x.Id == login.Id))
-            {
-                throw new NotFoundException("Codigo nao encontrado");
-            }
-            try
-            {
-                //_context.Update(login);
-                _context.Entry(login).State = EntityState.Modified;
-                _context.Entry(login).Property(p => p.Data_Cadastro).IsModified = false;
-
-                await _context.SaveChangesAsync();
-            }
-            catch (DBConcurrencyException e)
-            {
-                throw new DBConcurrencyException(e.Message);
-            }
-
-        }
-
+ 
 
         public async Task<IPagedList<Login>> ListarTodosRegistrosAsync(int? pagina)
         {

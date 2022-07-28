@@ -9,8 +9,6 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface ILoginRepository : IGenericoRepository<Login>
     {
-        Task AtualizarAsync(Login login);
-
         Task<Login> SelecionarPorEmailSenhaAsync(string Email, string Senha);
 
         Task<IPagedList<Login>> ListarTodosRegistrosAsync(int? pagina);

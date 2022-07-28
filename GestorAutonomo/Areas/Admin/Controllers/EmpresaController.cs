@@ -25,12 +25,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
         private readonly IEmpresaRepository _repositoryEmpresa;
         private readonly IUFRepository _repositoryUF;
-     
-        public EmpresaController(IEmpresaRepository empresa, IUFRepository uf)
+        private readonly IUnitOfWork _uow;
+
+        public EmpresaController(IEmpresaRepository empresa, IUFRepository uf, IUnitOfWork uow)
         {
             _repositoryEmpresa = empresa;
             _repositoryUF = uf;
-        
+            _uow = uow;
+
 
             crud.Descricao = "Aqui você poderá realizar as alterações do Cadastro da Empresa";
             crud.Titulo = "Manutenção";

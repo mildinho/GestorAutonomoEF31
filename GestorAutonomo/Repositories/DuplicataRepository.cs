@@ -24,33 +24,8 @@ namespace GestorAutonomo.Repositories
 
         }
 
+     
 
-        public async Task AtualizarAsync(Duplicata duplicata)
-        {
-            if (!await _context.Duplicatas.AnyAsync(x => x.Id == duplicata.Id))
-            {
-                throw new NotFoundException("Código não encontrado");
-            }
-            try
-            {
-                duplicata = AjustarCampos(duplicata);
-
-
-                //_context.Update(produto);
-                _context.Entry(duplicata).State = EntityState.Modified;
-                _context.Entry(duplicata).Property(p => p.Data_Cadastro).IsModified = false;
-
-                await _context.SaveChangesAsync();
-            }
-            catch (DBConcurrencyException e)
-            {
-                throw new DBConcurrencyException(e.Message);
-            }
-
-        }
-
-
-      
         public async Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro, int? pagina)
         {
 

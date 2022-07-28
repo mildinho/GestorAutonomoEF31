@@ -24,32 +24,9 @@ namespace GestorAutonomo.Repositories
 
         }
 
-
-        public async Task AtualizarAsync(ProdutoSaldo produtoSaldo)
-        {
-            if (!await _context.ProdutoSaldo.AnyAsync(x => x.Id == produtoSaldo.Id))
-            {
-                throw new NotFoundException("Codigo nao encontrado");
-            }
-            try
-            {
-                produtoSaldo = AjustarCampos(produtoSaldo);
-                //_context.Update(categoria);
-
-                _context.Entry(produtoSaldo).State = EntityState.Modified;
-                _context.Entry(produtoSaldo).Property(p => p.Data_Cadastro).IsModified = false;
-
-                await _context.SaveChangesAsync();
-            }
-            catch (DBConcurrencyException e)
-            {
-                throw new DBConcurrencyException(e.Message);
-            }
-
-        }
+     
 
 
-   
         public async Task<IPagedList<ProdutoSaldo>> ListarTodosRegistrosAsync(int? pagina)
         {
 

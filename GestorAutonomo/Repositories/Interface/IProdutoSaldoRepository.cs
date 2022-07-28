@@ -9,8 +9,6 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface IProdutoSaldoRepository : IGenericoRepository<ProdutoSaldo>
     {
-        Task AtualizarAsync(ProdutoSaldo ProdutoSaldo);
-
         Task<IPagedList<ProdutoSaldo>> ListarTodosRegistrosAsync(int? pagina);
 
         Task<IEnumerable<ProdutoSaldo>> ListarTodosRegistrosAsync();

@@ -25,28 +25,7 @@ namespace GestorAutonomo.Repositories
         }
 
 
-        public async Task AtualizarAsync(UF uf)
-        {
-            if (!await _context.UF.AnyAsync(x => x.Id == uf.Id))
-            {
-                throw new NotFoundException("Codigo nao encontrado");
-            }
-            try
-            {
-                //_context.Update(uf);
-                _context.Entry(uf).State = EntityState.Modified;
-                _context.Entry(uf).Property(p => p.Data_Cadastro).IsModified = false;
-
-                await _context.SaveChangesAsync();
-            }
-            catch (DBConcurrencyException e)
-            {
-                throw new DBConcurrencyException(e.Message);
-            }
-
-        }
-
-       public async Task<IPagedList<UF>> ListarTodosRegistrosAsync(int? pagina, string pesquisa)
+        public async Task<IPagedList<UF>> ListarTodosRegistrosAsync(int? pagina, string pesquisa)
         {
 
             int numeroPagina = pagina ?? 1;

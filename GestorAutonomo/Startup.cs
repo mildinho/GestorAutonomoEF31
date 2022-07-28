@@ -48,6 +48,8 @@ namespace GestorAutonomo
             services.AddScoped<IImagemRepository, ImagemRepository>();
             //services.AddScoped<IDuplicataRepository, DuplicataRepository>();
             services.AddScoped<IProdutoSaldoRepository, ProdutoSaldoRepository>();
+            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddMemoryCache();
             services.AddSession(options =>

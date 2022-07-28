@@ -14,10 +14,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class UFController : Controller
     {
         private readonly IUFRepository _repositoryUF;
+        private readonly IUnitOfWork _uow;
 
-        public UFController(IUFRepository repositoryUF)
+        public UFController(IUFRepository repositoryUF, IUnitOfWork uow)
         {
             _repositoryUF = repositoryUF;
+            _uow = uow;
         }
 
 

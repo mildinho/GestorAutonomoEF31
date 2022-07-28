@@ -24,14 +24,16 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         private readonly ICategoriaProdutoRepository _repositoryCategoria;
         private readonly IImagemRepository _repositoryImagem;
         private readonly IProdutoSaldoRepository _repositoryProdutoSaldo;
+        private readonly IUnitOfWork _uow;
 
 
-        public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria, IImagemRepository imagem, IProdutoSaldoRepository produtoSaldo)
+        public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria, IImagemRepository imagem, IProdutoSaldoRepository produtoSaldo, IUnitOfWork uow)
         {
             _repositoryProduto = produto;
             _repositoryCategoria = categoria;
             _repositoryImagem = imagem;
             _repositoryProdutoSaldo = produtoSaldo;
+            _uow = uow;
 
 
         }

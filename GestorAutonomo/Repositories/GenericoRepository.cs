@@ -29,9 +29,11 @@ namespace GestorAutonomo.Repositories
 
 
 
-        public async Task<Tabela> SelecionarPorCodigoAsync(int Id)
+        public async Task AtualizarAsync(Tabela tabela)
         {
-            return await _context.Set<Tabela>().FindAsync(Id);
+             _context.Entry<Tabela>(tabela).State = EntityState.Modified;
+            _context.Entry<Tabela>(tabela).Property("Data_Cadastro").IsModified = false;
+            await _context.SaveChangesAsync();
         }
 
 
@@ -51,6 +53,13 @@ namespace GestorAutonomo.Repositories
             {
                 throw new IntegrityException(e.Message);
             }
+        }
+
+
+
+        public async Task<Tabela> SelecionarPorCodigoAsync(int Id)
+        {
+            return await _context.Set<Tabela>().FindAsync(Id);
         }
     }
 }

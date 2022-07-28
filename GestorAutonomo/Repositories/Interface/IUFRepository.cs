@@ -9,8 +9,6 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface IUFRepository : IGenericoRepository<UF>
     {
-        Task AtualizarAsync(UF uf);
-
         Task<IPagedList<UF>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 
         Task<IEnumerable<UF>> ListarTodosRegistrosAsync();

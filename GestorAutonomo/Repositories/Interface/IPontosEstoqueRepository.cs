@@ -10,8 +10,6 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface IPontosEstoqueRepository : IGenericoRepository<PontosEstoque>
     {
-        Task AtualizarAsync(PontosEstoque pontos);
-
         Task<IPagedList<PontosEstoque>> ListarTodosRegistrosAsync( int? pagina, string pesquisa);
 
         Task<IEnumerable<PontosEstoque>> ListarTodosRegistrosAsync();

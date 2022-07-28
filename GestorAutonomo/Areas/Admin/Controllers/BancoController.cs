@@ -16,10 +16,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class BancoController : Controller
     {
         private readonly IBancoRepository _repositoryBanco;
+        private readonly IUnitOfWork _uow;
+        
+        
 
-        public BancoController(IBancoRepository repositoryBanco)
+        public BancoController(IBancoRepository repositoryBanco, IUnitOfWork uow)
         {
             _repositoryBanco = repositoryBanco;
+            _uow = uow;
         }
 
 

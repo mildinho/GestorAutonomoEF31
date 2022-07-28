@@ -23,13 +23,15 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
         private readonly IParceiroRepository _repositoryParceiro;
         private readonly IUFRepository _repositoryUF;
+        private readonly IUnitOfWork _uow;
 
         private IEnumerable<UF> objUF;
 
-        public ClienteController(IParceiroRepository parceiroRepository, IUFRepository uf)
+        public ClienteController(IParceiroRepository parceiroRepository, IUFRepository uf, IUnitOfWork uow)
         {
             _repositoryParceiro = parceiroRepository;
             _repositoryUF = uf;
+            _uow = uow;
         }
 
 

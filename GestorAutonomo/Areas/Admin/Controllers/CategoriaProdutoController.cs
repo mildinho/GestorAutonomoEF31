@@ -20,11 +20,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class CategoriaProdutoController : Controller
     {
         private readonly ICategoriaProdutoRepository _repositoryCategoriaProduto;
+        private readonly IUnitOfWork _uow;
 
-        public CategoriaProdutoController(ICategoriaProdutoRepository categoriaProdutoRepository)
+        public CategoriaProdutoController(ICategoriaProdutoRepository categoriaProdutoRepository, IUnitOfWork uow)
         {
             _repositoryCategoriaProduto = categoriaProdutoRepository;
-          
+            _uow = uow;
         }
 
 

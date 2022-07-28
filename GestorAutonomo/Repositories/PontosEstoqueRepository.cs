@@ -24,32 +24,9 @@ namespace GestorAutonomo.Repositories
 
         }
 
-
-        public async Task AtualizarAsync(PontosEstoque pontos)
-        {
-            if (!await _context.PontosEstoque.AnyAsync(x => x.Id == pontos.Id))
-            {
-                throw new NotFoundException("Código não encontrado");
-            }
-            try
-            {
-                pontos = AjustarCampos(pontos);
-
-                //_context.Update(pontos);
-                _context.Entry(pontos).State = EntityState.Modified;
-                _context.Entry(pontos).Property(p => p.Data_Cadastro).IsModified = false;
-
-                await _context.SaveChangesAsync();
-            }
-            catch (DBConcurrencyException e)
-            {
-                throw new DBConcurrencyException(e.Message);
-            }
-
-        }
+       
 
 
- 
         public async Task<IPagedList<PontosEstoque>> ListarTodosRegistrosAsync( int? pagina, string pesquisa)
         {
 

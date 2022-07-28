@@ -15,11 +15,13 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     {
 
         private readonly IParceiroRepository _repositoryParceiro;
+        private readonly IUnitOfWork _uow;
 
 
-        public HabilitarParceiroController(IParceiroRepository parceiroRepository)
+        public HabilitarParceiroController(IParceiroRepository parceiroRepository, IUnitOfWork uow)
         {
             _repositoryParceiro = parceiroRepository;
+            _uow = uow;
 
         }
 

@@ -10,8 +10,6 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface IDuplicataRepository : IGenericoRepository<Duplicata>
     {
-      
-        Task AtualizarAsync(Duplicata duplicata);
 
         Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro, int? pagina);
 
@@ -23,5 +21,5 @@ namespace GestorAutonomo.Repositories.Interface
 
     }
 
-   
+
 }
