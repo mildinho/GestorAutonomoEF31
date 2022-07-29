@@ -83,9 +83,10 @@ namespace GestorAutonomo.Models
         public virtual ICollection<Imagem> Imagens { get; set; }
 
 
-        public Produto(Guid id, string referencia, string descricao)
+        public Produto(Guid empresa, string referencia, string descricao, Guid categoria)
         {
-            Id = id;
+            Id = Guid.NewGuid();
+            EmpresaId = empresa;
             Referencia = referencia;
             Descricao = descricao;
             Altura = 22;
@@ -95,7 +96,9 @@ namespace GestorAutonomo.Models
             PrecoVenda = 10;
             PrecoMedio = 5;
             PrecoCusto = 5;
-           
+            CategoriaProdutoId = categoria;
+
+
 
         }
 

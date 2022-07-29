@@ -17,21 +17,36 @@ namespace GestorAutonomo.Data
         public void Seed()
         {
 
+            Empresa empresaCadastrada;
+            CategoriaProduto categoriaCadastrada;
+            PontosEstoque pontosCadastrado;
+            Produto produtoCadastrado;
+
+
             if (!_context.Empresa.Any())
             {
 
-                Empresa empresa = new Empresa(985, "Fernando Casagrande", "Gestor autonomo", "1921013000","SP");
+                Empresa empresa = new Empresa(985, "Fernando Casagrande", "Gestor autonomo", "1921013000", "SP");
                 _context.Empresa.Add(empresa);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
-            Empresa empresaCadastrada = _context.Empresa.First();
 
+            empresaCadastrada = _context.Empresa.First();
 
+            if (!_context.TipoTelefone.Any())
+            {
+
+                TipoTelefone tipoTelefone01 = new TipoTelefone(empresaCadastrada.Id, "Celuar");
+                TipoTelefone tipoTelefone02 = new TipoTelefone(empresaCadastrada.Id, "Recado");
+                _context.TipoTelefone.AddRange(tipoTelefone01, tipoTelefone02);
+
+                _context.SaveChanges();
+            }
 
             if (!_context.UF.Any())
             {
 
-                UF uf01 = new UF(empresaCadastrada.Id,"AC", "ACRE");
+                UF uf01 = new UF(empresaCadastrada.Id, "AC", "ACRE");
                 UF uf02 = new UF(empresaCadastrada.Id, "AL", "ALAGOAS");
                 UF uf03 = new UF(empresaCadastrada.Id, "AP", "AMAPA");
                 UF uf04 = new UF(empresaCadastrada.Id, "AM", "AMAZONAS");
@@ -64,8 +79,10 @@ namespace GestorAutonomo.Data
                 _context.UF.AddRange(uf01, uf02, uf03, uf04, uf05, uf06, uf07, uf08, uf09, uf10);
                 _context.UF.AddRange(uf11, uf12, uf13, uf14, uf15, uf16, uf17, uf18, uf19, uf20);
                 _context.UF.AddRange(uf21, uf22, uf23, uf24, uf25, uf26, uf27);
+
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+
 
 
 
@@ -73,10 +90,11 @@ namespace GestorAutonomo.Data
             if (!_context.Login.Any())
             {
 
-                Login login = new Login("fer@uol.com.br", "123456");
+                Login login = new Login(empresaCadastrada.Id, "fer@uol.com.br", "123456");
                 _context.Login.Add(login);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+
 
 
 
@@ -86,67 +104,86 @@ namespace GestorAutonomo.Data
             if (!_context.PontosEstoque.Any())
             {
 
-                PontosEstoque pontosEstoque01 = new PontosEstoque("Picking");
-                PontosEstoque pontosEstoque02 = new PontosEstoque("Apoio");
-                PontosEstoque pontosEstoque03 = new PontosEstoque("Porta Palete");
+                PontosEstoque pontosEstoque01 = new PontosEstoque(empresaCadastrada.Id, "Picking");
+                PontosEstoque pontosEstoque02 = new PontosEstoque(empresaCadastrada.Id, "Apoio");
+                PontosEstoque pontosEstoque03 = new PontosEstoque(empresaCadastrada.Id, "Porta Palete");
                 _context.PontosEstoque.AddRange(pontosEstoque01, pontosEstoque02, pontosEstoque03);
+
+                _context.SaveChanges();
+
+
             }
-            _context.SaveChanges();
+
 
             if (!_context.Banco.Any())
             {
 
-                Banco bc01 = new Banco("237", "BRADESCO");
-                Banco bc02 = new Banco("341", "ITAU");
-                Banco bc03 = new Banco("001", "BRASIL");
-                Banco bc04 = new Banco("999", "CARTEIRA");
+                Banco bc01 = new Banco(empresaCadastrada.Id, "237", "BRADESCO");
+                Banco bc02 = new Banco(empresaCadastrada.Id, "341", "ITAU");
+                Banco bc03 = new Banco(empresaCadastrada.Id, "001", "BRASIL");
+                Banco bc04 = new Banco(empresaCadastrada.Id, "999", "CARTEIRA");
 
                 _context.Banco.AddRange(bc01, bc02, bc03, bc04);
+
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+
 
 
             if (!_context.CategoriaProduto.Any())
             {
 
-                CategoriaProduto categoriaProduto01 = new CategoriaProduto(Guid.Parse("1"), "Livros", null);
-                CategoriaProduto categoriaProduto02 = new CategoriaProduto(Guid.Parse("2"), "Livros Terror", Guid.Parse("1"));
-                CategoriaProduto categoriaProduto03 = new CategoriaProduto(Guid.Parse("3"), "Livros Romance", Guid.Parse("1"));
-
+                CategoriaProduto categoriaProduto01 = new CategoriaProduto(empresaCadastrada.Id, "Livros", null);
                 _context.CategoriaProduto.AddRange(categoriaProduto01);
+                _context.SaveChanges();
+
+                categoriaCadastrada = _context.CategoriaProduto.First(x => x.Descricao == "Livros");
+
+                CategoriaProduto categoriaProduto02 = new CategoriaProduto(empresaCadastrada.Id, "Livros Terror", categoriaCadastrada.CategoriaPaiId);
+                CategoriaProduto categoriaProduto03 = new CategoriaProduto(empresaCadastrada.Id, "Livros Romance", categoriaCadastrada.CategoriaPaiId);
+
+
                 _context.CategoriaProduto.AddRange(categoriaProduto02);
                 _context.CategoriaProduto.AddRange(categoriaProduto03);
-
+                _context.SaveChanges();
 
             }
-            _context.SaveChanges();
+
+            categoriaCadastrada = _context.CategoriaProduto.First(x => x.Descricao == "Livros");
 
 
             if (!_context.Produto.Any())
             {
 
-                Produto Produto01 = new Produto(Guid.Parse("1"), "CAR80", "LUBRIFICANTE AUTOMOTIVO");
-                Produto Produto02 = new Produto(Guid.Parse("2"), "ZM501", "PASTILHAS DE FREIO JUPITER");
+                Produto Produto01 = new Produto(empresaCadastrada.Id, "CAR80", "LUBRIFICANTE AUTOMOTIVO", categoriaCadastrada.Id);
+                Produto Produto02 = new Produto(empresaCadastrada.Id, "ZM501", "PASTILHAS DE FREIO JUPITER", categoriaCadastrada.Id);
 
                 _context.Produto.AddRange(Produto01, Produto02);
 
-
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+
 
 
             if (!_context.ProdutoSaldo.Any())
             {
+                produtoCadastrado = _context.Produto.First(x => x.Referencia == "CAR80");
+                pontosCadastrado = _context.PontosEstoque.First(x => x.Descricao == "Picking");
+                ProdutoSaldo ProdutoSaldo01 = new ProdutoSaldo(empresaCadastrada.Id, produtoCadastrado.Id, pontosCadastrado.Id, 10, 1);
 
-                ProdutoSaldo ProdutoSaldo01 = new ProdutoSaldo(Guid.Parse("1"), Guid.Parse("1"), 10, 1);
-                ProdutoSaldo ProdutoSaldo02 = new ProdutoSaldo(Guid.Parse("1"), Guid.Parse("2"), 0, 0);
-                ProdutoSaldo ProdutoSaldo03 = new ProdutoSaldo(Guid.Parse("2"), Guid.Parse("1"), 55, 55);
+                pontosCadastrado = _context.PontosEstoque.First(x => x.Descricao == "Apoio");
+                ProdutoSaldo ProdutoSaldo02 = new ProdutoSaldo(empresaCadastrada.Id, produtoCadastrado.Id, pontosCadastrado.Id, 0, 0);
+
+
+                produtoCadastrado = _context.Produto.First(x => x.Referencia == "ZM501");
+                pontosCadastrado = _context.PontosEstoque.First(x => x.Descricao == "Apoio");
+                ProdutoSaldo ProdutoSaldo03 = new ProdutoSaldo(empresaCadastrada.Id, produtoCadastrado.Id, pontosCadastrado.Id, 55, 55);
 
                 _context.ProdutoSaldo.AddRange(ProdutoSaldo01, ProdutoSaldo02, ProdutoSaldo03);
 
-
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
+
 
             //if (!_context.Duplicatas.Any())
             //{

@@ -31,9 +31,10 @@ namespace GestorAutonomo.Models
         {
         }
 
-        public Login(string eMail, string password)
+        public Login(Guid empresa, string eMail, string password)
         {
             Id = Guid.NewGuid();
+            EmpresaId = empresa;
             EMail = eMail;
             Password = password;
 

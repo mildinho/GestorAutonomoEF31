@@ -28,9 +28,10 @@ namespace GestorAutonomo.Models
         {
 
         }
-        public Banco(string codigo, string descricao)
+        public Banco(Guid empresa, string codigo, string descricao)
         {
             Id = Guid.NewGuid();
+            EmpresaId = empresa;
             Codigo = codigo;
             Descricao = descricao;
         }

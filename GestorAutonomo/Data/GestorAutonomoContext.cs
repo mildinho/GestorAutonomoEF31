@@ -26,7 +26,10 @@ namespace GestorAutonomo.Data
         public DbSet<ProdutoSaldo> ProdutoSaldo { get; set; }
         public DbSet<Imagem> Imagems { get; set; }
         public DbSet<Duplicata> Duplicatas { get; set; }
-
+      
+        public DbSet<TipoEmail> TipoEmail { get; set; }
+        public DbSet<TipoLogradouro> TipoLogradouro { get; set; }
+        public DbSet<TipoTelefone> TipoTelefone { get; set; }
 
     }
 }

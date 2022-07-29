@@ -44,9 +44,10 @@ namespace GestorAutonomo.Models
         }
 
 
-        public ProdutoSaldo(Guid id, Guid PontoEstoque, int SaldoInicial, int ReservaInicial)
+        public ProdutoSaldo(Guid empresa, Guid produto, Guid PontoEstoque, int SaldoInicial, int ReservaInicial)
         {
-            ProdutoId = id;
+            EmpresaId = empresa;
+            ProdutoId = produto;
             PontosEstoqueId = PontoEstoque;
             Saldo = SaldoInicial;
             Reserva = ReservaInicial;

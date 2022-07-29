@@ -32,9 +32,10 @@ namespace GestorAutonomo.Models
         }
 
 
-        public CategoriaProduto(Guid id, string descricao, Guid? categoriaPaiId)
+        public CategoriaProduto(Guid empresa, string descricao, Guid? categoriaPaiId)
         {
-            Id = id;
+            Id = Guid.NewGuid(); ;
+            EmpresaId = empresa;
             Descricao = descricao;
             CategoriaPaiId = categoriaPaiId;
            
