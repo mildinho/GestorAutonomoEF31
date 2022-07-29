@@ -1,6 +1,7 @@
 ﻿using GestorAutonomo.Data;
 using GestorAutonomo.Models;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,7 +24,7 @@ namespace GestorAutonomo.Repositories
             _context.SaveChanges();
         }
 
-        public void CadastrarImagens(List<Imagem> ListaImagens, int ProdutoId)
+        public void CadastrarImagens(List<Imagem> ListaImagens, Guid ProdutoId)
         {
             if (ListaImagens != null && ListaImagens.Count > 0)
             {
@@ -37,14 +38,14 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public void Excluir(int Id)
+        public void Excluir(Guid Id)
         {
             Imagem obj = _context.Imagems.Find(Id);
             _context.Remove(obj);
             _context.SaveChanges();
         }
 
-        public void ExcluirImagensProduto(int ProdutoId)
+        public void ExcluirImagensProduto(Guid ProdutoId)
         {
             List<Imagem> obj = _context.Imagems.Where(a => a.ProdutoId == ProdutoId).ToList();
 

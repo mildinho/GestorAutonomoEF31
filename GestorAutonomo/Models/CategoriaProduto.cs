@@ -1,4 +1,5 @@
 ﻿using GestorAutonomo.Biblioteca.Lang;
+using GestorAutonomo.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,13 +10,10 @@ using System.Threading.Tasks;
 namespace GestorAutonomo.Models
 {
     [Table("CS_CATEGORIAPRODUTO")]
-    public class CategoriaProduto
+    public class CategoriaProduto : ModelBase
     {
 
-        [Display(Name = "Código")]
-        public int Id { get; set; }
-
-
+    
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [MinLength(4, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E002")]
         [Display(Name = "Nome")]
@@ -23,31 +21,18 @@ namespace GestorAutonomo.Models
 
 
         [Display(Name = "Categoria Pai")]
-        public int? CategoriaPaiId { get; set; }
+        public Guid? CategoriaPaiId { get; set; }
 
         [ForeignKey("CategoriaPaiId")]
         public virtual CategoriaProduto CategoriaPai { get; set; }
 
-        [Display(Name = "Data de Cadastro")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime Data_Cadastro { get; set; }
-
-
-        [Display(Name = "Data de Alteração")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Data_Alteracao { get; set; }
-
-
+      
        public CategoriaProduto()
         {
         }
 
 
-        public CategoriaProduto(int id, string descricao, int? categoriaPaiId)
+        public CategoriaProduto(Guid id, string descricao, Guid? categoriaPaiId)
         {
             Id = id;
             Descricao = descricao;

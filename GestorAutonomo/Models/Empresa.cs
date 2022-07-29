@@ -13,7 +13,8 @@ namespace GestorAutonomo.Models
         }
 
         [Key]
-        public int Id { get; set; }
+        [Display(Name = "Código")]
+        public Guid Id { get; set; }
 
         [Display(Name = "CNPJ / CNPJ")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
@@ -101,24 +102,20 @@ namespace GestorAutonomo.Models
 
 
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
-        [ForeignKey("UF")]
         [Display(Name = "UF")] 
-        public int UFId { get; set; }
+        public string UF { get; set; }
 
-        public virtual UF UF { get; set; }
-
-
+        
 
 
-
-        public Empresa(int id, double cNPJ_CPF, string nome, string fantasia, int ufid, string telefone)
+        public Empresa( double cNPJ_CPF, string nome, string fantasia, string telefone, string uf)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             CNPJ_CPF = cNPJ_CPF;
             Nome = nome;
             Fantasia = fantasia;
-            UFId = ufid;
             TelefonePrincipal = telefone;
+            UF = uf;
         }
     }
 }

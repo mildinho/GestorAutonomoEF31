@@ -12,9 +12,9 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task<IPagedList<CategoriaProduto>> ListarTodosRegistrosAsync(int? pagina, string pesquisa);
 
-        Task<List<CategoriaProduto>> ObterCategoriasPorCategoriaPai(int? Id);
+        Task<List<CategoriaProduto>> ObterCategoriasPorCategoriaPai(Guid? Id);
 
-        Task<List<Produto>> ObterProdutosPorCategoria(int Id);
+        Task<List<Produto>> ObterProdutosPorCategoria(Guid Id);
 
         Task<IEnumerable<CategoriaProduto>> ListarTodosRegistrosAsync();
 

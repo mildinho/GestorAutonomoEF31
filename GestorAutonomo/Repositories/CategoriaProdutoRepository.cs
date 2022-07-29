@@ -56,12 +56,12 @@ namespace GestorAutonomo.Repositories
             return categoria;
         }
 
-        public async Task<List<CategoriaProduto>> ObterCategoriasPorCategoriaPai(int? Id)
+        public async Task<List<CategoriaProduto>> ObterCategoriasPorCategoriaPai(Guid? Id)
         {
             return await _context.CategoriaProduto.Where(obj => obj.CategoriaPaiId == Id).ToListAsync();
         }
 
-        public async Task<List<Produto>> ObterProdutosPorCategoria(int Id)
+        public async Task<List<Produto>> ObterProdutosPorCategoria(Guid Id)
         {
             return await _context.Produto.Where(obj => obj.CategoriaProdutoId == Id).ToListAsync();
         }

@@ -55,7 +55,7 @@ namespace GestorAutonomo.Repositories
         }
   
 
-        public async Task<List<ProdutoSaldo>> ObterProdutosPorPonto(int Id, bool SomenteComSaldo )
+        public async Task<List<ProdutoSaldo>> ObterProdutosPorPonto(Guid Id, bool SomenteComSaldo )
         {
             if (SomenteComSaldo)
                 return await _context.ProdutoSaldo.
@@ -66,7 +66,7 @@ namespace GestorAutonomo.Repositories
             return await _context.ProdutoSaldo.Where(obj => obj.PontosEstoqueId == Id).ToListAsync();
         }
 
-        public async Task<List<ProdutoSaldo>> ObterPontosPorProduto(int Id, bool SomenteComSaldo)
+        public async Task<List<ProdutoSaldo>> ObterPontosPorProduto(Guid Id, bool SomenteComSaldo)
         {
             if (SomenteComSaldo)
                 return await _context.ProdutoSaldo.

@@ -165,3 +165,7 @@ namespace GestorAutonomo
         }
     }
 }
+
+//TODO: - CRIAÇÃO DESENVOLVIMENTO DA UNITOFWORK
+//TODO: - Fazer a tratativa de foreingkey ( ou seja) nao deixar deletar um Ponto de Estoque que tenha um produto vinculado e Saldo.
+//TODO: - No Cadastro de Produto - Exibir os Pontos de Estoque para a Peça;

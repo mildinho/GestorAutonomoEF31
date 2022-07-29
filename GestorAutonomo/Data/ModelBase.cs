@@ -16,6 +16,7 @@ namespace GestorAutonomo.Data
 
         [Required]
         [Display(Name = "Empresa")]
+        public Guid EmpresaId { get; set; }
         public Empresa Empresa { get; set; }
 
         [Display(Name = "Data de Cadastro")]

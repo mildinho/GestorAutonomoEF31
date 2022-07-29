@@ -12,8 +12,8 @@ namespace GestorAutonomo.Repositories.Interface
 
         Task AtualizarAsync(Tabela tabela);
 
-        Task DeletarAsync(int Id);
+        Task DeletarAsync(Guid Id);
 
-        Task<Tabela> SelecionarPorCodigoAsync(int Id);
+        Task<Tabela> SelecionarPorCodigoAsync(Guid Id);
     }
 }

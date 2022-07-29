@@ -44,12 +44,6 @@ namespace GestorAutonomo.Repositories
         }
 
 
-        //public async Task<IEnumerable<Banco>> ListarTodosRegistrosAsync()
-        //{
-        //    return await _context.Banco.ToListAsync();
-
-        //}
-
        
     }
 

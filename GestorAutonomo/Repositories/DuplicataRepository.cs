@@ -26,7 +26,7 @@ namespace GestorAutonomo.Repositories
 
      
 
-        public async Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro, int? pagina)
+        public async Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, Guid IdParceiro, int? pagina)
         {
 
             int numeroPagina = pagina ?? 1;
@@ -38,7 +38,7 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro)
+        public async Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, Guid IdParceiro)
         {
             var objConsulta = _context.Duplicatas.Where(x => x.ParceiroId == IdParceiro).AsQueryable();
             

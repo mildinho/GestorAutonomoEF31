@@ -1,4 +1,5 @@
 ﻿using GestorAutonomo.Biblioteca.Lang;
+using GestorAutonomo.Data;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,8 @@ using System.Threading.Tasks;
 namespace GestorAutonomo.Models
 {
     [Table("CS_PARCEIRO")]
-    public class Parceiro
+    public class Parceiro : ModelBase
     {
-
-        [Key]
-        [Display(Name = "Código")]
-        public int Id { get; set; }
 
         [Display(Name = "Cliente")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
@@ -49,20 +46,7 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [MinLength(3, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E002")]
         public string Fantasia { get; set; }
-        [Display(Name = "Data de Cadastro")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime Data_Cadastro { get; set; }
-
-        [Display(Name = "Data de Alteração")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Data_Alteracao { get; set; }
-
-
-
+      
 
         [Display(Name = "Endereço")]
         public string Endereco { get; set; }
@@ -111,7 +95,7 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [ForeignKey("UF")]
         [Display(Name = "UF")]
-        public int UFId { get; set; }
+        public Guid UFId { get; set; }
 
         public virtual UF UF { get; set; }
 

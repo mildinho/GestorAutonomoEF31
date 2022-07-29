@@ -102,7 +102,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Editar(int Id)
+        public async Task<IActionResult> Editar(Guid Id)
         {
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
@@ -121,7 +121,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Consultar(int Id)
+        public async Task<IActionResult> Consultar(Guid Id)
         {
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
@@ -142,7 +142,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Deletar(int Id)
+        public async Task<IActionResult> Deletar(Guid Id)
         {
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);

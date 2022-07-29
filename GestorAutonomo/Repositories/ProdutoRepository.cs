@@ -57,7 +57,7 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task<Produto> SelecionarPorCodigoAsync(int? Id)
+        public async Task<Produto> SelecionarPorCodigoAsync(Guid? Id)
         {
             return await _context.Produto.
                 Include(obj => obj.Imagens).

@@ -5,6 +5,7 @@ using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -96,7 +97,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Editar(int Id)
+        public async Task<IActionResult> Editar(Guid Id)
         {
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Update);
@@ -111,7 +112,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Consultar(int Id)
+        public async Task<IActionResult> Consultar(Guid Id)
         {
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Read);
 
@@ -128,7 +129,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Deletar(int Id)
+        public async Task<IActionResult> Deletar(Guid Id)
         {
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Delete);
 

@@ -1,4 +1,5 @@
 ﻿using GestorAutonomo.Biblioteca.Lang;
+using GestorAutonomo.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,13 +10,8 @@ using System.Threading.Tasks;
 namespace GestorAutonomo.Models
 {
     [Table("CS_PRODUTO")]
-    public class Produto
+    public class Produto : ModelBase
     {
-
-        [Key]
-        [Display(Name = "Código")]
-        public int Id { get; set; }
-
 
         [Display(Name = "Referência")]
         [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
@@ -27,19 +23,6 @@ namespace GestorAutonomo.Models
         public string Descricao { get; set; }
 
        
-        [Display(Name = "Data de Cadastro")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime Data_Cadastro { get; set; }
-
-        [Display(Name = "Data de Alteração")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Data_Alteracao { get; set; }
-
-
         [Display(Name = "Altura")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [Range(2, 105, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E006")]
@@ -90,7 +73,7 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [ForeignKey("CategoriaProduto")]
         [Display(Name = "Categoria")]
-        public int CategoriaProdutoId { get; set; }
+        public Guid CategoriaProdutoId { get; set; }
         public virtual CategoriaProduto CategoriaProduto { get; set; }
         
         
@@ -100,7 +83,7 @@ namespace GestorAutonomo.Models
         public virtual ICollection<Imagem> Imagens { get; set; }
 
 
-        public Produto(int id, string referencia, string descricao)
+        public Produto(Guid id, string referencia, string descricao)
         {
             Id = id;
             Referencia = referencia;
@@ -112,7 +95,7 @@ namespace GestorAutonomo.Models
             PrecoVenda = 10;
             PrecoMedio = 5;
             PrecoCusto = 5;
-            CategoriaProdutoId = 2;
+           
 
         }
 

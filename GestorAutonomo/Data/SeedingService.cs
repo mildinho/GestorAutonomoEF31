@@ -17,37 +17,47 @@ namespace GestorAutonomo.Data
         public void Seed()
         {
 
+            if (!_context.Empresa.Any())
+            {
+
+                Empresa empresa = new Empresa(985, "Fernando Casagrande", "Gestor autonomo", "1921013000","SP");
+                _context.Empresa.Add(empresa);
+            }
+            _context.SaveChanges();
+            Empresa empresaCadastrada = _context.Empresa.First();
+
+
 
             if (!_context.UF.Any())
             {
 
-                UF uf01 = new UF(1, "AC", "ACRE");
-                UF uf02 = new UF(2, "AL", "ALAGOAS");
-                UF uf03 = new UF(3, "AP", "AMAPA");
-                UF uf04 = new UF(4, "AM", "AMAZONAS");
-                UF uf05 = new UF(5, "BA", "BAHIA");
-                UF uf06 = new UF(6, "CE", "CEARA");
-                UF uf07 = new UF(7, "ES", "ESPIRITO SANTO");
-                UF uf08 = new UF(8, "GO", "GOIAS");
-                UF uf09 = new UF(9, "MA", "MARANHAO");
-                UF uf10 = new UF(10, "MT", "MATO GROSSO");
-                UF uf11 = new UF(11, "MS", "MATO GROSSO DO SUL");
-                UF uf12 = new UF(12, "MG", "MINAS GERAIS");
-                UF uf13 = new UF(13, "PA", "PARA");
-                UF uf14 = new UF(14, "PB", "PARAIBA");
-                UF uf15 = new UF(15, "PR", "PARANA");
-                UF uf16 = new UF(16, "PE", "PERNAMBUCO");
-                UF uf17 = new UF(17, "PI", "PIAUI");
-                UF uf18 = new UF(18, "RJ", "RIO DE JANEIRO");
-                UF uf19 = new UF(19, "RN", "RIO GRANDE DO NORTE");
-                UF uf20 = new UF(20, "RS", "RIO GRANDE DO SUL");
-                UF uf21 = new UF(21, "RO", "RONDONIA");
-                UF uf22 = new UF(22, "RR", "RORAIMA");
-                UF uf23 = new UF(23, "SC", "SANTA CATARINA");
-                UF uf24 = new UF(24, "SP", "SAO PAULO");
-                UF uf25 = new UF(25, "SE", "SERGIPE");
-                UF uf26 = new UF(26, "TO", "TOCANTINS");
-                UF uf27 = new UF(27, "DF", "DISTRITO FEDERAL");
+                UF uf01 = new UF(empresaCadastrada.Id,"AC", "ACRE");
+                UF uf02 = new UF(empresaCadastrada.Id, "AL", "ALAGOAS");
+                UF uf03 = new UF(empresaCadastrada.Id, "AP", "AMAPA");
+                UF uf04 = new UF(empresaCadastrada.Id, "AM", "AMAZONAS");
+                UF uf05 = new UF(empresaCadastrada.Id, "BA", "BAHIA");
+                UF uf06 = new UF(empresaCadastrada.Id, "CE", "CEARA");
+                UF uf07 = new UF(empresaCadastrada.Id, "ES", "ESPIRITO SANTO");
+                UF uf08 = new UF(empresaCadastrada.Id, "GO", "GOIAS");
+                UF uf09 = new UF(empresaCadastrada.Id, "MA", "MARANHAO");
+                UF uf10 = new UF(empresaCadastrada.Id, "MT", "MATO GROSSO");
+                UF uf11 = new UF(empresaCadastrada.Id, "MS", "MATO GROSSO DO SUL");
+                UF uf12 = new UF(empresaCadastrada.Id, "MG", "MINAS GERAIS");
+                UF uf13 = new UF(empresaCadastrada.Id, "PA", "PARA");
+                UF uf14 = new UF(empresaCadastrada.Id, "PB", "PARAIBA");
+                UF uf15 = new UF(empresaCadastrada.Id, "PR", "PARANA");
+                UF uf16 = new UF(empresaCadastrada.Id, "PE", "PERNAMBUCO");
+                UF uf17 = new UF(empresaCadastrada.Id, "PI", "PIAUI");
+                UF uf18 = new UF(empresaCadastrada.Id, "RJ", "RIO DE JANEIRO");
+                UF uf19 = new UF(empresaCadastrada.Id, "RN", "RIO GRANDE DO NORTE");
+                UF uf20 = new UF(empresaCadastrada.Id, "RS", "RIO GRANDE DO SUL");
+                UF uf21 = new UF(empresaCadastrada.Id, "RO", "RONDONIA");
+                UF uf22 = new UF(empresaCadastrada.Id, "RR", "RORAIMA");
+                UF uf23 = new UF(empresaCadastrada.Id, "SC", "SANTA CATARINA");
+                UF uf24 = new UF(empresaCadastrada.Id, "SP", "SAO PAULO");
+                UF uf25 = new UF(empresaCadastrada.Id, "SE", "SERGIPE");
+                UF uf26 = new UF(empresaCadastrada.Id, "TO", "TOCANTINS");
+                UF uf27 = new UF(empresaCadastrada.Id, "DF", "DISTRITO FEDERAL");
 
 
 
@@ -63,7 +73,7 @@ namespace GestorAutonomo.Data
             if (!_context.Login.Any())
             {
 
-                Login login = new Login(1, "fer@uol.com.br", "123456");
+                Login login = new Login("fer@uol.com.br", "123456");
                 _context.Login.Add(login);
             }
             _context.SaveChanges();
@@ -71,21 +81,14 @@ namespace GestorAutonomo.Data
 
 
 
-            if (!_context.Empresa.Any())
-            {
-
-                Empresa empresa = new Empresa(1, 985, "Fernando Casagrande", "Gestor autonomo", 1, "1921013000");
-                _context.Empresa.Add(empresa);
-            }
-            _context.SaveChanges();
 
 
             if (!_context.PontosEstoque.Any())
             {
 
-                PontosEstoque pontosEstoque01 = new PontosEstoque(1, "Picking");
-                PontosEstoque pontosEstoque02 = new PontosEstoque(2, "Apoio");
-                PontosEstoque pontosEstoque03 = new PontosEstoque(3, "Porta Palete");
+                PontosEstoque pontosEstoque01 = new PontosEstoque("Picking");
+                PontosEstoque pontosEstoque02 = new PontosEstoque("Apoio");
+                PontosEstoque pontosEstoque03 = new PontosEstoque("Porta Palete");
                 _context.PontosEstoque.AddRange(pontosEstoque01, pontosEstoque02, pontosEstoque03);
             }
             _context.SaveChanges();
@@ -93,10 +96,10 @@ namespace GestorAutonomo.Data
             if (!_context.Banco.Any())
             {
 
-                Banco bc01 = new Banco(1, "237", "BRADESCO");
-                Banco bc02 = new Banco(2, "341", "ITAU");
-                Banco bc03 = new Banco(3, "001", "BRASIL");
-                Banco bc04 = new Banco(4, "999", "CARTEIRA");
+                Banco bc01 = new Banco("237", "BRADESCO");
+                Banco bc02 = new Banco("341", "ITAU");
+                Banco bc03 = new Banco("001", "BRASIL");
+                Banco bc04 = new Banco("999", "CARTEIRA");
 
                 _context.Banco.AddRange(bc01, bc02, bc03, bc04);
             }
@@ -106,9 +109,9 @@ namespace GestorAutonomo.Data
             if (!_context.CategoriaProduto.Any())
             {
 
-                CategoriaProduto categoriaProduto01 = new CategoriaProduto(1, "Livros", null);
-                CategoriaProduto categoriaProduto02 = new CategoriaProduto(2, "Livros Terror", 1);
-                CategoriaProduto categoriaProduto03 = new CategoriaProduto(3, "Livros Romance", 1);
+                CategoriaProduto categoriaProduto01 = new CategoriaProduto(Guid.Parse("1"), "Livros", null);
+                CategoriaProduto categoriaProduto02 = new CategoriaProduto(Guid.Parse("2"), "Livros Terror", Guid.Parse("1"));
+                CategoriaProduto categoriaProduto03 = new CategoriaProduto(Guid.Parse("3"), "Livros Romance", Guid.Parse("1"));
 
                 _context.CategoriaProduto.AddRange(categoriaProduto01);
                 _context.CategoriaProduto.AddRange(categoriaProduto02);
@@ -122,8 +125,8 @@ namespace GestorAutonomo.Data
             if (!_context.Produto.Any())
             {
 
-                Produto Produto01 = new Produto(1, "CAR80", "LUBRIFICANTE AUTOMOTIVO");
-                Produto Produto02 = new Produto(2, "ZM501", "PASTILHAS DE FREIO JUPITER");
+                Produto Produto01 = new Produto(Guid.Parse("1"), "CAR80", "LUBRIFICANTE AUTOMOTIVO");
+                Produto Produto02 = new Produto(Guid.Parse("2"), "ZM501", "PASTILHAS DE FREIO JUPITER");
 
                 _context.Produto.AddRange(Produto01, Produto02);
 
@@ -135,10 +138,10 @@ namespace GestorAutonomo.Data
             if (!_context.ProdutoSaldo.Any())
             {
 
-                ProdutoSaldo ProdutoSaldo01 = new ProdutoSaldo(1, 1, 10, 1);
-                ProdutoSaldo ProdutoSaldo02 = new ProdutoSaldo(1, 2, 0, 0);
-                ProdutoSaldo ProdutoSaldo03 = new ProdutoSaldo(2, 1, 55, 55);
-                
+                ProdutoSaldo ProdutoSaldo01 = new ProdutoSaldo(Guid.Parse("1"), Guid.Parse("1"), 10, 1);
+                ProdutoSaldo ProdutoSaldo02 = new ProdutoSaldo(Guid.Parse("1"), Guid.Parse("2"), 0, 0);
+                ProdutoSaldo ProdutoSaldo03 = new ProdutoSaldo(Guid.Parse("2"), Guid.Parse("1"), 55, 55);
+
                 _context.ProdutoSaldo.AddRange(ProdutoSaldo01, ProdutoSaldo02, ProdutoSaldo03);
 
 

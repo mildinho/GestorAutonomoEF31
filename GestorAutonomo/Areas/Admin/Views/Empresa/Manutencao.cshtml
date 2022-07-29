@@ -89,11 +89,9 @@
         <div class="col">
 
             <div class="form-group">
-                <label asp-for="UFId"></label>
-                <select asp-for="UFId" class="form-control" asp-items="@ViewBag.UF">
-                    <option value="0">Selecione</option>
-                </select>
-                <span asp-validation-for="UFId" class="text-danger"></span>
+                <label asp-for="UF"></label>
+                <input asp-for="UF" class="form-control" placeholder="Informe a UF">
+                <span asp-validation-for="UF" class="text-danger"></span>
             </div>
 
         </div>
@@ -183,7 +181,7 @@
         <br />
 
         <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Salvar</button>
-       
+
         <a asp-action="Index" asp-controller="Painel" class="btn btn-outline-info"><i class="fas fa-step-backward"></i> Voltar</a>
 
 

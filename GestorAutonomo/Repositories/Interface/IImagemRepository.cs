@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GestorAutonomo.Models
 {
@@ -6,12 +7,12 @@ namespace GestorAutonomo.Models
     {
 
         void Cadastrar(Imagem imagem);
-        void CadastrarImagens(List<Imagem> ListaImagens, int ProdutoId);
+        void CadastrarImagens(List<Imagem> ListaImagens, Guid ProdutoId);
 
 
-        void Excluir(int Id);
+        void Excluir(Guid Id);
 
-        void ExcluirImagensProduto(int ProdutoId);
+        void ExcluirImagensProduto(Guid ProdutoId);
 
 
     }

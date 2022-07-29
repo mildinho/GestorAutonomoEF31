@@ -1,4 +1,5 @@
 ﻿using GestorAutonomo.Biblioteca.Lang;
+using GestorAutonomo.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,14 +10,10 @@ using System.Threading.Tasks;
 namespace GestorAutonomo.Models
 {
     [Table("CS_DUPLICATA")]
-    public class Duplicata
+    public class Duplicata : ModelBase
     {
 
-        [Key]
-        [Display(Name = "Código")]
-        public int Id { get; set; }
-
-        [Display(Name = "Tipo de Duplicata")]
+       [Display(Name = "Tipo de Duplicata")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         public TipoDuplicata TipoDuplicata { get; set; } = 0;
 
@@ -31,7 +28,7 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [ForeignKey("Parceiro")]
         [Display(Name = "Código do Parceiro")]
-        public int ParceiroId { get; set; }
+        public Guid ParceiroId { get; set; }
         public virtual Parceiro Parceiro { get; set; }
 
 
@@ -70,7 +67,7 @@ namespace GestorAutonomo.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         [ForeignKey("Banco")]
         [Display(Name = "Banco")]
-        public int BancoId { get; set; }
+        public Guid BancoId { get; set; }
         public virtual Banco Banco { get; set; }
 
         [Display(Name = "Histórico")]
@@ -90,18 +87,7 @@ namespace GestorAutonomo.Models
         public DateTime Data_Registro_Banco { get; set; }
 
 
-        [Display(Name = "Data de Cadastro")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime Data_Cadastro { get; set; }
-
-        [Display(Name = "Data de Alteração")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Data_Alteracao { get; set; }
-
+  
         //public Duplicata(int id, TipoDuplicata tipo, string documento, int parcela, int IdParceiro)
         //{
         //    Id = id;

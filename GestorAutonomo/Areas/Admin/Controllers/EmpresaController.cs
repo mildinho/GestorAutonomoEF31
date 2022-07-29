@@ -62,7 +62,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Atualizar([FromForm] Empresa empresa , int id)
+        public async Task<IActionResult> Atualizar([FromForm] Empresa empresa , Guid id)
         {         
             if (ModelState.IsValid)
             {

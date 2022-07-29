@@ -76,7 +76,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Consultar(int Id)
+        public async Task<IActionResult> Consultar(Guid Id)
         {
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
@@ -93,7 +93,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Manutencao(int Id, int tipo, int LigadoDesligado)
+        public async Task<IActionResult> Manutencao(Guid Id, int tipo, int LigadoDesligado)
         {
 
             var parceiro = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);

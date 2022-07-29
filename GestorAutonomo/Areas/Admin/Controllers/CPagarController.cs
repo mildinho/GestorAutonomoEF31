@@ -70,7 +70,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         }
 
 
-        public async Task<IActionResult> Historico(int IdParceiro)
+        public async Task<IActionResult> Historico(Guid IdParceiro)
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
 

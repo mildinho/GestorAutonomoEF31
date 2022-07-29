@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorAutonomo.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,13 +9,10 @@ using System.Threading.Tasks;
 namespace GestorAutonomo.Models
 {
     [Table("CS_BANCO")]
-    public class Banco
+    public class Banco : ModelBase 
     {
 
-        [Key]
-        [Display(Name = "Código")]
-        public int Id { get; set; }
-
+   
 
         [Display(Name = "Banco")]
         [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
@@ -26,27 +24,13 @@ namespace GestorAutonomo.Models
         public string Descricao { get; set; }
 
 
-        [Display(Name = "Data de Cadastro")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime Data_Cadastro { get; set; }
-
-
-        [Display(Name = "Data de Alteração")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Data_Alteracao { get; set; }
-
-
-        public Banco()
+           public Banco()
         {
 
         }
-        public Banco(int id, string codigo, string descricao)
+        public Banco(string codigo, string descricao)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             Codigo = codigo;
             Descricao = descricao;
         }

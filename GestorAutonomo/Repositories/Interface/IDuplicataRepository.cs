@@ -11,9 +11,9 @@ namespace GestorAutonomo.Repositories.Interface
     public interface IDuplicataRepository : IGenericoRepository<Duplicata>
     {
 
-        Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro, int? pagina);
+        Task<IPagedList<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, Guid IdParceiro, int? pagina);
 
-        Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, int IdParceiro);
+        Task<IEnumerable<Duplicata>> ListarTodosRegistrosAsync(TipoDuplicata Tipo, Guid IdParceiro);
 
         Duplicata AjustarCampos(Duplicata duplicata);
 

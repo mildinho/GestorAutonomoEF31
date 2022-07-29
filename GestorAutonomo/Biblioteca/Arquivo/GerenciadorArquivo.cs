@@ -37,7 +37,7 @@ namespace GestorAutonomo.Biblioteca.Arquivo
             }
         }
 
-        public static List<Imagem> MoverImagensProduto(List<string> ListaCaminhoTemp, int ProdutoId)
+        public static List<Imagem> MoverImagensProduto(List<string> ListaCaminhoTemp, Guid ProdutoId)
         {
             /*
              * Criar a Pasta do Produto
@@ -100,7 +100,7 @@ namespace GestorAutonomo.Biblioteca.Arquivo
 
         public static void ExcluirImagensProduto(List<Imagem> ListaImagem)
         {
-            int ProdutoId = 0;
+            Guid ProdutoId = Guid.NewGuid();
             foreach (var Imagem in ListaImagem)
             {
                 ExcluirImagemProduto(Imagem.Caminho);

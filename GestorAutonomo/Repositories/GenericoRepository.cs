@@ -38,7 +38,7 @@ namespace GestorAutonomo.Repositories
 
 
 
-        public async Task DeletarAsync(int Id)
+        public async Task DeletarAsync(Guid Id)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace GestorAutonomo.Repositories
 
 
 
-        public async Task<Tabela> SelecionarPorCodigoAsync(int Id)
+        public async Task<Tabela> SelecionarPorCodigoAsync(Guid Id)
         {
             return await _context.Set<Tabela>().FindAsync(Id);
         }
