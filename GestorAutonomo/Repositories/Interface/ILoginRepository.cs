@@ -9,7 +9,7 @@ namespace GestorAutonomo.Repositories.Interface
 {
     public interface ILoginRepository : IGenericoRepository<Login>
     {
-        Task<Login> SelecionarPorEmailSenhaAsync(string Email, string Senha);
+        Task<Login> SelecionarPorEmailSenhaAsync(double CPNJ_CPF, string Email, string Senha);
 
         Task<IPagedList<Login>> ListarTodosRegistrosAsync(int? pagina);
 

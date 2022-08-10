@@ -13,13 +13,13 @@ namespace GestorAutonomo.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SessaoUsuario _sessaoUsuario;
-        private readonly ILoginRepository _loginRepository;
+        private readonly IUnitOfWork _uow;
 
-        public HomeController(ILogger<HomeController> logger, SessaoUsuario sessaoUsuario, ILoginRepository loginRepository)
+        public HomeController(ILogger<HomeController> logger, SessaoUsuario sessaoUsuario, IUnitOfWork uow)
         {
             _logger = logger;
             _sessaoUsuario = sessaoUsuario;
-            _loginRepository = loginRepository;
+            _uow = uow;
         }
 
         public IActionResult Index()
@@ -49,7 +49,7 @@ namespace GestorAutonomo.Controllers
         public async Task<IActionResult> Login([FromForm] Login login)
         {
 
-            Login obj = await _loginRepository.SelecionarPorEmailSenhaAsync(login.EMail, login.Password);
+            Login obj = await _uow.Login.SelecionarPorEmailSenhaAsync(login.Empresa.CNPJ_CPF, login.EMail, login.Password);
 
 
             if (obj != null)

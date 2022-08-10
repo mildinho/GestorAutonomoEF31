@@ -13,16 +13,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
     public class HabilitarParceiroController : Controller
     {
-
-        private readonly IParceiroRepository _repositoryParceiro;
         private readonly IUnitOfWork _uow;
 
-
-        public HabilitarParceiroController(IParceiroRepository parceiroRepository, IUnitOfWork uow)
+        public HabilitarParceiroController(IUnitOfWork uow)
         {
-            _repositoryParceiro = parceiroRepository;
             _uow = uow;
-
         }
 
 
@@ -63,7 +58,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
 
-            var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Todos, pagina, pesquisa);
+            var registros = await _uow.Parceiro.ListarTodosRegistrosAsync(TipoParceiro.Todos, pagina, pesquisa);
 
             return View(registros);
         }
@@ -81,7 +76,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
 
-            var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Parceiro.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -96,7 +91,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         public async Task<IActionResult> Manutencao(Guid Id, int tipo, int LigadoDesligado)
         {
 
-            var parceiro = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var parceiro = await _uow.Parceiro.SelecionarPorCodigoAsync(Id);
 
             if (parceiro != null && tipo <= 3) 
             {
@@ -112,7 +107,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 }
 
 
-                await _repositoryParceiro.AtualizarAsync(parceiro);
+                await _uow.Parceiro.AtualizarAsync(parceiro);
             }
 
             return RedirectToAction(nameof(Index));

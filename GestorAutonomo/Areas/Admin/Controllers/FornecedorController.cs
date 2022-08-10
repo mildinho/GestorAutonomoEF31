@@ -17,19 +17,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
     public class FornecedorController : Controller
     {
-
-       
-
-        private readonly IParceiroRepository _repositoryParceiro;
-        private readonly IUFRepository _repositoryUF;
         private readonly IUnitOfWork _uow;
 
         private IEnumerable<UF> objUF;
 
-        public FornecedorController(IParceiroRepository parceiroRepository, IUFRepository uf, IUnitOfWork uow)
+        public FornecedorController(IUnitOfWork uow)
         {
-            _repositoryParceiro = parceiroRepository;
-            _repositoryUF = uf;
             _uow = uow;
         }
 
@@ -83,10 +76,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
          
-            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Fornecedor,  pagina, pesquisa);
+            var registros = await _uow.Parceiro.ListarTodosRegistrosAsync(TipoParceiro.Fornecedor,  pagina, pesquisa);
 
             return View(registros);
         }
@@ -100,10 +93,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Create);
 
-            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var categorias = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Fornecedor);
+            var categorias = await _uow.Parceiro.ListarTodosRegistrosAsync(TipoParceiro.Fornecedor);
            
 
             return View("Manutencao");
@@ -117,10 +110,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
 
-            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Parceiro.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -134,11 +127,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
 
-            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
 
-            var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Parceiro.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -150,7 +143,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             Parceiro obj01 = null;
             if (Opcoes.Create == (Opcoes)operacao)
-                obj01 = await _repositoryParceiro.SelecionarPorCNPJ_CPFAsync(CNPJ_CPF);
+                obj01 = await _uow.Parceiro.SelecionarPorCNPJ_CPFAsync(CNPJ_CPF);
 
 
             if (obj01 == null)
@@ -173,10 +166,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
 
-            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var obj01 = await _repositoryParceiro.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Parceiro.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -196,7 +189,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             parceiro.Fornecedor = 1;
             if (Opcoes.Delete == (Opcoes)operacao)
             {
-                await _repositoryParceiro.DeletarAsync(parceiro.Id);
+                await _uow.Parceiro.DeletarAsync(parceiro.Id);
 
                 AlertNotification.Warning("Registro Excluído");
 
@@ -207,14 +200,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
                   
-                    await _repositoryParceiro.InserirAsync(parceiro);
+                    await _uow.Parceiro.InserirAsync(parceiro);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
 
                    
-                    await _repositoryParceiro.AtualizarAsync(parceiro);
+                    await _uow.Parceiro.AtualizarAsync(parceiro);
 
                 }
 
@@ -224,7 +217,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
             
-            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
 

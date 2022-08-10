@@ -16,14 +16,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
     public class BancoController : Controller
     {
-        private readonly IBancoRepository _repositoryBanco;
         private readonly IUnitOfWork _uow;
         
-        
-
-        public BancoController(IBancoRepository repositoryBanco, IUnitOfWork uow)
+        public BancoController(IUnitOfWork uow)
         {
-            _repositoryBanco = repositoryBanco;
             _uow = uow;
         }
 
@@ -78,7 +74,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Information);
 
-            var registros = await _repositoryBanco.ListarTodosRegistrosAsync(pagina, pesquisa);
+            var registros = await _uow.Banco.ListarTodosRegistrosAsync(pagina, pesquisa);
 
             return View(registros);
         }
@@ -102,7 +98,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Update);
 
-            var obj01 = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Banco.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -117,7 +113,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Read);
 
        
-            var obj01 = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Banco.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -133,7 +129,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Delete);
 
-            var obj01 = await _repositoryBanco.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Banco.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -150,7 +146,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             if (Opcoes.Delete == (Opcoes)operacao)
             {
-                await _repositoryBanco.DeletarAsync(banco.Id);
+                await _uow.Banco.DeletarAsync(banco.Id);
 
                 AlertNotification.Warning("Registro Excluído");
 
@@ -161,12 +157,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
-                    await _repositoryBanco.InserirAsync(banco);
+                    await _uow.Banco.InserirAsync(banco);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-                    await _repositoryBanco.AtualizarAsync(banco);
+                    await _uow.Banco.AtualizarAsync(banco);
 
                 }
 

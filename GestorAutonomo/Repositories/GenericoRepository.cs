@@ -21,7 +21,7 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task InserirAsync(Tabela tabela)
+        public virtual async Task InserirAsync(Tabela tabela)
         {
             await _context.Set<Tabela>().AddAsync(tabela);
             await _context.SaveChangesAsync();
@@ -29,7 +29,7 @@ namespace GestorAutonomo.Repositories
 
 
 
-        public async Task AtualizarAsync(Tabela tabela)
+        public virtual async Task AtualizarAsync(Tabela tabela)
         {
              _context.Entry<Tabela>(tabela).State = EntityState.Modified;
             _context.Entry<Tabela>(tabela).Property("Data_Cadastro").IsModified = false;
@@ -38,7 +38,7 @@ namespace GestorAutonomo.Repositories
 
 
 
-        public async Task DeletarAsync(Guid Id)
+        public virtual async Task DeletarAsync(Guid Id)
         {
             try
             {
@@ -57,9 +57,15 @@ namespace GestorAutonomo.Repositories
 
 
 
-        public async Task<Tabela> SelecionarPorCodigoAsync(Guid Id)
+        public virtual async Task<Tabela> SelecionarPorCodigoAsync(Guid Id)
         {
             return await _context.Set<Tabela>().FindAsync(Id);
         }
+
+
+
+       
+
+
     }
 }

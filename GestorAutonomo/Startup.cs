@@ -37,18 +37,7 @@ namespace GestorAutonomo
             services.AddHttpContextAccessor();
 
             //Configuracao dos Repositories
-            services.AddScoped<IBancoRepository, BancoRepository>();
-            services.AddScoped<IUFRepository, UFRepository>();
-            services.AddScoped<ILoginRepository, LoginRepository>();
-            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
-            services.AddScoped<ICategoriaProdutoRepository, CategoriaProdutoRepository>();
-            services.AddScoped<IParceiroRepository, ParceiroRepository>();
-            services.AddScoped<IPontosEstoqueRepository, PontosEstoqueRepository>();
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IImagemRepository, ImagemRepository>();
-            //services.AddScoped<IDuplicataRepository, DuplicataRepository>();
-            services.AddScoped<IProdutoSaldoRepository, ProdutoSaldoRepository>();
-            
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddMemoryCache();

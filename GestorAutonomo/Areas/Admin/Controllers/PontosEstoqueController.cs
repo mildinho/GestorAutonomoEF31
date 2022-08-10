@@ -18,12 +18,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class PontosEstoqueController : Controller
     {
 
-        private readonly IPontosEstoqueRepository _repositoryPontoEstoque;
         private readonly IUnitOfWork _uow;
 
-        public PontosEstoqueController(IPontosEstoqueRepository pontosEstoqueRepository, IUnitOfWork uow)
+        public PontosEstoqueController( IUnitOfWork uow)
         {
-            _repositoryPontoEstoque = pontosEstoqueRepository;
             _uow = uow;
 
         }
@@ -79,7 +77,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Information);
 
 
-            var registros = await _repositoryPontoEstoque.ListarTodosRegistrosAsync(pagina, pesquisa);
+            var registros = await _uow.PontosEstoque.ListarTodosRegistrosAsync(pagina, pesquisa);
 
             return View(registros);
         }
@@ -102,7 +100,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Update);
 
-            var obj01 = await _repositoryPontoEstoque.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.PontosEstoque.SelecionarPorCodigoAsync(Id);
 
             if (obj01 == null)
                 return View("NoDataFound");
@@ -117,7 +115,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Read);
 
-            var obj01 = await _repositoryPontoEstoque.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.PontosEstoque.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -132,7 +130,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Delete);
 
-            var obj01 = await _repositoryPontoEstoque.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.PontosEstoque.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -152,7 +150,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             if (Opcoes.Delete == (Opcoes)operacao)
             {
-                await _repositoryPontoEstoque.DeletarAsync(parceiro.Id);
+                await _uow.PontosEstoque.DeletarAsync(parceiro.Id);
                 AlertNotification.Warning("Registro Excluído");
                 return RedirectToAction(nameof(Index));
             }
@@ -160,12 +158,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
-                    await _repositoryPontoEstoque.InserirAsync(parceiro);
+                    await _uow.PontosEstoque.InserirAsync(parceiro);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-                    await _repositoryPontoEstoque.AtualizarAsync(parceiro);
+                    await _uow.PontosEstoque.AtualizarAsync(parceiro);
                 }
 
                 return RedirectToAction(nameof(Index));

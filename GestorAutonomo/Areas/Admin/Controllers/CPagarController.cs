@@ -14,15 +14,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     [LoginAutorizacao]
     public class CPagarController : Controller
     {
-        private readonly IParceiroRepository _repositoryParceiro;
-        private readonly IDuplicataRepository _repositoryDuplicata;
         private readonly IUnitOfWork _uow;
 
 
-        public CPagarController(IParceiroRepository parceiroRepository, IDuplicataRepository duplicataRepository, IUnitOfWork uow)
+        public CPagarController(IUnitOfWork uow)
         {
-            _repositoryParceiro = parceiroRepository;
-            _repositoryDuplicata = duplicataRepository;
             _uow = uow;
 
         }
@@ -64,7 +60,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
              ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
 
-            var registros = await _repositoryParceiro.ListarTodosRegistrosAsync(TipoParceiro.Todos, pagina, pesquisa);
+            var registros = await _uow.Parceiro.ListarTodosRegistrosAsync(TipoParceiro.Todos, pagina, pesquisa);
 
             return View(registros);
         }
@@ -74,7 +70,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
 
-            var registros = await _repositoryDuplicata.ListarTodosRegistrosAsync(TipoDuplicata.Pagar,IdParceiro);
+            var registros = await _uow.Duplicata.ListarTodosRegistrosAsync(TipoDuplicata.Pagar,IdParceiro);
 
             return View(registros);
         }

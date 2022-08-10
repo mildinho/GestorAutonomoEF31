@@ -20,22 +20,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     {
 
 
-        private readonly IProdutoRepository _repositoryProduto;
-        private readonly ICategoriaProdutoRepository _repositoryCategoria;
         private readonly IImagemRepository _repositoryImagem;
-        private readonly IProdutoSaldoRepository _repositoryProdutoSaldo;
         private readonly IUnitOfWork _uow;
 
 
-        public ProdutoController(IProdutoRepository produto, ICategoriaProdutoRepository categoria, IImagemRepository imagem, IProdutoSaldoRepository produtoSaldo, IUnitOfWork uow)
+        public ProdutoController(IImagemRepository imagem, IUnitOfWork uow)
         {
-            _repositoryProduto = produto;
-            _repositoryCategoria = categoria;
             _repositoryImagem = imagem;
-            _repositoryProdutoSaldo = produtoSaldo;
             _uow = uow;
-
-
         }
 
 
@@ -88,7 +80,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
 
-            var registros = await _repositoryProduto.ListarTodosRegistrosAsync(pagina, pesquisa);
+            var registros = await _uow.Produto.ListarTodosRegistrosAsync(pagina, pesquisa);
 
             return View(registros);
         }
@@ -101,7 +93,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Create);
 
-            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            var categorias = await _uow.CategoriaProduto.ListarTodosRegistrosAsync();
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             return View("Manutencao");
@@ -114,11 +106,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Update);
 
-            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            var categorias = await _uow.CategoriaProduto.ListarTodosRegistrosAsync();
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
 
-            var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Produto.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -132,10 +124,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Read);
 
-            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            var categorias = await _uow.CategoriaProduto.ListarTodosRegistrosAsync();
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Produto.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -151,10 +143,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Delete);
 
-            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            var categorias = await _uow.CategoriaProduto.ListarTodosRegistrosAsync();
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            var obj01 = await _repositoryProduto.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.Produto.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -175,7 +167,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             if (Opcoes.Delete == (Opcoes)operacao)
 
             {
-                List<ProdutoSaldo> obj01 = await _repositoryProdutoSaldo.ObterPontosPorProduto(produto.Id, true);
+                List<ProdutoSaldo> obj01 = await _uow.ProdutoSaldo.ObterPontosPorProduto(produto.Id, true);
                 if (obj01.Count > 0)
                 {
 
@@ -189,7 +181,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 }
                 _repositoryImagem.ExcluirImagensProduto(produto.Id);
 
-                await _repositoryProduto.DeletarAsync(produto.Id);
+                await _uow.Produto.DeletarAsync(produto.Id);
                 AlertNotification.Warning("Registro Excluído");
 
 
@@ -200,13 +192,13 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
 
-                    await _repositoryProduto.InserirAsync(produto);
+                    await _uow.Produto.InserirAsync(produto);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
 
-                    await _repositoryProduto.AtualizarAsync(produto);
+                    await _uow.Produto.AtualizarAsync(produto);
 
                 }
                 List<Imagem> ListaImagens = GerenciadorArquivo.MoverImagensProduto(new List<string>(Request.Form["imagem"]), produto.Id);
@@ -219,7 +211,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
 
-            var categorias = await _repositoryCategoria.ListarTodosRegistrosAsync();
+            var categorias = await _uow.CategoriaProduto.ListarTodosRegistrosAsync();
             ViewBag.Categorias = categorias.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             return View();

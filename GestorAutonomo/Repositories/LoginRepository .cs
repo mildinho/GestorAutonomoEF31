@@ -42,9 +42,9 @@ namespace GestorAutonomo.Repositories
 
         }
 
-        public async Task<Login> SelecionarPorEmailSenhaAsync(string Email, string Senha)
+        public async Task<Login> SelecionarPorEmailSenhaAsync(double CPNJ_CPF, string Email, string Senha)
         {
-            return await _context.Login.Where(m => m.EMail == Email && m.Password == Senha).FirstOrDefaultAsync();
+            return await _context.Login.Where(m => m.Empresa.CNPJ_CPF == CPNJ_CPF &&  m.EMail == Email && m.Password == Senha).FirstOrDefaultAsync();
 
         }
 

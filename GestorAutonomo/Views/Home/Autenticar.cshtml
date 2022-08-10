@@ -35,6 +35,13 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="form-group">
+                        <b><label asp-for="Empresa.CNPJ_CPF"></label></b>
+                        <input asp-for="Empresa.CNPJ_CPF" class="form-control" id="idEmpresaCNPJ_CPF" type="text" placeholder="Informe o CNPJ ou CPF da Empresa" required autofocus>
+                        <span asp-validation-for="Empresa.CNPJ_CPF" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="form-group">
                         <b><label asp-for="EMail"></label></b>
                         <input asp-for="EMail" class="form-control" id="idemail" type="email" placeholder="Informe o E-Mail" required autofocus>
                         <span asp-validation-for="EMail" class="text-danger"></span>
@@ -48,7 +55,7 @@
                     </div>
                     <div class="d-flex row px-3">
                         <button class="btn btn-dark flex-fill" type="submit">Acessar</button>
-                        
+
                     </div>
                 </div>
 

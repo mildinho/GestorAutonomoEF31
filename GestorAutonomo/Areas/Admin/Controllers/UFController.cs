@@ -14,13 +14,11 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
     public class UFController : Controller
     {
-        private readonly IUFRepository _repositoryUF;
         private readonly IUnitOfWork _uow;
 
-        public UFController(IUFRepository repositoryUF, IUnitOfWork uow)
+        public UFController( IUnitOfWork uow)
         {
-            _repositoryUF = repositoryUF;
-            _uow = uow;
+             _uow = uow;
         }
 
 
@@ -74,7 +72,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Information);
 
-            var registros = await _repositoryUF.ListarTodosRegistrosAsync(pagina, pesquisa);
+            var registros = await _uow.UF.ListarTodosRegistrosAsync(pagina, pesquisa);
 
             return View(registros);
         }
@@ -97,7 +95,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Update);
 
-            var obj01 = await _repositoryUF.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.UF.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -110,7 +108,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Read);
 
-            var obj01 = await _repositoryUF.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.UF.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
 
@@ -126,7 +124,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Delete);
 
-            var obj01 = await _repositoryUF.SelecionarPorCodigoAsync(Id);
+            var obj01 = await _uow.UF.SelecionarPorCodigoAsync(Id);
 
             if (obj01 == null)
                 return View("NoDataFound");
@@ -144,7 +142,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             if (Opcoes.Delete == (Opcoes)operacao)
             {
-                await _repositoryUF.DeletarAsync(uf.Id);
+                await _uow.UF.DeletarAsync(uf.Id);
 
                 AlertNotification.Warning("Registro Excluído");
                 return RedirectToAction(nameof(Index));
@@ -153,12 +151,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
-                    await _repositoryUF.InserirAsync(uf);
+                    await _uow.UF.InserirAsync(uf);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-                    await _repositoryUF.AtualizarAsync(uf);
+                    await _uow.UF.AtualizarAsync(uf);
 
                 }
 

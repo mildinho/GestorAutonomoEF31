@@ -16,7 +16,7 @@ namespace GestorAutonomo.Models
         [Display(Name = "Código")]
         public Guid Id { get; set; }
 
-        [Display(Name = "CNPJ / CNPJ")]
+        [Display(Name = "CNPJ / CPF")]
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_E001")]
         public double CNPJ_CPF { get; set; }
 

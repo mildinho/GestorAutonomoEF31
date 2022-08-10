@@ -23,14 +23,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         private readonly CRUD crud = new CRUD();
         private IEnumerable<UF> objUF;
 
-        private readonly IEmpresaRepository _repositoryEmpresa;
-        private readonly IUFRepository _repositoryUF;
         private readonly IUnitOfWork _uow;
 
-        public EmpresaController(IEmpresaRepository empresa, IUFRepository uf, IUnitOfWork uow)
+        public EmpresaController(IUnitOfWork uow)
         {
-            _repositoryEmpresa = empresa;
-            _repositoryUF = uf;
             _uow = uow;
 
 
@@ -50,12 +46,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             
             ViewBag.CRUD = crud;
 
-            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF =  objUF.Select( a => new SelectListItem(a.Descricao, a.Id.ToString()));
            
 
-            IEnumerable <Empresa> objList = await _repositoryEmpresa.ListarTodosRegistrosAsync();
-            Empresa empresa = await _repositoryEmpresa.SelecionarPorCodigoAsync( objList.First().Id );
+            IEnumerable <Empresa> objList = await _uow.Empresa.ListarTodosRegistrosAsync();
+            Empresa empresa = await _uow.Empresa.SelecionarPorCodigoAsync( objList.First().Id );
 
 
             return View(empresa);
@@ -66,17 +62,17 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {         
             if (ModelState.IsValid)
             {
-                await _repositoryEmpresa.AtualizarAsync(empresa);
+                await _uow.Empresa.AtualizarAsync(empresa);
                 return RedirectToAction("Index", "Painel", new { area = "Admin" });
 
             }
 
             ViewBag.CRUD = crud;
 
-            objUF = await _repositoryUF.ListarTodosRegistrosAsync();
+            objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
-            Empresa obj  = await _repositoryEmpresa.SelecionarPorCodigoAsync(id);
+            Empresa obj  = await _uow.Empresa.SelecionarPorCodigoAsync(id);
 
             return View("Manutencao", obj);
         }

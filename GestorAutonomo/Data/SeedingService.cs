@@ -33,15 +33,15 @@ namespace GestorAutonomo.Data
 
             empresaCadastrada = _context.Empresa.First();
 
-            if (!_context.TipoTelefone.Any())
-            {
+            //if (!_context.TipoTelefone.Any())
+            //{
 
-                TipoTelefone tipoTelefone01 = new TipoTelefone(empresaCadastrada.Id, "Celuar");
-                TipoTelefone tipoTelefone02 = new TipoTelefone(empresaCadastrada.Id, "Recado");
-                _context.TipoTelefone.AddRange(tipoTelefone01, tipoTelefone02);
+            //    TipoTelefone tipoTelefone01 = new TipoTelefone(empresaCadastrada.Id, "Celuar");
+            //    TipoTelefone tipoTelefone02 = new TipoTelefone(empresaCadastrada.Id, "Recado");
+            //    _context.TipoTelefone.AddRange(tipoTelefone01, tipoTelefone02);
 
-                _context.SaveChanges();
-            }
+            //    _context.SaveChanges();
+            //}
 
             if (!_context.UF.Any())
             {
