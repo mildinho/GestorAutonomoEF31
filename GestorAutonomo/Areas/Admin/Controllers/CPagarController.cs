@@ -1,6 +1,7 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class CPagarController : Controller
     {
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
-
-        public CPagarController(IUnitOfWork uow)
+        public CPagarController(IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
             _uow = uow;
+            _sessaoUsuario = sessaoUsuario;
 
         }
 

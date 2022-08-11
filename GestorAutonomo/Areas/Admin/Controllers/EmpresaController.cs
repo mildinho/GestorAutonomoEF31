@@ -16,19 +16,18 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [LoginAutorizacao]
-
-
     public class EmpresaController : Controller
     {
         private readonly CRUD crud = new CRUD();
         private IEnumerable<UF> objUF;
 
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
-        public EmpresaController(IUnitOfWork uow)
+        public EmpresaController(IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
             _uow = uow;
-
+            _sessaoUsuario = sessaoUsuario;
 
             crud.Descricao = "Aqui você poderá realizar as alterações do Cadastro da Empresa";
             crud.Titulo = "Manutenção";

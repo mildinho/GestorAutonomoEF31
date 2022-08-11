@@ -1,8 +1,10 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -15,10 +17,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class UFController : Controller
     {
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
-        public UFController( IUnitOfWork uow)
+        public UFController( IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
              _uow = uow;
+            _sessaoUsuario = sessaoUsuario;
         }
 
 
@@ -140,11 +144,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] UF uf, Opcoes operacao)
         {
+            uf.EmpresaId = _sessaoUsuario.GetLoginUsuario().EmpresaId;
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _uow.UF.DeletarAsync(uf.Id);
+                await _uow.SaveAsync();
 
-                AlertNotification.Warning("Registro Excluído");
+                AlertNotification.Warning(Mensagem.MSG_S002);
+
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)
@@ -152,12 +159,16 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
                     await _uow.UF.InserirAsync(uf);
+                    await _uow.SaveAsync();
 
+                    AlertNotification.Warning(Mensagem.MSG_S001);
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
                     await _uow.UF.AtualizarAsync(uf);
+                    await _uow.SaveAsync();
 
+                    AlertNotification.Warning(Mensagem.MSG_S001);
                 }
 
                 return RedirectToAction(nameof(Index));

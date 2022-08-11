@@ -1,8 +1,10 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -14,17 +16,17 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [LoginAutorizacao]
-
     public class ClienteController : Controller
     {
-
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
         private IEnumerable<UF> objUF;
 
-        public ClienteController(IUnitOfWork uow)
+        public ClienteController(IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
             _uow = uow;
+            _sessaoUsuario = sessaoUsuario;
         }
 
 
@@ -76,7 +78,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
             ViewBag.CRUD = ConfiguraMensagem(Opcoes.Information);
-         
+
             objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
@@ -98,7 +100,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 
             var categorias = await _uow.Parceiro.ListarTodosRegistrosAsync(TipoParceiro.Cliente);
-           
+
 
             return View("Manutencao");
         }
@@ -151,7 +153,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 return Json(true);
             }
-           else
+            else
             {
                 return Json("Documento Já Existente na Base");
             }
@@ -177,7 +179,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             return View("Manutencao", obj01);
         }
 
-        
+
 
 
 
@@ -187,12 +189,15 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] Parceiro parceiro, Opcoes operacao)
         {
+            parceiro.EmpresaId = _sessaoUsuario.GetLoginUsuario().EmpresaId;
             parceiro.Cliente = 1;
+            
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _uow.Parceiro.DeletarAsync(parceiro.Id);
+                await _uow.SaveAsync();
 
-                AlertNotification.Warning("Registro Excluído");
+                AlertNotification.Warning(Mensagem.MSG_S002);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -200,16 +205,19 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             {
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
-                   
+
                     await _uow.Parceiro.InserirAsync(parceiro);
+                    await _uow.SaveAsync();
+
+                    AlertNotification.Warning(Mensagem.MSG_S001);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
-
-                   
                     await _uow.Parceiro.AtualizarAsync(parceiro);
+                    await _uow.SaveAsync();
 
+                    AlertNotification.Warning(Mensagem.MSG_S001);
                 }
 
                 return RedirectToAction(nameof(Index));
@@ -217,7 +225,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             }
 
             ViewBag.CRUD = ConfiguraMensagem((Opcoes)operacao);
-            
+
             objUF = await _uow.UF.ListarTodosRegistrosAsync();
             ViewBag.UF = objUF.Select(a => new SelectListItem(a.Descricao, a.Id.ToString()));
 

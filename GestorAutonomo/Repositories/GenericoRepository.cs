@@ -24,7 +24,7 @@ namespace GestorAutonomo.Repositories
         public virtual async Task InserirAsync(Tabela tabela)
         {
             await _context.Set<Tabela>().AddAsync(tabela);
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
         }
 
 
@@ -33,7 +33,7 @@ namespace GestorAutonomo.Repositories
         {
              _context.Entry<Tabela>(tabela).State = EntityState.Modified;
             _context.Entry<Tabela>(tabela).Property("Data_Cadastro").IsModified = false;
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
         }
 
 
@@ -46,7 +46,7 @@ namespace GestorAutonomo.Repositories
                 if (obj != null)
                 {
                     _context.Set<Tabela>().Remove(obj);
-                    await _context.SaveChangesAsync();
+                    //await _context.SaveChangesAsync();
                 }
             }
             catch (DbUpdateException e)

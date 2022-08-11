@@ -1,8 +1,10 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -14,16 +16,17 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [LoginAutorizacao]
-
     public class FornecedorController : Controller
     {
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
         private IEnumerable<UF> objUF;
 
-        public FornecedorController(IUnitOfWork uow)
+        public FornecedorController(IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
             _uow = uow;
+            _sessaoUsuario = sessaoUsuario;
         }
 
 
@@ -186,12 +189,14 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] Parceiro parceiro, Opcoes operacao)
         {
+            parceiro.EmpresaId = _sessaoUsuario.GetLoginUsuario().EmpresaId;
             parceiro.Fornecedor = 1;
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _uow.Parceiro.DeletarAsync(parceiro.Id);
+                await _uow.SaveAsync();
 
-                AlertNotification.Warning("Registro Excluído");
+                AlertNotification.Warning(Mensagem.MSG_S002);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -201,14 +206,18 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 {
                   
                     await _uow.Parceiro.InserirAsync(parceiro);
+                    await _uow.SaveAsync();
 
+                    AlertNotification.Warning(Mensagem.MSG_S001);
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
 
                    
                     await _uow.Parceiro.AtualizarAsync(parceiro);
+                    await _uow.SaveAsync();
 
+                    AlertNotification.Warning(Mensagem.MSG_S001);
                 }
 
                 return RedirectToAction(nameof(Index));

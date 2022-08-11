@@ -26,8 +26,9 @@ namespace GestorAutonomo.Session
             if (_sessao.Existe(_key))
             {
                 string obj = _sessao.Consultar(_key);
+                Login login = JsonConvert.DeserializeObject<Login>(obj); 
 
-                return JsonConvert.DeserializeObject<Login>(obj);
+                return login;
             }
             else
             {

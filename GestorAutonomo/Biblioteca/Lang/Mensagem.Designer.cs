@@ -142,7 +142,7 @@ namespace GestorAutonomo.Biblioteca.Lang {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Registro Excluido com Sucesso!.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Registro Excluído com Sucesso!.
         /// </summary>
         public static string MSG_S002 {
             get {

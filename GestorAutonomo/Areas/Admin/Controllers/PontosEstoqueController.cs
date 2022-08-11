@@ -1,8 +1,10 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -14,16 +16,16 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [LoginAutorizacao]
-
     public class PontosEstoqueController : Controller
     {
 
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
-        public PontosEstoqueController( IUnitOfWork uow)
+        public PontosEstoqueController( IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
             _uow = uow;
-
+            _sessaoUsuario = sessaoUsuario;
         }
 
 
@@ -148,10 +150,15 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         public async Task<IActionResult> Manutencao([FromForm] PontosEstoque parceiro, Opcoes operacao)
         {
 
+            parceiro.EmpresaId = _sessaoUsuario.GetLoginUsuario().EmpresaId;
+
             if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _uow.PontosEstoque.DeletarAsync(parceiro.Id);
-                AlertNotification.Warning("Registro Excluído");
+                await _uow.SaveAsync();
+
+                AlertNotification.Warning(Mensagem.MSG_S002);
+                
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)
@@ -159,11 +166,16 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
                     await _uow.PontosEstoque.InserirAsync(parceiro);
+                    await _uow.SaveAsync();
 
+                    AlertNotification.Warning(Mensagem.MSG_S001);
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
                     await _uow.PontosEstoque.AtualizarAsync(parceiro);
+                    await _uow.SaveAsync();
+
+                    AlertNotification.Warning(Mensagem.MSG_S001);
                 }
 
                 return RedirectToAction(nameof(Index));

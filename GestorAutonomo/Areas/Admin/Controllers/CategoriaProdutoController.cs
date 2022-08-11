@@ -4,6 +4,7 @@ using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -16,15 +17,15 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [LoginAutorizacao]
-
     public class CategoriaProdutoController : Controller
     {
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
-        public CategoriaProdutoController(IUnitOfWork uow)
+        public CategoriaProdutoController(IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
-        
             _uow = uow;
+            _sessaoUsuario = sessaoUsuario;
         }
 
 
@@ -165,11 +166,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] CategoriaProduto categoria, Opcoes operacao)
         {
+            categoria.EmpresaId = _sessaoUsuario.GetLoginUsuario().EmpresaId;
             if (Opcoes.Delete == (Opcoes)operacao)
             {
-               
-                List<CategoriaProduto> obj = await _uow.CategoriaProduto.ObterCategoriasPorCategoriaPai( categoria.Id);
-                if(obj.Count > 0)
+
+                List<CategoriaProduto> obj = await _uow.CategoriaProduto.ObterCategoriasPorCategoriaPai(categoria.Id);
+                if (obj.Count > 0)
                 {
                     StringBuilder sb = new StringBuilder();
                     foreach (var item in obj)
@@ -189,8 +191,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 }
 
                 await _uow.CategoriaProduto.DeletarAsync(categoria.Id);
+                await _uow.SaveAsync();
 
-                AlertNotification.Warning("Registro Excluído");
+                AlertNotification.Warning(Mensagem.MSG_S002);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -199,12 +202,17 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
                     await _uow.CategoriaProduto.InserirAsync(categoria);
+                    await _uow.SaveAsync();
+
+                    AlertNotification.Warning(Mensagem.MSG_S001);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
                     await _uow.CategoriaProduto.AtualizarAsync(categoria);
+                    await _uow.SaveAsync();
 
+                    AlertNotification.Warning(Mensagem.MSG_S001);
                 }
 
                 return RedirectToAction(nameof(Index));

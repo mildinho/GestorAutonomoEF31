@@ -15,8 +15,6 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class PainelController : Controller
     {
         private readonly SessaoUsuario _sessaoUsuario;
-       
-
 
         public PainelController(SessaoUsuario sessaoUsuario)
         {

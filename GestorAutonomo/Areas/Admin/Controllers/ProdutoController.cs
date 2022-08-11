@@ -1,9 +1,11 @@
 ﻿using GestorAutonomo.Biblioteca.Arquivo;
 using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -18,16 +20,15 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
     public class ProdutoController : Controller
     {
-
-
         private readonly IImagemRepository _repositoryImagem;
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
-
-        public ProdutoController(IImagemRepository imagem, IUnitOfWork uow)
+        public ProdutoController(IImagemRepository imagem, IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
             _repositoryImagem = imagem;
             _uow = uow;
+            _sessaoUsuario = sessaoUsuario;
         }
 
 
@@ -163,9 +164,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] Produto produto, Opcoes operacao)
         {
-
+            produto.EmpresaId = _sessaoUsuario.GetLoginUsuario().EmpresaId;
+            
             if (Opcoes.Delete == (Opcoes)operacao)
-
             {
                 List<ProdutoSaldo> obj01 = await _uow.ProdutoSaldo.ObterPontosPorProduto(produto.Id, true);
                 if (obj01.Count > 0)
@@ -182,7 +183,9 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 _repositoryImagem.ExcluirImagensProduto(produto.Id);
 
                 await _uow.Produto.DeletarAsync(produto.Id);
-                AlertNotification.Warning("Registro Excluído");
+                await _uow.SaveAsync();
+
+                AlertNotification.Warning(Mensagem.MSG_S002);
 
 
                 return RedirectToAction(nameof(Index));
@@ -193,12 +196,18 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 {
 
                     await _uow.Produto.InserirAsync(produto);
+                    await _uow.SaveAsync();
+
+                    AlertNotification.Warning(Mensagem.MSG_S001);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
 
                     await _uow.Produto.AtualizarAsync(produto);
+                    await _uow.SaveAsync();
+
+                    AlertNotification.Warning(Mensagem.MSG_S001);
 
                 }
                 List<Imagem> ListaImagens = GerenciadorArquivo.MoverImagensProduto(new List<string>(Request.Form["imagem"]), produto.Id);

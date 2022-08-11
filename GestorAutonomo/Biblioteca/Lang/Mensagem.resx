@@ -145,7 +145,7 @@
     <value>Registro Salvo com Sucesso!</value>
   </data>
   <data name="MSG_S002" xml:space="preserve">
-    <value>Registro Excluido com Sucesso!</value>
+    <value>Registro Excluído com Sucesso!</value>
   </data>
   <data name="MSG_S003" xml:space="preserve">
     <value>Senha Enviada com Sucesso!</value>

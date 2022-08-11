@@ -1,7 +1,10 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Lang;
+using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -14,10 +17,12 @@ namespace GestorAutonomo.Areas.Admin.Controllers
     public class HabilitarParceiroController : Controller
     {
         private readonly IUnitOfWork _uow;
+        private readonly SessaoUsuario _sessaoUsuario;
 
-        public HabilitarParceiroController(IUnitOfWork uow)
+        public HabilitarParceiroController(IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
             _uow = uow;
+            _sessaoUsuario = sessaoUsuario;
         }
 
 
@@ -92,9 +97,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
 
             var parceiro = await _uow.Parceiro.SelecionarPorCodigoAsync(Id);
-
-            if (parceiro != null && tipo <= 3) 
+            
+            if (parceiro != null && tipo <= 3)
             {
+                parceiro.EmpresaId = _sessaoUsuario.GetLoginUsuario().EmpresaId;
                 if (tipo == 1)
                 {
                     parceiro.Cliente = LigadoDesligado;
@@ -108,6 +114,10 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 
 
                 await _uow.Parceiro.AtualizarAsync(parceiro);
+                await _uow.SaveAsync();
+
+                AlertNotification.Warning(Mensagem.MSG_S001);
+
             }
 
             return RedirectToAction(nameof(Index));

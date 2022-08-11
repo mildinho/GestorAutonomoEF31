@@ -1,8 +1,10 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
+using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -13,14 +15,16 @@ namespace GestorAutonomo.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [LoginAutorizacao]
-
     public class BancoController : Controller
     {
         private readonly IUnitOfWork _uow;
-        
-        public BancoController(IUnitOfWork uow)
+        private readonly SessaoUsuario _sessaoUsuario;
+       
+        public BancoController(IUnitOfWork uow, SessaoUsuario sessaoUsuario)
         {
             _uow = uow;
+            _sessaoUsuario = sessaoUsuario;
+          
         }
 
 
@@ -112,7 +116,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         {
             ViewBag.CRUD = await ConfiguraMensagem(Opcoes.Read);
 
-       
+
             var obj01 = await _uow.Banco.SelecionarPorCodigoAsync(Id);
             if (obj01 == null)
                 return View("NoDataFound");
@@ -144,11 +148,16 @@ namespace GestorAutonomo.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Manutencao([FromForm] Banco banco, Opcoes operacao)
         {
-            if (Opcoes.Delete == (Opcoes)operacao)
+            banco.EmpresaId = _sessaoUsuario.GetLoginUsuario().EmpresaId;
+
+            //try
+            //{
+                if (Opcoes.Delete == (Opcoes)operacao)
             {
                 await _uow.Banco.DeletarAsync(banco.Id);
+                await _uow.SaveAsync();
 
-                AlertNotification.Warning("Registro Excluído");
+                AlertNotification.Warning(Mensagem.MSG_S002);
 
 
                 return RedirectToAction(nameof(Index));
@@ -158,17 +167,28 @@ namespace GestorAutonomo.Areas.Admin.Controllers
                 if (Opcoes.Create == (Opcoes)operacao)
                 {
                     await _uow.Banco.InserirAsync(banco);
+                    await _uow.SaveAsync();
+
+                    AlertNotification.Warning(Mensagem.MSG_S001);
 
                 }
                 else if (Opcoes.Update == (Opcoes)operacao)
                 {
                     await _uow.Banco.AtualizarAsync(banco);
+                    await _uow.SaveAsync();
+                    AlertNotification.Warning(Mensagem.MSG_S001);
+
 
                 }
 
                 return RedirectToAction(nameof(Index));
 
             }
+            //}
+            //catch
+            //{
+
+            //}
 
             ViewBag.CRUD = await ConfiguraMensagem((Opcoes)operacao);
 
