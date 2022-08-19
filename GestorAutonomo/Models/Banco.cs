@@ -11,9 +11,6 @@ namespace GestorAutonomo.Models
     [Table("CS_BANCO")]
     public class Banco : ModelBase 
     {
-
-   
-
         [Display(Name = "Banco")]
         [Required(ErrorMessage = "Campo Obrigatório!", AllowEmptyStrings = false)]
         public string Codigo { get; set; }

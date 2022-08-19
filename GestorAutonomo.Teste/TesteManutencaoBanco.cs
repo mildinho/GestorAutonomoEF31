@@ -1,4 +1,7 @@
 using GestorAutonomo.Data;
+using GestorAutonomo.Models;
+using GestorAutonomo.Repositories;
+using GestorAutonomo.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -7,11 +10,11 @@ using Xunit;
 namespace GestorAutonomo.Teste
 {
     public class TesteManutencaoBanco : IClassFixture<InjectionFixture>
-
     {
 
         public IServiceCollection _services;
         public IServiceProvider _serviceProvider;
+        public IUnitOfWork _unitOfWork;
 
         public TesteManutencaoBanco(InjectionFixture injection)
         {
@@ -29,29 +32,48 @@ namespace GestorAutonomo.Teste
             _serviceProvider = _services.BuildServiceProvider();
 
 
+
         }
 
 
-        //[Fact]
-        //public void Inserindo_Registro_Album()
-        //{
-        //    using (var dbContext = _serviceProvider.GetService<GestorAutonomoContext>())
-        //    {
-        //        dbContext.Banco.Add(
-        //            new ba
-        //            {
-        //                AlbumId = 1,
-        //                Destino = "Guaxupe",
-        //                Inicio = DateTime.Today,
-        //                Fim = DateTime.Today
-        //            }
-        //            );
+        [Fact]
+        public void Verificando_Se_Verdade()
+        {
+            bool a = true;
+            bool b = true;
+
+            Assert.True(a == b);
+
+        }
 
 
-        //        dbContext.SaveChanges();
-        //        Assert.True(dbContext.Albuns.Count() == 1);
-        //    }
-        //}
+
+        [Fact]
+        public void Verificando_Se_Falso()
+        {
+            bool a = true;
+            bool b = false;
+            bool c = (a == b);
+
+            Assert.False(c);
+        }
+
+
+        [Fact]
+        public void Verificando_Letra_Inicial()
+        {
+            string nome = "Fernando";
+            Assert.StartsWith("F", nome);
+        }
+
+        [Fact]
+        public void Verificando_Letra_Final()
+        {
+            string nome = "Fernando".ToUpper();
+
+            Assert.EndsWith("O", nome);
+        }
+
 
     }
 }
