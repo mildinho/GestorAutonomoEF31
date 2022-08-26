@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GestorAutonomo.Servico
 {
-    public class GenericoServico<Tabela> : IGenericoServico<Tabela> where Tabela : class
+    public class GenericoServico<Tabela> : IGenericoServico<Tabela> where Tabela : ModelBase
     {
         private readonly GestorAutonomoContext _context;
 
@@ -20,20 +20,19 @@ namespace GestorAutonomo.Servico
         }
 
 
-        public virtual async Task<Tabela> SelecionarPorCodigoAsync(Guid Id)
+        public virtual async Task<Tabela> BuscarPorCodigoAsync(Guid Id)
         {
             return await _context.Set<Tabela>().FindAsync(Id);
 
         }
 
 
-        public virtual async Task<IEnumerable<Tabela>> ListarTodosRegistrosAsync(Guid EmpresaId)
+        public virtual async Task<IEnumerable<Tabela>> TodosRegistrosPorEmpresaAsync(Guid EmpresaId)
         {
-            IQueryable<Tabela> objConsulta = _context.Set<Tabela>().AsQueryable();
-
-            IQueryable<Tabela> objConsulta2 = objConsulta
-            .Where(e => <objConsulta>.EmpresaId == EmpresaId);
-            //_context.Entry<Tabela>(tabela).Property("Data_Cadastro").IsModified = false;
+            IQueryable<Tabela> objConsulta = _context.
+                Set<Tabela>().
+                AsQueryable().
+                Where(e => e.EmpresaId == EmpresaId);
 
             return await objConsulta.ToListAsync();
 

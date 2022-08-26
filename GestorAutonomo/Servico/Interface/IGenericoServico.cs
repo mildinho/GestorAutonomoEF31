@@ -8,8 +8,8 @@ namespace GestorAutonomo.Servico.Interface
     public interface IGenericoServico<Tabela> where Tabela : class
     {
 
-        Task<Tabela> SelecionarPorCodigoAsync(Guid Id);
-        Task<IEnumerable<Tabela>> ListarTodosRegistrosAsync(Guid EmpresaId);
+        Task<Tabela> BuscarPorCodigoAsync(Guid Id);
+        Task<IEnumerable<Tabela>> TodosRegistrosPorEmpresaAsync(Guid EmpresaId);
 
     }
 }
