@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GestorAutonomo.Repositories.Interface
 {
-    public interface IGenericoRepository<Tabela>where Tabela : class
+    public interface IGenericoRepository<Tabela> where Tabela : class
     {
 
         Task InserirAsync(Tabela tabela);

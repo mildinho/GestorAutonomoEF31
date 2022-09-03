@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace GestorAutonomo.Data
 {
-    public class ModelBase
+    public abstract class ModelBase 
     {
         [Key]
         [Display(Name = "Código")]
-        public Guid Id { get; set; }
+        public Guid Id { get; protected set; }
 
         [Required]
         [Display(Name = "Empresa")]

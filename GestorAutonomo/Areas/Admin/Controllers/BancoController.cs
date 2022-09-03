@@ -25,6 +25,7 @@ namespace GestorAutonomo.Areas.Admin.Controllers
             _uow = uow;
             _sessaoUsuario = sessaoUsuario;
           
+            
         }
 
 
