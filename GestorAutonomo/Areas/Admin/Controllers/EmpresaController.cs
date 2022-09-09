@@ -1,8 +1,7 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
 using GestorAutonomo.Domain.Entities;
-using GestorAutonomo.Models;
-using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Domain.Interfaces;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

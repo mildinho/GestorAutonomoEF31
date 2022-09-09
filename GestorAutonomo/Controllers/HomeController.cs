@@ -1,7 +1,6 @@
 ﻿using GestorAutonomo.Domain.Entities;
+using GestorAutonomo.Domain.Interfaces;
 using GestorAutonomo.Models;
-using GestorAutonomo.Repositories;
-using GestorAutonomo.Repositories.Interface;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

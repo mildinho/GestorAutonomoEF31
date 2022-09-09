@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GestorAutonomo.Repositories.Interface
+namespace GestorAutonomo.Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

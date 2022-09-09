@@ -7,7 +7,7 @@ using X.PagedList;
 using Newtonsoft.Json;
 using GestorAutonomo.Domain.Entities;
 
-namespace GestorAutonomo.Repositories.Interface
+namespace GestorAutonomo.Domain.Interfaces
 {
     public interface IParceiroRepository : IGenericoRepository<Parceiro>
     {

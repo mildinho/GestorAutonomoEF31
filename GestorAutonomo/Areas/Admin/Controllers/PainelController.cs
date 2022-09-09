@@ -1,12 +1,6 @@
 ﻿using GestorAutonomo.Biblioteca.Filtro;
-using GestorAutonomo.Repositories.Interface;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GestorAutonomo.Areas.Admin.Controllers
 {

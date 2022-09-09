@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace GestorAutonomo.Repositories.Interface
+namespace GestorAutonomo.Domain.Interfaces
 {
     public interface IUFRepository : IGenericoRepository<UF>
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace GestorAutonomo.Repositories.Interface
+namespace GestorAutonomo.Domain.Interfaces
 {
     public interface IProdutoSaldoRepository : IGenericoRepository<ProdutoSaldo>
     {

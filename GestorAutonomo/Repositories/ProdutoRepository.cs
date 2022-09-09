@@ -1,15 +1,13 @@
-﻿using GestorAutonomo.Biblioteca.Exceptions;
-using GestorAutonomo.Data;
-using GestorAutonomo.Models;
-using GestorAutonomo.Repositories.Interface;
+﻿using GestorAutonomo.Data;
+using GestorAutonomo.Domain.Entities;
+using GestorAutonomo.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
-using System;
-using GestorAutonomo.Domain.Entities;
 
 namespace GestorAutonomo.Repositories
 {

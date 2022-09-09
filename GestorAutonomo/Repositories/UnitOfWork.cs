@@ -1,10 +1,7 @@
 ﻿using GestorAutonomo.Data;
-using GestorAutonomo.Models;
-using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestorAutonomo.Repositories

@@ -1,6 +1,6 @@
 ﻿using GestorAutonomo.Data;
 using GestorAutonomo.Domain.Entities;
-using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;

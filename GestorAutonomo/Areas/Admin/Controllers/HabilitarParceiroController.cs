@@ -2,7 +2,7 @@
 using GestorAutonomo.Biblioteca.Filtro;
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Domain.Biblioteca.Lang;
-using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Domain.Interfaces;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using System;
