@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorAutonomo.Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace GestorAutonomo.Models

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using Newtonsoft.Json;
+using GestorAutonomo.Domain.Entities;
 
 namespace GestorAutonomo.Repositories.Interface
 {

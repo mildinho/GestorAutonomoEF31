@@ -1,15 +1,11 @@
-﻿using GestorAutonomo.Biblioteca.Lang;
-using GestorAutonomo.Data;
+﻿using GestorAutonomo.Domain.Biblioteca.Lang;
+using GestorAutonomo.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace GestorAutonomo.Models
+namespace GestorAutonomo.Domain.Entities
 {
     [Table("CS_PARCEIRO")]
    

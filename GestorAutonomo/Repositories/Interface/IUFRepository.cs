@@ -1,7 +1,5 @@
-﻿using GestorAutonomo.Models;
-using System;
+﻿using GestorAutonomo.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 

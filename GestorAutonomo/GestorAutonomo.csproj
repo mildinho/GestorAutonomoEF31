@@ -28,22 +28,12 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Models\" />
     <Folder Include="wwwroot\upload\temp\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Biblioteca\Lang\Mensagem.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Mensagem.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Biblioteca\Lang\Mensagem.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Mensagem.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <ProjectReference Include="..\GestorAutonomo.Domain\GestorAutonomo.Domain.csproj" />
   </ItemGroup>
 
 </Project>

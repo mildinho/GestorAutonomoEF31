@@ -1,4 +1,5 @@
-﻿using GestorAutonomo.Models;
+﻿using GestorAutonomo.Domain.Entities;
+using GestorAutonomo.Models;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

@@ -1,5 +1,6 @@
 ﻿using GestorAutonomo.Biblioteca.Exceptions;
 using GestorAutonomo.Data;
+using GestorAutonomo.Domain.Entities;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;

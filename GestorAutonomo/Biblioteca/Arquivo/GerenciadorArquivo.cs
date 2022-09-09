@@ -1,4 +1,5 @@
-﻿using GestorAutonomo.Models;
+﻿using GestorAutonomo.Domain.Entities;
+using GestorAutonomo.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

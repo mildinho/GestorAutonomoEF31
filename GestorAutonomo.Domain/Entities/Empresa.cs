@@ -1,9 +1,9 @@
-﻿using GestorAutonomo.Biblioteca.Lang;
+﻿using GestorAutonomo.Domain.Biblioteca.Lang;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GestorAutonomo.Models
+namespace GestorAutonomo.Domain.Entities
 {
     [Table("CS_EMPRESA")]
     public class Empresa

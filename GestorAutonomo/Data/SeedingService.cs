@@ -1,4 +1,5 @@
-﻿using GestorAutonomo.Models;
+﻿using GestorAutonomo.Domain.Entities;
+using GestorAutonomo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

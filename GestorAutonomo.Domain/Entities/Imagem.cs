@@ -1,9 +1,7 @@
-﻿using GestorAutonomo.Data;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GestorAutonomo.Models
+namespace GestorAutonomo.Domain.Entities
 {
     [Table("CS_IMAGEM")]
     public class Imagem : ModelBase

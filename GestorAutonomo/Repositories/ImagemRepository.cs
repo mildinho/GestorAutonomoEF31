@@ -1,4 +1,5 @@
 ﻿using GestorAutonomo.Data;
+using GestorAutonomo.Domain.Entities;
 using GestorAutonomo.Models;
 using Microsoft.Extensions.Configuration;
 using System;

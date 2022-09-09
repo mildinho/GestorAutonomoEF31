@@ -1,8 +1,7 @@
 ﻿using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
-using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
-using GestorAutonomo.Models;
+using GestorAutonomo.Domain.Biblioteca.Lang;
 using GestorAutonomo.Repositories.Interface;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Mvc;

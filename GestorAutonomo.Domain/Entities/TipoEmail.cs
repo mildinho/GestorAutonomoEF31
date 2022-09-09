@@ -1,18 +1,16 @@
-﻿using GestorAutonomo.Data;
-using System;
-using System.Collections.Generic;
+﻿using GestorAutonomo.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GestorAutonomo.Models
 {
-    public class TipoLogradouro : ModelBase
+    public class TipoEmail : ModelBase
     {
         [Required]
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
+
     }
+
 
 }

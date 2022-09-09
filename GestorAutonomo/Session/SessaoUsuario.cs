@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using GestorAutonomo.Models;
+using GestorAutonomo.Domain.Entities;
 
 namespace GestorAutonomo.Session
 {

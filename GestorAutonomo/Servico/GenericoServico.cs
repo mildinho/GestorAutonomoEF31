@@ -1,4 +1,5 @@
 ﻿using GestorAutonomo.Data;
+using GestorAutonomo.Domain.Entities;
 using GestorAutonomo.Servico.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using System;
+using GestorAutonomo.Domain.Entities;
 
 namespace GestorAutonomo.Repositories
 {

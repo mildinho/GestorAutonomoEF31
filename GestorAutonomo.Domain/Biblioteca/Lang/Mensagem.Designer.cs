@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GestorAutonomo.Biblioteca.Lang {
+namespace GestorAutonomo.Domain.Biblioteca.Lang {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace GestorAutonomo.Biblioteca.Lang {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GestorAutonomo.Biblioteca.Lang.Mensagem", typeof(Mensagem).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GestorAutonomo.Domain.Biblioteca.Lang.Mensagem", typeof(Mensagem).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

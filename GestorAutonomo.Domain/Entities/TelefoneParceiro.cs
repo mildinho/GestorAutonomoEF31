@@ -1,12 +1,10 @@
-﻿using GestorAutonomo.Data;
+﻿using GestorAutonomo.Domain.Entities;
+using GestorAutonomo.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace GestorAutonomo.Models
+namespace GestorAutonomo.GestorAutonomo.Domain.Entities
 {
     public class TelefoneParceiro : ModelBase
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GestorAutonomo.Models;
+using GestorAutonomo.Domain.Entities;
 
 namespace GestorAutonomo.Data
 {

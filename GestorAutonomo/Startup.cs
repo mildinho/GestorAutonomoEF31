@@ -1,22 +1,22 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GestorAutonomo.Biblioteca.Middleware;
+using GestorAutonomo.Biblioteca.Notification;
+using GestorAutonomo.Data;
+using GestorAutonomo.Models;
+using GestorAutonomo.Repositories;
+using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Session;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using GestorAutonomo.Data;
-using GestorAutonomo.Session;
-using GestorAutonomo.Models;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
 using System.Collections.Generic;
-using GestorAutonomo.Repositories;
-using GestorAutonomo.Repositories.Interface;
-using GestorAutonomo.Biblioteca.Middleware;
-using Microsoft.AspNetCore.Mvc;
-using GestorAutonomo.Biblioteca.Notification;
-using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace GestorAutonomo
 {

@@ -1,8 +1,9 @@
 ﻿using GestorAutonomo.Biblioteca.Arquivo;
 using GestorAutonomo.Biblioteca.CRUD;
 using GestorAutonomo.Biblioteca.Filtro;
-using GestorAutonomo.Biblioteca.Lang;
 using GestorAutonomo.Biblioteca.Notification;
+using GestorAutonomo.Domain.Biblioteca.Lang;
+using GestorAutonomo.Domain.Entities;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories.Interface;
 using GestorAutonomo.Session;
