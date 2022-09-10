@@ -1,5 +1,5 @@
-﻿using GestorAutonomo.Data;
-using GestorAutonomo.Domain.Interfaces;
+﻿using GestorAutonomo.Domain.Interfaces;
+using GestorAutonomo.Infra.Data.Context;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;

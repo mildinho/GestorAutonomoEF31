@@ -1,7 +1,5 @@
-using GestorAutonomo.Data;
-using GestorAutonomo.Models;
-using GestorAutonomo.Repositories;
-using GestorAutonomo.Repositories.Interface;
+using GestorAutonomo.Domain.Interfaces;
+using GestorAutonomo.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;

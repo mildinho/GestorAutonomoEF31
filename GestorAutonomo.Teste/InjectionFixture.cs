@@ -1,11 +1,8 @@
-﻿using GestorAutonomo.Data;
+﻿using GestorAutonomo.Domain.Interfaces;
 using GestorAutonomo.Repositories;
-using GestorAutonomo.Repositories.Interface;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GestorAutonomo.Teste
 {

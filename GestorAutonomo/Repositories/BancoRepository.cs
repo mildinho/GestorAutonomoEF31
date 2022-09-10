@@ -1,6 +1,6 @@
-﻿using GestorAutonomo.Data;
-using GestorAutonomo.Domain.Entities;
+﻿using GestorAutonomo.Domain.Entities;
 using GestorAutonomo.Domain.Interfaces;
+using GestorAutonomo.Infra.Data.Context;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Threading.Tasks;

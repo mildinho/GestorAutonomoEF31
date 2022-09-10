@@ -1,7 +1,7 @@
 ﻿using GestorAutonomo.Biblioteca.Middleware;
 using GestorAutonomo.Biblioteca.Notification;
-using GestorAutonomo.Data;
 using GestorAutonomo.Domain.Interfaces;
+using GestorAutonomo.Infra.Data.Context;
 using GestorAutonomo.Models;
 using GestorAutonomo.Repositories;
 using GestorAutonomo.Session;

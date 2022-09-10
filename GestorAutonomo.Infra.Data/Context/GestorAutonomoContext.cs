@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using GestorAutonomo.Domain.Entities;
 using GestorAutonomo.Models;
-using GestorAutonomo.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace GestorAutonomo.Data
+namespace GestorAutonomo.Infra.Data.Context
 {
     public class GestorAutonomoContext : DbContext
     {

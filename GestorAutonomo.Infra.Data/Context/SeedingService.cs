@@ -1,11 +1,7 @@
 ﻿using GestorAutonomo.Domain.Entities;
-using GestorAutonomo.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace GestorAutonomo.Data
+namespace GestorAutonomo.Infra.Data.Context
 {
     public class SeedingService
     {
