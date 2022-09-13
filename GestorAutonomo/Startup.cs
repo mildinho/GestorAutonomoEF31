@@ -2,8 +2,8 @@
 using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Domain.Interfaces;
 using GestorAutonomo.Infra.Data.Context;
+using GestorAutonomo.Infra.Data.Repositories;
 using GestorAutonomo.Models;
-using GestorAutonomo.Repositories;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

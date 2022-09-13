@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace GestorAutonomo.Biblioteca.Exceptions
+namespace GestorAutonomo.Domain.Biblioteca.Exceptions
 
 {
     public class DBConcurrencyException : ApplicationException

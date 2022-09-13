@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
-namespace GestorAutonomo.Repositories
+namespace GestorAutonomo.Infra.Data.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

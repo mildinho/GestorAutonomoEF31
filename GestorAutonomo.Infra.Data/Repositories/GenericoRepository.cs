@@ -1,11 +1,11 @@
-﻿using GestorAutonomo.Biblioteca.Exceptions;
+﻿using GestorAutonomo.Domain.Biblioteca.Exceptions;
 using GestorAutonomo.Domain.Interfaces;
 using GestorAutonomo.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
-namespace GestorAutonomo.Repositories
+namespace GestorAutonomo.Infra.Data.Repositories
 {
     public class GenericoRepository<Tabela> : IGenericoRepository<Tabela> where Tabela : class
     {

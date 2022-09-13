@@ -1,12 +1,11 @@
 ﻿using GestorAutonomo.Domain.Entities;
 using GestorAutonomo.Infra.Data.Context;
 using GestorAutonomo.Models;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GestorAutonomo.Repositories
+namespace GestorAutonomo.Infra.Data.Repositories
 {
     public class ImagemRepository : IImagemRepository
     {

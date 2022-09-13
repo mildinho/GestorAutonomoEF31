@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace GestorAutonomo.Repositories
+namespace GestorAutonomo.Infra.Data.Repositories
 {
     public class ProdutoRepository : GenericoRepository<Produto>, IProdutoRepository
     {

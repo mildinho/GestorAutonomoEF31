@@ -1,5 +1,6 @@
 ﻿using GestorAutonomo.Domain.Interfaces;
-using GestorAutonomo.Repositories;
+using GestorAutonomo.Infra.Data.Context;
+using GestorAutonomo.Infra.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
