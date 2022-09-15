@@ -14,9 +14,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
     public class ProdutoSaldoRepository : GenericoRepository<ProdutoSaldo>, IProdutoSaldoRepository
     {
         private readonly IConfiguration _conf;
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
 
-        public ProdutoSaldoRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
+        public ProdutoSaldoRepository(Context.DBContexto context, IConfiguration configuration) : base(context)
     {
             _context = context;
             _conf = configuration;

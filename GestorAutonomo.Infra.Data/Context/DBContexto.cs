@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GestorAutonomo.Infra.Data.Context
 {
-    public class GestorAutonomoContext : DbContext
+    public class DBContexto : DbContext
     {
-        public GestorAutonomoContext(DbContextOptions<GestorAutonomoContext> options)
+        public DBContexto(DbContextOptions<DBContexto> options)
             : base(options)
         {
         }
@@ -27,6 +27,6 @@ namespace GestorAutonomo.Infra.Data.Context
         public DbSet<TipoEmail> TipoEmail { get; set; }
         public DbSet<TipoLogradouro> TipoLogradouro { get; set; }
         public DbSet<TipoTelefone> TipoTelefone { get; set; }
-
+        
     }
 }

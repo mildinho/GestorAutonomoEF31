@@ -13,9 +13,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
     public class UFRepository : GenericoRepository<UF>, IUFRepository
     {
         private readonly IConfiguration _conf;
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
 
-        public UFRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
+        public UFRepository(Context.DBContexto context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;

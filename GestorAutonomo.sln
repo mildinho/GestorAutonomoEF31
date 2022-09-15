@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorAutonomo.Teste", "Ges
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorAutonomo.Domain", "GestorAutonomo.Domain\GestorAutonomo.Domain.csproj", "{2768D5FB-2925-4927-80B2-A50BA548B069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestorAutonomo.Infra.Data", "GestorAutonomo.Infra.Data\GestorAutonomo.Infra.Data.csproj", "{AC7E6492-82F4-4C44-962A-889BFF640BEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorAutonomo.Infra.Data", "GestorAutonomo.Infra.Data\GestorAutonomo.Infra.Data.csproj", "{AC7E6492-82F4-4C44-962A-889BFF640BEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestorAutonomo.Infra.IoC", "GestorAutonomo.Infra.IoC\GestorAutonomo.Infra.IoC.csproj", "{CFD58645-D5E3-4A11-9E85-1B4E45883F95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{AC7E6492-82F4-4C44-962A-889BFF640BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC7E6492-82F4-4C44-962A-889BFF640BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC7E6492-82F4-4C44-962A-889BFF640BEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD58645-D5E3-4A11-9E85-1B4E45883F95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD58645-D5E3-4A11-9E85-1B4E45883F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD58645-D5E3-4A11-9E85-1B4E45883F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD58645-D5E3-4A11-9E85-1B4E45883F95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

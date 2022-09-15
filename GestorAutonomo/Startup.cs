@@ -3,6 +3,7 @@ using GestorAutonomo.Biblioteca.Notification;
 using GestorAutonomo.Domain.Interfaces;
 using GestorAutonomo.Infra.Data.Context;
 using GestorAutonomo.Infra.Data.Repositories;
+using GestorAutonomo.Infra.IoC;
 using GestorAutonomo.Models;
 using GestorAutonomo.Session;
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +11,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,7 +38,6 @@ namespace GestorAutonomo
 
             //Configuracao dos Repositories
             services.AddScoped<IImagemRepository, ImagemRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddMemoryCache();
             services.AddSession(options =>
@@ -52,9 +51,7 @@ namespace GestorAutonomo
 
             services.AddControllersWithViews();
 
-            services.AddDbContext<GestorAutonomoContext>(options =>
-                    options.UseMySql(Configuration.GetConnectionString("GestorAutonomoContext"), builder => builder.MigrationsAssembly("GestorAutonomo")));
-
+            services.AddInfraStructure(Configuration);
 
             services.AddScoped<SeedingService>();
 
@@ -75,7 +72,6 @@ namespace GestorAutonomo
                 options.ModelBindingMessageProvider.SetNonPropertyUnknownValueIsInvalidAccessor(() => "O valor fornecido é inválido. ---H");
                 options.ModelBindingMessageProvider.SetNonPropertyValueMustBeANumberAccessor(() => "O campo deve ser um número.   -I");
                 options.ModelBindingMessageProvider.SetUnknownValueIsInvalidAccessor((x) => "O valor fornecido é inválido para {0}.  -- J");
-                //options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(x => "O campo {0} deve ser um número.  - K");
                 
             }).SetCompatibilityVersion(CompatibilityVersion.Latest);
 

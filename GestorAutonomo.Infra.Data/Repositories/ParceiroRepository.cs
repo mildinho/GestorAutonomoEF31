@@ -13,9 +13,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
     public class ParceiroRepository : GenericoRepository<Parceiro>, IParceiroRepository
     {
         private readonly IConfiguration _conf;
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
 
-        public ParceiroRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
+        public ParceiroRepository(Context.DBContexto context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;

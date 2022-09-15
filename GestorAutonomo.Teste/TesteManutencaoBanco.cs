@@ -23,7 +23,7 @@ namespace GestorAutonomo.Teste
 
             _services = new ServiceCollection();
 
-            _services.AddDbContext<GestorAutonomoContext>(opt => opt.UseInMemoryDatabase(databaseName: "InMemoryDb"),
+            _services.AddDbContext<DBContexto>(opt => opt.UseInMemoryDatabase(databaseName: "InMemoryDb"),
                 ServiceLifetime.Scoped,
                 ServiceLifetime.Scoped);
 

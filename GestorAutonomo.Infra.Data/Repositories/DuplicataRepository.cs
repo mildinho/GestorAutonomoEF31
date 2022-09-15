@@ -14,9 +14,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
     public class DuplicataRepository : GenericoRepository<Duplicata>, IDuplicataRepository
     {
         private readonly IConfiguration _conf;
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
 
-        public DuplicataRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
+        public DuplicataRepository(Context.DBContexto context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;

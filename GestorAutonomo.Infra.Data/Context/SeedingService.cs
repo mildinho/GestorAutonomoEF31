@@ -5,8 +5,8 @@ namespace GestorAutonomo.Infra.Data.Context
 {
     public class SeedingService
     {
-        private readonly GestorAutonomoContext _context;
-        public SeedingService(GestorAutonomoContext context)
+        private readonly DBContexto _context;
+        public SeedingService(DBContexto context)
         {
             _context = context;
         }

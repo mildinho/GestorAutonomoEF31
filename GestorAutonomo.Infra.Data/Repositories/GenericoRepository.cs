@@ -1,4 +1,5 @@
 ﻿using GestorAutonomo.Domain.Biblioteca.Exceptions;
+using GestorAutonomo.Domain.Entities;
 using GestorAutonomo.Domain.Interfaces;
 using GestorAutonomo.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -9,28 +10,28 @@ namespace GestorAutonomo.Infra.Data.Repositories
 {
     public class GenericoRepository<Tabela> : IGenericoRepository<Tabela> where Tabela : class
     {
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
+        internal DbSet<Tabela> _dbSet;
 
 
-        public GenericoRepository(GestorAutonomoContext context)
+        public GenericoRepository(Context.DBContexto context)
         {
             _context = context;
-
+            _dbSet = context.Set<Tabela>();
         }
 
         public virtual async Task InserirAsync(Tabela tabela)
         {
-            await _context.Set<Tabela>().AddAsync(tabela);
-            //await _context.SaveChangesAsync();
+            await _dbSet.AddAsync(tabela);
         }
 
 
 
         public virtual async Task AtualizarAsync(Tabela tabela)
         {
-             _context.Entry<Tabela>(tabela).State = EntityState.Modified;
+            _context.Entry<Tabela>(tabela).State = EntityState.Modified;
             _context.Entry<Tabela>(tabela).Property("Data_Cadastro").IsModified = false;
-            //await _context.SaveChangesAsync();
+            
         }
 
 
@@ -42,8 +43,7 @@ namespace GestorAutonomo.Infra.Data.Repositories
                 var obj = await SelecionarPorCodigoAsync(Id);
                 if (obj != null)
                 {
-                    _context.Set<Tabela>().Remove(obj);
-                    //await _context.SaveChangesAsync();
+                    _dbSet.Remove(obj);
                 }
             }
             catch (DbUpdateException e)
@@ -56,12 +56,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
 
         public virtual async Task<Tabela> SelecionarPorCodigoAsync(Guid Id)
         {
-            return await _context.Set<Tabela>().FindAsync(Id);
+            return await _dbSet.FindAsync(Id);
         }
 
-
-
-       
 
 
     }

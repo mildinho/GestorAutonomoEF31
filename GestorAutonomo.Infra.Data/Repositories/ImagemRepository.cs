@@ -11,8 +11,8 @@ namespace GestorAutonomo.Infra.Data.Repositories
     {
 
 
-        private readonly GestorAutonomoContext _context;
-        public ImagemRepository(GestorAutonomoContext context)
+        private readonly Context.DBContexto _context;
+        public ImagemRepository(Context.DBContexto context)
         {
             _context = context;
 

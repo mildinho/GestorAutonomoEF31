@@ -20,7 +20,7 @@ namespace GestorAutonomo.Teste
             Services = new ServiceCollection();
             ServiceProvider = Services.BuildServiceProvider();
             unitOfWork = new UnitOfWork(
-                ServiceProvider.GetService<GestorAutonomoContext>(),
+                ServiceProvider.GetService<DBContexto>(),
                 configuration
                 );
         }

@@ -13,9 +13,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
     public class EmpresaRepository : GenericoRepository<Empresa>, IEmpresaRepository
     {
         private readonly IConfiguration _conf;
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
 
-        public EmpresaRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
+        public EmpresaRepository(Context.DBContexto context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;

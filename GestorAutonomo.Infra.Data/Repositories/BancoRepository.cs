@@ -11,9 +11,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
     public class BancoRepository : GenericoRepository<Banco>,  IBancoRepository
     {
         private readonly IConfiguration _conf;
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
 
-        public BancoRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
+        public BancoRepository(Context.DBContexto context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
@@ -28,6 +28,7 @@ namespace GestorAutonomo.Infra.Data.Repositories
             int numeroPagina = pagina ?? 1;
             int RegistroPorPagina = _conf.GetValue<int>("RegistroPorPagina");
 
+           
             var objConsulta = _context.Banco.AsQueryable();
             if (!string.IsNullOrEmpty(pesquisa))
             {

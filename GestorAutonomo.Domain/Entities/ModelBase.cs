@@ -8,13 +8,14 @@ namespace GestorAutonomo.Domain.Entities
     public abstract class ModelBase 
     {
         [Key]
+        [Required]
         [Display(Name = "Código")]
-        public Guid Id { get; protected set; }
+        public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "Empresa")]
         public Guid EmpresaId { get; set; }
-        public Empresa Empresa { get; set; }
+        public virtual Empresa Empresa { get; set; }
 
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.Date)]

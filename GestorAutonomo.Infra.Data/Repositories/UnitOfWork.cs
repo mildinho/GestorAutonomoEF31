@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace GestorAutonomo.Infra.Data.Repositories
 {
+
+    //https://docs.microsoft.com/pt-br/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
+    
+    
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
         private readonly IConfiguration _configuration;
 
         public IBancoRepository Banco { get; private set; }
@@ -23,7 +27,7 @@ namespace GestorAutonomo.Infra.Data.Repositories
         public IDuplicataRepository Duplicata { get; private set; }
 
 
-        public UnitOfWork(GestorAutonomoContext context, IConfiguration configuration)
+        public UnitOfWork(Context.DBContexto context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
@@ -69,8 +73,8 @@ namespace GestorAutonomo.Infra.Data.Repositories
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            //Dispose(true);
+            //GC.SuppressFinalize(this);
         }
     }
 }

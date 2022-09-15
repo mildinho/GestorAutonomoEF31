@@ -13,9 +13,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
     public class LoginRepository : GenericoRepository<Login>, ILoginRepository
     {
         private readonly IConfiguration _conf;
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
 
-        public LoginRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
+        public LoginRepository(Context.DBContexto context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;

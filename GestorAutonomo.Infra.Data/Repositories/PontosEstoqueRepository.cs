@@ -13,9 +13,9 @@ namespace GestorAutonomo.Infra.Data.Repositories
     public class PontosEstoqueRepository : GenericoRepository<PontosEstoque>, IPontosEstoqueRepository
     {
         private readonly IConfiguration _conf;
-        private readonly GestorAutonomoContext _context;
+        private readonly Context.DBContexto _context;
 
-        public PontosEstoqueRepository(GestorAutonomoContext context, IConfiguration configuration) : base(context)
+        public PontosEstoqueRepository(Context.DBContexto context, IConfiguration configuration) : base(context)
         {
             _context = context;
             _conf = configuration;
